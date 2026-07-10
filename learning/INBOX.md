@@ -2,7 +2,7 @@
 
 ## Ideas
 
-- Repo structure — simple vs. expandable, shared vs. broken apart across projects
+- Repo structure — simple vs. expandable, shared vs. broken apart across projects (agents/skills settled as shared, in one repo, pulled in via additional-dirs — still open for other content types)
 - Graphify (or similar) for encoding a project for agent readability — worth it, and at what threshold
 - Encouraging the agent to refine its own instructions — post-project retrospective trigger
 - Agentic skill frameworks vs. rolling your own
@@ -12,8 +12,7 @@
 - Managing context + gated, documented steps with fresh context per step; consistency/coherence checks across docs, code, comments, tests after major chunks
 - Multi-language repo — Python first, others possibly later
 - Minimal setup to restructure an existing repo via Claude Code, then iterate
-- Claude Code managing git — explore different levels of autonomy
-- Tool-portability — effort now vs. future-proofing instructions for other tools (e.g. Copilot)
+- Claude Code managing git — explore different levels of autonomy (commit-directly-to-main settled for the `agentic` repo specifically — broader question of auto-push, conflict handling, etc. still open)
 - Test-driven development — encourage where it makes sense
 - Introspection process for gradually improving the repo over time to be easier for agents to follow/modify/use
 - Mechanics of getting settled conventions into the repo
