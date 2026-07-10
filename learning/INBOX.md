@@ -1,5 +1,7 @@
 # Agentic engineering topics to explore
 
+## Ideas
+
 - Repo structure — simple vs. expandable, shared vs. broken apart across projects
 - Graphify (or similar) for encoding a project for agent readability — worth it, and at what threshold
 - Encouraging the agent to refine its own instructions — post-project retrospective trigger
