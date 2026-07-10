@@ -4,7 +4,14 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## What this repo is
 
-This is not a software project — there is no code, build, lint, or test tooling. It is a personal scratchpad for learning agentic engineering (Claude Code, agentic workflows, repo structure, skills). Content lives under `learning/`.
+There is no code, build, lint, or test tooling. This repo has two roles:
+
+1. A personal scratchpad for learning agentic engineering (Claude Code, agentic workflows, repo structure, skills) — content lives under `learning/`.
+2. The intended home for Claude Code agents and skills meant to be reused across other project repos, pulled in there via Claude Code's "Additional repos" feature. This part is still being built out.
+
+## Workflow
+
+Commit directly to `main` — no feature branches or PRs for changes to this repo.
 
 ## Knowledge base structure (`learning/`)
 
