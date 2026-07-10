@@ -7,11 +7,25 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 There is no code, build, lint, or test tooling. This repo has two roles:
 
 1. A personal scratchpad for learning agentic engineering (Claude Code, agentic workflows, repo structure, skills) — content lives under `learning/`.
-2. The intended home for Claude Code agents and skills meant to be reused across other project repos, pulled in there via Claude Code's "Additional repos" feature. This part is still being built out.
+2. The home for reusable agents and skills, pulled into other project repos so they don't have to be duplicated per-project.
 
 ## Workflow
 
 Commit directly to `main` — no feature branches or PRs for changes to this repo.
+
+## Agents and skills (`agents/`, `skills/`)
+
+Canonical content lives in tool-agnostic form so it isn't tied to Claude Code specifically:
+
+```
+agents/<agent-name>/agent.md   # frontmatter: name, description — body: instructions
+skills/<skill-name>/SKILL.md   # frontmatter: name, description — body: instructions
+                                 # (optional supporting files can live alongside SKILL.md)
+```
+
+Frontmatter is deliberately limited to `name` and `description` — no tool-specific fields (Claude Code's `tools`, `model`, etc.) belong in the canonical files, so this content can be read or adapted by other coding agents (Copilot, Cursor, etc.), not just Claude Code.
+
+`.claude/agents` and `.claude/skills` are symlinks to the top-level `agents/` and `skills/` folders. They exist purely so Claude Code can discover this content today via `/add-dir <path-to-this-repo>` — the top-level folders remain the single source of truth; don't edit through the symlinks or duplicate content into them.
 
 ## Knowledge base structure (`learning/`)
 
