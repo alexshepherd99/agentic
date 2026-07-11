@@ -23,7 +23,7 @@ Don't skip straight to implementation just because a plan sounds plausible — a
 
 ## Record of the exchange
 
-Not yet implemented. Where this Q&A gets recorded (a per-task file, a persistent requirements/decision log, etc.) depends on this repo's still-open "standard repo structure for persistent documents" decision. Once that's settled, update this skill to write there.
+Once a request has been grilled, write the resolved understanding to `docs/<effort-name>/requirements.md` (use the `init-project-docs` skill to create the effort folder if it doesn't exist yet). Once a plan has been grilled, write the resolved plan to `docs/<effort-name>/plan.md`. Record the settled answers and decisions, not a transcript of the back-and-forth. For a trivial effort, collapse into `docs/<effort-name>/log.md` with `## Requirements` / `## Plan` sections instead — see the collapsing rule in `agentic`'s `learning/CONVENTIONS.md`.
 
 ## Source
 
