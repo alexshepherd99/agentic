@@ -11,6 +11,18 @@ Two-part plan for a fresh session:
 
 **Status**: queued, not started
 
+### Topic: Project instructions should only hold project specifics
+
+**Principle**: a project repo's own agent instructions (`CLAUDE.md`, `.github/copilot-instructions.md`, etc.) should contain only project-specific content. Anything generic/repo-agnostic belongs in this `agentic` repo instead (as a convention or skill), not duplicated per-project.
+
+**Action needed**: as part of repo setup, any existing Copilot/agent instructions in a project repo should be reviewed against this principle:
+- Flag generic content that should be migrated out to `agentic` (convention/skill), rather than left duplicated in the project's own instructions.
+- Flag inconsistencies between what the project's instructions say and what's already settled in `agentic`'s `CONVENTIONS.md`/skills.
+
+Likely lands as a review step added to the `onboard-project` skill, once the "Import Copilot instructions" work above has happened and there's real content to test the review against.
+
+**Status**: queued, not started — related to the topic above
+
 ## Longer-term — investigate later
 
 - Managing context + gated, documented steps with fresh context per step; consistency/coherence checks across docs, code, comments, tests after major chunks
