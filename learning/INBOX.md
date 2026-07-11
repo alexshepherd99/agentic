@@ -3,8 +3,6 @@
 ## Immediate — needed to start using skills on future projects
 
 - Minimal setup to restructure an existing repo via Claude Code, then iterate
-- Standard repo structure for persistent documents (requirements, plans, execution logs) — used consistently; sections may live within execution logs
-- Where/how to record requirements and a backlog — manual for now, mechanics kept flexible
 - Test-driven development — encourage where it makes sense
 
 ## Longer-term — investigate later

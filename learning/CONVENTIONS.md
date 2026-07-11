@@ -33,3 +33,13 @@ Example shell alias for launching project sessions (illustrative name, not fixed
 **Split authority:** a project session may read conventions/skills and propose changes, but must not write to this repo. Actual edits/commits only happen from a session whose working directory is this repo itself — run two sessions in parallel and hand text across manually.
 
 **Verification caveat:** deny rules on `--add-dir`/`additionalDirectories` paths may not reliably hold in all Claude Code versions. Verify once per machine by asking a project session to edit a dummy file in the mounted repo. If the deny rule doesn't hold, the two-session discipline above is the real safeguard — the deny rule is a backstop, not a guarantee.
+
+## Persistent documents in project repos
+
+Project repos (not this one) use a standard structure for requirements/plans/execution logs, so agents and humans always know where to look:
+
+- **`BACKLOG.md`** (top-level) — global list of not-yet-started work, freeform/manual, no fixed mechanics beyond "one file, one list."
+- **`docs/<effort-name>/`** — created once an item is picked up off the backlog and work starts. Holds that effort's `requirements.md`, `plan.md`, and `log.md`.
+- **Collapsing is fine for small efforts** — a trivial effort can skip separate files and just use `log.md` with inline `## Requirements` / `## Plan` sections instead. Split out into separate files once any one section gets unwieldy.
+
+Scaffolding a new effort folder, and reviewing existing docs in a repo for migration to this structure, is handled by the `init-project-docs` skill (report/propose only — it never moves files automatically).

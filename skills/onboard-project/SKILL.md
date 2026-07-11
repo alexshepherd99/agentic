@@ -46,3 +46,7 @@ Run this from a session in the project repo, with `agentic` reachable (e.g. laun
 ## Note on staleness
 
 This pointer section is static prose, written once. If `agentic`'s structure changes significantly later, re-run this skill on the project to refresh it — there's no automatic sync.
+
+## Next step
+
+Once the mount is set up, recommend running the `init-project-docs` skill to scaffold the project's own persistent-document structure (`BACKLOG.md`, `docs/<effort-name>/`) — a separate concern from this skill, kept separate so neither skill grows too large.
