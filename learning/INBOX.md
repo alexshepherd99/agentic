@@ -7,7 +7,6 @@
 - Standard repo structure for persistent documents (requirements, plans, execution logs) — used consistently; sections may live within execution logs
 - Where/how to record requirements and a backlog — manual for now, mechanics kept flexible
 - Test-driven development — encourage where it makes sense
-- "Grill me"-style skill — active challenge before starting work, with a record of the exchange
 
 ### Topic: Project onboarding guide for agentic
 
