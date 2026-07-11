@@ -43,3 +43,9 @@ Project repos (not this one) use a standard structure for requirements/plans/exe
 - **Collapsing is fine for small efforts** — a trivial effort can skip separate files and just use `log.md` with inline `## Requirements` / `## Plan` sections instead. Split out into separate files once any one section gets unwieldy.
 
 Scaffolding a new effort folder, and reviewing existing docs in a repo for migration to this structure, is handled by the `init-project-docs` skill (report/propose only — it never moves files automatically).
+
+## Test-driven development: encouraged where behavior is known upfront
+
+Default to test-first — write a failing test, then implement — when the expected behavior is already clear: pure logic, bug fixes (regression test before the fix), APIs with a defined contract. Skip test-first for exploratory/prototype work, UI layout, or anything where the shape of the solution is still being discovered — write tests after, once the design settles, or skip entirely for throwaway exploration.
+
+Applies to project repos with actual code — this repo itself has no code/build/test tooling (per `CLAUDE.md`).

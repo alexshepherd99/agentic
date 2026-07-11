@@ -2,8 +2,7 @@
 
 ## Immediate — needed to start using skills on future projects
 
-- Minimal setup to restructure an existing repo via Claude Code, then iterate
-- Test-driven development — encourage where it makes sense
+(none currently — all resolved into CONVENTIONS.md/skills)
 
 ## Longer-term — investigate later
 
