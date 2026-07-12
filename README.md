@@ -1,5 +1,7 @@
 # agentic
 
+Two roles: a personal scratchpad for learning agentic engineering (under `learning/`), and the home for reusable agents and skills (`agents/`, `skills/`) that project repos pull in read-only rather than duplicating per-repo. See `CLAUDE.md` for the full picture.
+
 ## Onboarding a new project repo
 
 To let a project repo use this repo's `agents/`/`skills/` and conventions (read-only, never copied):
