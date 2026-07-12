@@ -64,5 +64,7 @@ How Claude should work through changes in a project repo. (This is the coding-pr
 
 - **Show the approach before writing.** For any non-trivial change, present the plan — or the concrete diff for a judgment call — and get confirmation before editing. Review-then-write, not write-then-revise. Trivial one-line fixes are exempt.
 - **Ask clarifying questions.** When scope or requirements are ambiguous, prefer several small, scoped questions over one open-ended one; don't build on unstated assumptions. (The `grill-me` skill formalizes this for larger tasks.)
-- **One change at a time, commit per item.** Work through a multi-item task in an agreed order (flagging dependencies), committing each resolved item on its own before starting the next — don't batch unrelated changes into one commit.
+- **One change at a time, commit per item.** Work through a multi-item task in an agreed order (flagging dependencies), committing each resolved item on its own — with a descriptive message — before starting the next; don't batch unrelated changes into one commit.
+- **Definition of done: a green suite.** In a repo with tests, confirm the relevant tests pass before starting a change, and that the full suite is green before marking work complete.
+- **Propose improvements to shared instructions.** When you spot a better practice mid-work, propose an update to the relevant convention, skill, or instructions file — propose, don't silently apply — rather than using it once and moving on.
 - **End-of-session review.** Near the end of a working session, check that everything discussed landed somewhere durable (a commit, a tracked doc/issue), that no doc still frames a resolved decision as open, and that the working tree is clean and pushed.
