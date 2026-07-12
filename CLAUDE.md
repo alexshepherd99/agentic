@@ -29,7 +29,7 @@ Frontmatter is deliberately limited to `name` and `description` — no tool-spec
 
 ## Knowledge base structure (`learning/`)
 
-- `INBOX.md` — raw, messy capture of ideas, links, and half-formed thoughts
+- `INBOX.md` — raw, messy capture of ideas, links, and half-formed thoughts. A completed item can be deleted from the list once it's fully done **and** its outputs are persisted somewhere durable (a commit, a `CONVENTIONS.md` entry, a skill, or a memory) — the INBOX tracks open work, not history.
 - `CONVENTIONS.md` — settled decisions (repo structure, naming, workflow patterns) — this is what eventually gets copied into a real repo
 
 Treat `learning/` as a staging area, not a source of truth — finished material eventually gets promoted out into actual git repos.
