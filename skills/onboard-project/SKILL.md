@@ -5,15 +5,20 @@ description: Set up a project repo to consume this repo's (agentic's) shared age
 
 # Onboard Project
 
-Wires a project repo up to consume `agentic`'s `agents/`/`skills/`/conventions read-only, per the mechanics in `agentic`'s `learning/CONVENTIONS.md` ("Sharing agents/skills into project repos").
+Wires a project repo up to consume `agentic`'s `agents/`/`skills/`/conventions
+read-only, per the mechanics in `agentic`'s `learning/CONVENTIONS.md`
+("Sharing agents/skills into project repos").
 
-Run this from a session in the project repo, with `agentic` reachable (e.g. launched via `claude --add-dir ../agentic`, or already configured).
+Run this from a session in the project repo, with `agentic` reachable (e.g.
+launched via `claude --add-dir ../agentic`, or already configured).
 
 ## Steps
 
-1. **Confirm the relative path.** Find where `agentic` actually sits relative to the project repo (commonly `../agentic`, but confirm — don't assume). Use that path everywhere below.
+1. **Confirm the relative path.** Find where `agentic` sits relative to the
+   project repo (commonly `../agentic`, but confirm — don't assume). Use that
+   path everywhere below.
 
-2. **Write/update `.claude/settings.json`** in the project repo, merging into any existing config (don't clobber unrelated settings):
+2. **Write/update `.claude/settings.json`** in the project repo:
    ```json
    {
      "permissions": {
@@ -25,8 +30,10 @@ Run this from a session in the project repo, with `agentic` reachable (e.g. laun
      }
    }
    ```
+   **Non-negotiable:** Merge into any existing config — never clobber
+   unrelated settings.
 
-3. **Add a pointer section to the project's `CLAUDE.md`**, something like:
+3. **Add a short pointer section to the project's `CLAUDE.md`:**
    ```markdown
    ## Shared agents/skills/conventions
 
@@ -37,16 +44,27 @@ Run this from a session in the project repo, with `agentic` reachable (e.g. laun
    drafting text in this session — actual edits happen from a session
    whose working directory is `agentic` itself.
    ```
-   Keep this section short — it's a pointer, not a copy. Don't duplicate `agentic`'s conventions content into the project's `CLAUDE.md`.
+   Keep it a pointer, not a copy — don't duplicate `agentic`'s conventions
+   content into the project.
 
-4. **Verify the deny rule actually holds.** Try to `Write` or `Edit` a dummy file inside the mounted `agentic` path (e.g. a scratch file, then clean it up). Confirm the operation is blocked. If it isn't, tell the user explicitly and point them at the split-authority workflow in `agentic`'s `learning/CONVENTIONS.md` as the real safeguard (two-session discipline: only commit to `agentic` from a session whose working directory is `agentic` itself).
+4. **Verify the deny rule actually holds.** Try to `Write`/`Edit` a dummy file
+   inside the mounted `agentic` path (then clean it up), and confirm it's
+   blocked. **Non-negotiable:** If it isn't blocked, tell the user explicitly
+   and point them at the split-authority workflow in `agentic`'s
+   `learning/CONVENTIONS.md` — the two-session discipline is the real
+   safeguard; the deny rule is only a backstop.
 
-5. **Report back** what was changed (settings.json diff, CLAUDE.md addition, verification result) rather than assuming silent success.
+5. **Report back** what changed (settings.json diff, CLAUDE.md addition,
+   verification result) rather than assuming silent success.
 
-## Note on staleness
+## Staleness
 
-This pointer section is static prose, written once. If `agentic`'s structure changes significantly later, re-run this skill on the project to refresh it — there's no automatic sync.
+The pointer section is static prose, written once. If `agentic`'s structure
+changes significantly later, re-run this skill to refresh it — there's no
+automatic sync.
 
 ## Next step
 
-Once the mount is set up, recommend running the `init-project-docs` skill to scaffold the project's own persistent-document structure (`BACKLOG.md`, `docs/<effort-name>/`) — a separate concern from this skill, kept separate so neither skill grows too large.
+Recommend running the `init-project-docs` skill to scaffold the project's own
+persistent-document structure (`BACKLOG.md`, `docs/<effort-name>/`) — a
+separate concern, kept separate so neither skill grows too large.
