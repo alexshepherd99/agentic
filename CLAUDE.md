@@ -29,7 +29,7 @@ Frontmatter is deliberately limited to `name` and `description` — no tool-spec
 
 ## Shared instruction (`shared/`)
 
-Runtime instruction needed by more than one skill, extracted here so it isn't duplicated (e.g. `shared/persistent-docs.md`, the project persistent-document structure). Created only when the need actually arises; one file per concern. Distinct from `learning/CONVENTIONS.md`, which records settled decisions and rationale and is *not* loaded at skill runtime.
+Runtime instruction needed in more than one place — across skills, or by this file's own conventions — extracted here so it isn't duplicated (e.g. `shared/persistent-docs.md`, the project persistent-document structure; `shared/collaboration-workflow.md`, the collaboration discipline). Created only when the need actually arises; one file per concern. Distinct from `learning/CONVENTIONS.md`, which records settled decisions and rationale and is *not* loaded at skill runtime.
 
 ## Knowledge base structure (`learning/`)
 
@@ -40,13 +40,12 @@ Treat `learning/` as a staging area, not a source of truth — finished material
 
 ## Working conventions
 
+The repo-agnostic collaboration discipline lives in `shared/collaboration-workflow.md` — read it (clarifying questions, propose-before-writing, commit-per-item, propose-improvements-to-shared-instructions, end-of-session review). This repo adds:
+
 - **Ask before adding to the knowledge base.** When something in a chat looks like it should persist (a decision, a convention, a completed idea), ask before adding it — don't add automatically, and don't assume something is settled just because it was discussed at length.
 - **Watch for sprawl.** Periodically (roughly every 10–15 chats, or whenever proposing an addition), check the knowledge base and flag it for review/consolidation if:
   - There are more than ~8–10 documents
   - Any single document exceeds ~1,500 words
   - Documents seem to overlap in coverage
   - Answering a simple question requires searching across multiple docs
-- **Draft before writing.** For judgment-call or multi-paragraph content (a convention, a skill/agent file), show the full draft in chat and get explicit confirmation before Edit/Write — review-then-write, not write-then-revise. Trivial one-line fixes are exempt.
-- **Ask clarifying questions.** When anything is ambiguous, prefer several small, scoped questions over one big open-ended one — don't finalize on assumptions.
-- **One item at a time, commit per item.** Work multi-item lists in an order you pick (flagging dependencies), committing and pushing each resolved item before the next — don't batch several into one commit.
-- **End-of-session review.** Near the end of a session with nontrivial back-and-forth, proactively check that everything discussed was captured somewhere durable (commit, INBOX/CONVENTIONS entry, memory), that no file still frames a since-resolved decision as open, that the tree is clean/pushed, and that sprawl (see above) is in check.
+- **End-of-session review — also** confirm the knowledge base is captured and consistent: everything discussed lives in the INBOX/CONVENTIONS/a memory/a commit, no doc frames a since-resolved decision as open, and sprawl (above) is in check.
