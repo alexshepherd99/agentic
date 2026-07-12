@@ -34,11 +34,18 @@ Run this from a session in the project repo, with `agentic` reachable (e.g. laun
    This repo pulls in reusable agents, skills, and conventions from the
    `agentic` repo, mounted read-only at `<relative-path-to-agentic>`.
    See its `learning/CONVENTIONS.md` for settled decisions and
-   `skills/`/`agents/` for what's available. Propose changes there by
-   drafting text in this session — actual edits happen from a session
-   whose working directory is `agentic` itself.
+   `skills/`/`agents/` for what's available.
+
+   Apply these shared skills as a matter of course:
+   - **`how-we-work`** — the working discipline for any task; consult it at
+     the very start of a piece of work, before planning or code.
+   - **`coding-standards`** — how code here should be written; consult it
+     before writing, modifying, or reviewing code.
+
+   Propose changes to `agentic` by drafting text in this session — actual
+   edits happen from a session whose working directory is `agentic` itself.
    ```
-   Keep it a pointer, not a copy — don't duplicate `agentic`'s conventions content into the project.
+   Keep it a pointer, not a copy — don't duplicate `agentic`'s conventions content into the project. **Non-negotiable:** name the always-apply skills (`how-we-work`, `coding-standards`) explicitly — a plain mounted guidance file is easy to silently ignore, so the pointer is the backstop that surfaces them.
 
 4. **Verify the deny rule actually holds.** Try to `Write`/`Edit` a dummy file inside the mounted `agentic` path (then clean it up), and confirm it's blocked. **Non-negotiable:** If it isn't blocked, tell the user explicitly and point them at the split-authority workflow in `agentic`'s `learning/CONVENTIONS.md` — the two-session discipline is the real safeguard; the deny rule is only a backstop.
 
