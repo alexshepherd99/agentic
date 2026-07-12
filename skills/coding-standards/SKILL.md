@@ -1,8 +1,16 @@
+---
+name: coding-standards
+description: How project code should be written — simple design, small
+  single-responsibility functions, meaningful names, documented public interfaces,
+  explicit error handling (raise over silent None/sentinels), test-first where
+  behaviour is known, and language-specific style (Python: PEP 8, type hints,
+  fully-qualified imports, logging). Read BEFORE writing or modifying any source
+  code, and when reviewing existing code.
+---
+
 # Coding standards (project code)
 
-Generic, project-agnostic guidance for how code in a *project* repo should be written — distilled from prior projects' agent instructions. Staged here like everything in `learning/`; not yet a final source of truth.
-
-This is distinct from `CONVENTIONS.md`, which records repo-structure and workflow *decisions*. Where the two overlap or conflict, `CONVENTIONS.md` wins. Applies to project repos with actual code — not this repo, which has no code/build/test tooling.
+How code in a project repo should be written. Read before writing or changing source, and when reviewing existing code. (Language-agnostic unless a section says otherwise; Python is the current primary language.)
 
 ## Design and readability
 
@@ -27,12 +35,12 @@ This is distinct from `CONVENTIONS.md`, which records repo-structure and workflo
 
 ## Testing
 
+- **Test-first where behaviour is known upfront.** Write a failing test, then implement — for pure logic, bug fixes (regression test before the fix), and APIs with a defined contract. For exploratory/prototype/UI work where the solution's shape is still emerging, write tests after the design settles, or skip for throwaway exploration.
 - Avoid mocking existing first-party functions where a real call is practical — mock at genuine boundaries, not internal code you own.
-- (Whether to write tests first or after is governed by `CONVENTIONS.md`'s "Test-driven development" section.)
 
 ## Python-specific
 
-Python is the current primary language; treat these as Python conventions, to be paralleled — not copied verbatim — for other languages later.
+Treat these as Python conventions, to be paralleled — not copied verbatim — for other languages later.
 
 - Follow PEP 8.
 - Use type hints for parameters and return values.
