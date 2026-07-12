@@ -63,11 +63,7 @@ Example shell alias for launching project sessions (illustrative name, not fixed
 
 ## Persistent documents in project repos
 
-Project repos (not this one) use a standard structure for requirements/plans/execution logs, so agents and humans always know where to look:
-
-- **`BACKLOG.md`** (top-level) — global list of not-yet-started work, freeform/manual, no fixed mechanics beyond "one file, one list."
-- **`docs/<effort-name>/`** — created once an item is picked up off the backlog and work starts. Holds that effort's `requirements.md`, `plan.md`, and `log.md`.
-- **Collapsing is fine for small efforts** — a trivial effort can skip separate files and just use `log.md` with inline `## Requirements` / `## Plan` sections instead. Split out into separate files once any one section gets unwieldy.
+Project repos (not this one) use a standard structure for requirements/plans/execution logs, so agents and humans always know where to look. Because skills need it at runtime, the structure itself lives in `shared/persistent-docs.md` — that file is the source of truth for the mechanics; this section records only the decision to adopt it.
 
 Scaffolding a new effort folder, and reviewing existing docs in a repo for migration to this structure, is handled by the `init-project-docs` skill (report/propose only — it never moves files automatically).
 
