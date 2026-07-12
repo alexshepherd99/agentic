@@ -6,6 +6,33 @@ Settled decisions — repo structure, naming, workflow patterns. This is what ev
 
 Decided: future-proof now rather than defer. Canonical agent/skill content is written in a tool-agnostic format — plain markdown with minimal YAML frontmatter (`name`, `description` only, no tool-specific fields like Claude's `tools`/`model`) — so it can be read or adapted by any coding agent (Claude Code, Copilot, Cursor, etc.), not just Claude Code. Tool-specific integration (e.g. Claude Code discovering skills/agents via `/add-dir`) is handled by a thin adapter layer (symlinks) rather than by changing the canonical format. See the `agentic` repo's `agents/` and `skills/` folders for the applied structure.
 
+## Authoring skills and agents: concise, non-negotiables signposted
+
+Skill and agent instructions are read under context pressure and may be
+summarised mid-task. Write them so the load-bearing parts survive.
+
+- **Be concise.** Every sentence competes with the task for attention. Cut
+  throat-clearing, non-actionable rationale, and examples a capable agent
+  doesn't need. Aim for the shortest text that removes ambiguity, not a
+  complete essay.
+- **Signpost non-negotiables.** A rule that must not be dropped gets an
+  explicit, greppable marker: a bold **Non-negotiable:** label on its own
+  line, stated as a self-contained imperative that still makes sense with
+  the surrounding prose stripped away. These are the lines that must survive
+  compression — make them stand out.
+- **Minimise duplication — extract shared instruction, don't copy.** Two
+  kinds of "shared" pull in different directions. Settled *decisions* (the
+  human-facing rationale and history) live in this CONVENTIONS.md, which is
+  not loaded at skill runtime — don't make a skill depend on reading it.
+  Shared *instruction that skills need at runtime* goes in a dedicated
+  `shared/` folder, created only when the need actually arises and kept lean,
+  with one file per concern so a skill can pull in just the relevant piece.
+  If two skills need the same rule, extract it to `shared/` and have both
+  reference it rather than duplicating.
+- **Be consistent.** Reuse the same section structure, vocabulary, and
+  cross-reference style across skills, so familiarity with one transfers to
+  the next.
+
 ## Skill development: bespoke over framework
 
 Build skills in-house rather than adopting external agentic frameworks. (Rationale: stay in control of pace and direction; avoid trend-chasing that pulls focus from your own goals.)
