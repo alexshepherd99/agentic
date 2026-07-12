@@ -1,6 +1,6 @@
 ---
 name: onboard-project
-description: Set up a project repo to consume this repo's (agentic's) shared agents/skills and conventions read-only. Trigger when the user asks to onboard a project, wire up agentic, set up access to shared skills/conventions, or connect a project repo to the agentic repo.
+description: Set up a project repo to consume this repo's (agentic's) shared agents/skills and conventions read-only. Trigger when the user asks to onboard a project, wire up agentic, set up access to shared skills/conventions, connect a project repo to the agentic repo, or reconcile a project's existing instruction files down to project-specific deltas.
 ---
 
 # Onboard Project
@@ -49,7 +49,15 @@ Run this from a session in the project repo, with `agentic` reachable (e.g. laun
 
 4. **Verify the deny rule actually holds.** Try to `Write`/`Edit` a dummy file inside the mounted `agentic` path (then clean it up), and confirm it's blocked. **Non-negotiable:** If it isn't blocked, tell the user explicitly and point them at the split-authority workflow in `agentic`'s `learning/CONVENTIONS.md` — the two-session discipline is the real safeguard; the deny rule is only a backstop.
 
-5. **Report back** what changed (settings.json diff, CLAUDE.md addition, verification result) rather than assuming silent success.
+5. **Reconcile the project's existing agent instructions.** Review any instruction files already in the repo (`CLAUDE.md`, `.github/copilot-instructions.md`, Cursor rules, etc.) against the principle that a project's instructions should hold *only* project-specific content — its differences from and overrides of `agentic`'s shared conventions/skills. Sort each existing rule into:
+   - **Already covered by `agentic`** — redundant with the mounted shared content; propose deleting it.
+   - **Generic but not yet in `agentic`** — repo-agnostic and worth sharing; propose migrating it out to `agentic` (convention or skill) and removing it here. The `agentic` edit is propose-only from a project session — it lands via the split-authority two-session workflow, not by writing to `agentic` from here.
+   - **Project-specific difference/override** — keep it. This is the only category that should remain.
+   - **Conflicts with `agentic`** — where the project's instructions contradict `agentic`'s `CONVENTIONS.md`/skills, flag it and ask which wins; don't silently reconcile.
+
+   The end state is a project instruction file containing only project-specific deltas. **Non-negotiable:** propose the full sort and get sign-off before editing the project's files or drafting `agentic` changes — never trim or migrate automatically.
+
+6. **Report back** what changed (settings.json diff, CLAUDE.md addition, verification result) rather than assuming silent success.
 
 ## Staleness
 
