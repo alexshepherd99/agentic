@@ -31,7 +31,6 @@ Frontmatter is deliberately limited to `name` and `description` — no tool-spec
 
 - `INBOX.md` — raw, messy capture of ideas, links, and half-formed thoughts
 - `CONVENTIONS.md` — settled decisions (repo structure, naming, workflow patterns) — this is what eventually gets copied into a real repo
-- `SKILLS-AND-TECHNIQUES.md` — specific techniques, skills, or patterns being evaluated but not yet adopted
 
 Treat `learning/` as a staging area, not a source of truth — finished material eventually gets promoted out into actual git repos.
 
