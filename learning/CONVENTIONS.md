@@ -8,38 +8,15 @@ Decided: future-proof now rather than defer. Canonical agent/skill content is wr
 
 ## Authoring skills and agents: concise, non-negotiables signposted
 
-Skill and agent instructions are read under context pressure and may be
-summarised mid-task. Write them so the load-bearing parts survive.
+Skill and agent instructions are read under context pressure and may be summarised mid-task. Write them so the load-bearing parts survive.
 
-- **Be concise.** Every sentence competes with the task for attention. Cut
-  throat-clearing, non-actionable rationale, and examples a capable agent
-  doesn't need. Aim for the shortest text that removes ambiguity, not a
-  complete essay.
-- **Signpost non-negotiables.** A rule that must not be dropped gets an
-  explicit, greppable marker: a bold **Non-negotiable:** label on its own
-  line, stated as a self-contained imperative that still makes sense with
-  the surrounding prose stripped away. These are the lines that must survive
-  compression — make them stand out.
-- **Minimise duplication — extract shared instruction, don't copy.** Two
-  kinds of "shared" pull in different directions. Settled *decisions* (the
-  human-facing rationale and history) live in this CONVENTIONS.md, which is
-  not loaded at skill runtime — don't make a skill depend on reading it.
-  Shared *instruction that skills need at runtime* goes in a dedicated
-  `shared/` folder, created only when the need actually arises and kept lean,
-  with one file per concern so a skill can pull in just the relevant piece.
-  If two skills need the same rule, extract it to `shared/` and have both
-  reference it rather than duplicating.
-- **Qualify cross-references by repo.** A skill may run inside a project repo
-  with this repo mounted elsewhere, so a bare relative path is ambiguous.
-  Name the repo in the reference — `agentic`'s `shared/persistent-docs.md`,
-  not a bare `shared/persistent-docs.md`.
-- **Keep meta out of the instruction file.** Source links, influences, and
-  design rationale go in a skill-local `README.md`, not `SKILL.md` /
-  `agent.md`. The instruction file is loaded into context at runtime, so
-  anything not needed to *perform* the skill is pure noise there.
-- **Be consistent.** Reuse the same section structure, vocabulary, and
-  cross-reference style across skills, so familiarity with one transfers to
-  the next.
+- **Be concise.** Every sentence competes with the task for attention. Cut throat-clearing, non-actionable rationale, and examples a capable agent doesn't need. Aim for the shortest text that removes ambiguity, not a complete essay.
+- **Signpost non-negotiables.** A rule that must not be dropped gets an explicit, greppable marker: a bold **Non-negotiable:** label on its own line, stated as a self-contained imperative that still makes sense with the surrounding prose stripped away. These are the lines that must survive compression — make them stand out.
+- **Minimise duplication — extract shared instruction, don't copy.** Two kinds of "shared" pull in different directions. Settled *decisions* (the human-facing rationale and history) live in this CONVENTIONS.md, which is not loaded at skill runtime — don't make a skill depend on reading it. Shared *instruction that skills need at runtime* goes in a dedicated `shared/` folder, created only when the need actually arises and kept lean, with one file per concern so a skill can pull in just the relevant piece. If two skills need the same rule, extract it to `shared/` and have both reference it rather than duplicating.
+- **Qualify cross-references by repo.** A skill may run inside a project repo with this repo mounted elsewhere, so a bare relative path is ambiguous. Name the repo in the reference — `agentic`'s `shared/persistent-docs.md`, not a bare `shared/persistent-docs.md`.
+- **Keep meta out of the instruction file.** Source links, influences, and design rationale go in a skill-local `README.md`, not `SKILL.md` / `agent.md`. The instruction file is loaded into context at runtime, so anything not needed to *perform* the skill is pure noise there.
+- **Be consistent.** Reuse the same section structure, vocabulary, and cross-reference style across skills, so familiarity with one transfers to the next.
+- **One line per paragraph (repo-wide).** Write markdown soft-wrapped — one long line per paragraph or list item, no hard breaks mid-paragraph — for cleaner diffs. Applies to every markdown file in this repo, not just skills/agents.
 
 ## Skill development: bespoke over framework
 
