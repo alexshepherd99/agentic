@@ -15,6 +15,6 @@ To let a project repo use this repo's `agents/`/`skills/` and conventions (read-
    - Verify the deny rule actually blocks writes (a known Claude Code permissions quirk means `--add-dir` mounts don't always inherit deny rules reliably — see `learning/CONVENTIONS.md`).
 4. Usually, follow up by running the `init-project-docs` skill to scaffold the project's own persistent-document structure (`BACKLOG.md`, `docs/<effort-name>/`). This is a separate concern from onboarding the mount — see `learning/CONVENTIONS.md` under "Persistent documents in project repos".
 
-You can also do these steps by hand — see the exact `settings.json` block and split-authority workflow in `learning/CONVENTIONS.md` under "Sharing agents/skills into project repos".
+You can also do these steps by hand — the exact `settings.json` block lives in the `onboard-project` skill (`skills/onboard-project/SKILL.md`), and the split-authority workflow is in `learning/CONVENTIONS.md` under "Sharing agents/skills into project repos".
 
 **Note:** the project's `CLAUDE.md` pointer section is static prose written once at onboarding time. If this repo's structure changes significantly later, existing projects' pointer text won't auto-update — re-run onboarding if you want it refreshed.
