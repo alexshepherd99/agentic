@@ -2,18 +2,6 @@
 
 ## Immediate — needed to start using skills on future projects
 
-### Topic: Project instructions should only hold project specifics
-
-**Principle**: a project repo's own agent instructions (`CLAUDE.md`, `.github/copilot-instructions.md`, etc.) should contain only project-specific content. Anything generic/repo-agnostic belongs in this `agentic` repo instead (as a convention or skill), not duplicated per-project.
-
-**Action needed**: as part of repo setup, any existing Copilot/agent instructions in a project repo should be reviewed against this principle:
-- Flag generic content that should be migrated out to `agentic` (convention/skill), rather than left duplicated in the project's own instructions.
-- Flag inconsistencies between what the project's instructions say and what's already settled in `agentic`'s `CONVENTIONS.md`/skills.
-
-Likely lands as a review step added to the `onboard-project` skill. The import/packaging work this depended on is now done (the `how-we-work` and `coding-standards` skills exist, and CONVENTIONS points at them), so there's real content to test the review against.
-
-**Status**: queued, not started
-
 ### Topic: Final full-repo review (folds in the duplication sweep)
 
 A comprehensive, one-time review of *everything* in this repo — not just duplication — inviting suggestions, changes, and fixes. Walk area by area (`CLAUDE.md`, `learning/`, `agents/`, `skills/`, `shared/`, all READMEs, the symlink setup) and surface anything worth improving: gaps, inconsistencies, drift / stale cross-references, duplication (the learning-vs-skills sweep is folded in here and re-checked fresh), unclear or overlong instructions, sprawl, naming, structure.
