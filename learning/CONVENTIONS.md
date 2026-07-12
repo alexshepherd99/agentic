@@ -52,6 +52,8 @@ Guidance for how an agent should *work in a project repo* — the collaboration 
 
 ## Project instruction files hold only project-specific deltas
 
+*Distinct from the section above: that governs where `agentic` keeps its own guidance (skills vs this file); this governs what a consuming project's own instruction files should contain.*
+
 A project repo's own agent instructions (`CLAUDE.md`, `.github/copilot-instructions.md`, Cursor rules, etc.) should contain *only* what's specific to that project — its differences from and overrides of `agentic`'s shared conventions and skills. Anything generic/repo-agnostic belongs in `agentic` (as a convention or skill), mounted read-only, not duplicated per project.
 
 - Content already covered by `agentic` is deleted from the project, not restated.
