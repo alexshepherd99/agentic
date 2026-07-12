@@ -49,3 +49,13 @@ Guidance for how an agent should *work in a project repo* — the collaboration 
 - **`coding-standards` skill** — how project code should be written, including test-first-where-behaviour-is-known. Triggers before writing/modifying code.
 
 *Why skills, not plain files:* in a project session only the project's own `CLAUDE.md` and registered skills/agents surface automatically; a guidance file mounted via `--add-dir` loads only if something reads it, so it's easy to silently ignore. Skills self-surface via their trigger descriptions. The `onboard-project` skill also names these skills in the project's `CLAUDE.md` pointer as a backstop.
+
+## Project instruction files hold only project-specific deltas
+
+A project repo's own agent instructions (`CLAUDE.md`, `.github/copilot-instructions.md`, Cursor rules, etc.) should contain *only* what's specific to that project — its differences from and overrides of `agentic`'s shared conventions and skills. Anything generic/repo-agnostic belongs in `agentic` (as a convention or skill), mounted read-only, not duplicated per project.
+
+- Content already covered by `agentic` is deleted from the project, not restated.
+- Generic content not yet in `agentic` is migrated out to `agentic` (via the split-authority workflow) and removed from the project.
+- Only genuine project-specific differences/overrides remain.
+
+Reconciling a project's existing instructions to this end state is a step in the `onboard-project` skill — the operational procedure lives there; this section records only the decision.
