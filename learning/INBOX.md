@@ -34,6 +34,16 @@ Ties into the "package everything for project use" topic above (the CONVENTIONS 
 
 **Status**: queued, not started
 
+### Topic: Build a manually-run repo-review skill
+
+Turn the periodic repo review (done manually this session) into a reusable, manually-invoked skill, usable both in this repo and in project repos (mounted via the standard share). It should audit the repo for gaps, inconsistencies, drift / stale cross-references, duplication, and sprawl, and surface suggestions for the human to weigh — report/propose only, never act without sign-off (cf. `init-project-docs`).
+
+Keep it open-ended, not a fixed checklist: the agent should recommend what's worth reviewing based on what it actually finds, rather than mechanically walking a prescriptive list. A short set of standing prompts (sprawl caps, dangling references, duplication, docs-vs-reality drift) can seed it, but the agent should stay free to raise anything else it notices.
+
+One concrete instance of the "introspection process for gradually improving the repo" item under Longer-term below.
+
+**Status**: queued, not started
+
 ## Longer-term — investigate later
 
 - Managing context + gated, documented steps with fresh context per step; consistency/coherence checks across docs, code, comments, tests after major chunks
