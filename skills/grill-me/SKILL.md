@@ -37,8 +37,3 @@ not a transcript of the back-and-forth. For a trivial effort, collapse into
 `log.md` instead. See `agentic`'s `shared/persistent-docs.md` for the
 structure and collapsing rule, and the `init-project-docs` skill to create
 the folder if it doesn't exist yet.
-
-## Source
-
-Adapted from the "grill-me" pattern in the Claude Code skill ecosystem — see
-https://claudemarketplaces.com/skills/mattpocock/skills/grill-me
