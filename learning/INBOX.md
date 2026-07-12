@@ -7,10 +7,10 @@
 Two-part plan for a fresh session:
 
 1. ~~**Bring in Copilot instructions from a previous project.** Review them and convert whatever is generic/repo-agnostic (not tied to that specific project) into settled conventions in this repo's `CONVENTIONS.md`.~~ **Done** — generic content imported to new `CODING-STANDARDS.md`; Collaboration-workflow section of `CONVENTIONS.md` augmented (green-suite DoD, propose-improvements, descriptive commit messages). Project-specific F1/PuLP/tooling content discarded; source file deleted.
-2. **Package everything for project consumption.** Once that's done, sweep everything in this repo that's meant for other projects to use but isn't already a skill (e.g. convention entries that are really guidance for how a project should behave, not just decisions about this repo) — turn each into whatever form actually fits: a skill, an agent, or a plain guidance file that project repos read. Form is flexible; the point is making it consumable, not just documented here.
-3. **De-duplicate and re-split CONVENTIONS as part of this.** As guidance moves into skills/guidance files, CONVENTIONS should reference them once rather than restating, and can be split by concern — repo-internal mechanics vs. guidance that gets mounted into projects. CONVENTIONS is already growing (7 sections, ~1,100 words, still under the sprawl caps but trending up); this is where that gets addressed. See the dedicated de-duplication task below.
+2. ~~**Package everything for project consumption.**~~ **Done** — the two project-facing guidance bodies (collaboration workflow, coding standards) are packaged as skills (`how-we-work`, `coding-standards`) rather than plain files, so they self-surface via skill-triggering instead of being silently ignored. `how-we-work` triggers at the very start of any work; `coding-standards` before writing/modifying code.
+3. ~~**De-duplicate and re-split CONVENTIONS as part of this.**~~ **Done** — TDD + Collaboration-workflow sections replaced by one section pointing at the skills (+ why-skills-not-files rationale); `settings.json` block de-duplicated to `onboard-project`; frontmatter-spec restatement de-duplicated to the `agents/`/`skills/` READMEs. CONVENTIONS down to 6 sections.
 
-**Status**: part 1 done; parts 2–3 (package everything for project use; de-duplicate/re-split CONVENTIONS) still queued
+**Status**: done — all three parts complete.
 
 ### Topic: Project instructions should only hold project specifics
 
@@ -32,7 +32,7 @@ Once a rule has been coded into a skill or guidance file, CONVENTIONS should ref
 
 Ties into the "package everything for project use" topic above (the CONVENTIONS split is part of that).
 
-**Status**: queued, not started
+**Status**: done — both known instances resolved. The `settings.json` block now points to `onboard-project`; the clarifying-questions guidance moved into the `how-we-work` skill, which references `grill-me` rather than restating it.
 
 ### Topic: Build a manually-run repo-review skill
 
