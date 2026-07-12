@@ -34,9 +34,9 @@ Once the request is grilled, write the resolved understanding to
 `docs/<effort-name>/requirements.md`; once the plan is grilled, write the
 resolved plan to `docs/<effort-name>/plan.md`. Record the settled decisions,
 not a transcript of the back-and-forth. For a trivial effort, collapse into
-`log.md` instead. See `shared/persistent-docs.md` for the structure and
-collapsing rule, and the `init-project-docs` skill to create the folder if
-it doesn't exist yet.
+`log.md` instead. See `agentic`'s `shared/persistent-docs.md` for the
+structure and collapsing rule, and the `init-project-docs` skill to create
+the folder if it doesn't exist yet.
 
 ## Source
 
