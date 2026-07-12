@@ -23,6 +23,12 @@ Likely lands as a review step added to the `onboard-project` skill, once the "Im
 
 **Status**: queued, not started — related to the topic above
 
+### Topic: Thorough review of the repo so far + suggestions
+
+One-off checkpoint (distinct from the ongoing "introspection process" item below): do a thorough review of everything in this repo as it stands — conventions, skills, agents, structure, docs — and surface suggestions for the user to weigh (gaps, inconsistencies, sprawl, things worth promoting/consolidating/cutting). Report/propose only; don't act without sign-off.
+
+**Status**: queued, not started
+
 ## Longer-term — investigate later
 
 - Managing context + gated, documented steps with fresh context per step; consistency/coherence checks across docs, code, comments, tests after major chunks
