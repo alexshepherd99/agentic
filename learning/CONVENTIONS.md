@@ -4,7 +4,7 @@ Settled decisions — repo structure, naming, workflow patterns. This is what ev
 
 ## Tool-portability for agents/skills
 
-Decided: future-proof now rather than defer. Canonical agent/skill content is written in a tool-agnostic format — plain markdown with minimal YAML frontmatter (`name`, `description` only, no tool-specific fields like Claude's `tools`/`model`) — so it can be read or adapted by any coding agent (Claude Code, Copilot, Cursor, etc.), not just Claude Code. Tool-specific integration (e.g. Claude Code discovering skills/agents via `/add-dir`) is handled by a thin adapter layer (symlinks) rather than by changing the canonical format. See the `agentic` repo's `agents/` and `skills/` folders for the applied structure.
+Decided: future-proof now rather than defer. Canonical agent/skill content is tool-agnostic — plain markdown, no tool-specific frontmatter — so any coding agent (Claude Code, Copilot, Cursor) can read or adapt it, not just Claude Code. Tool-specific integration (e.g. Claude Code discovering skills/agents via `--add-dir`) is a thin adapter layer (symlinks), not a change to the canonical format. The concrete frontmatter spec (`name`/`description` only) lives in `agents/README.md` and `skills/README.md` — don't restate it here.
 
 ## Authoring skills and agents: concise, non-negotiables signposted
 
@@ -29,18 +29,7 @@ Build skills in-house rather than adopting external agentic frameworks. (Rationa
 
 ## Sharing agents/skills into project repos
 
-Project repos consume this repo's `agents/`/`skills/` read-only, via `--add-dir` and `additionalDirectories`, never by copying.
-
-Project `.claude/settings.json`:
-```json
-{
-  "permissions": {
-    "additionalDirectories": ["../agentic"],
-    "deny": ["Write(../agentic/**)", "Edit(../agentic/**)"]
-  }
-}
-```
-Example shell alias for launching project sessions (illustrative name, not fixed): `alias claude-project='claude --add-dir ../agentic'`
+Project repos consume this repo's `agents/`/`skills/` read-only, via `--add-dir` and `additionalDirectories`, never by copying. The exact `settings.json` permissions block and the onboarding steps live in the `onboard-project` skill — the source of truth for the mechanics; don't restate them here.
 
 **Split authority:** a project session may read conventions/skills and propose changes, but must not write to this repo. Actual edits/commits only happen from a session whose working directory is this repo itself — run two sessions in parallel and hand text across manually.
 
@@ -52,19 +41,11 @@ Project repos (not this one) use a standard structure for requirements/plans/exe
 
 Scaffolding a new effort folder, and reviewing existing docs in a repo for migration to this structure, is handled by the `init-project-docs` skill (report/propose only — it never moves files automatically).
 
-## Test-driven development: encouraged where behavior is known upfront
+## Project-facing guidance lives in skills, not this file
 
-Default to test-first — write a failing test, then implement — when the expected behavior is already clear: pure logic, bug fixes (regression test before the fix), APIs with a defined contract. Skip test-first for exploratory/prototype work, UI layout, or anything where the shape of the solution is still being discovered — write tests after, once the design settles, or skip entirely for throwaway exploration.
+Guidance for how an agent should *work in a project repo* — the collaboration workflow and the code-writing standards — is packaged as skills, not stated here, so it's surfaced by skill-triggering and not duplicated per project.
 
-Applies to project repos with actual code — this repo itself has no code/build/test tooling (per `CLAUDE.md`).
+- **`how-we-work` skill** — the collaboration workflow (clarifying questions, propose-before-editing, commit-per-item, green-suite DoD, end-of-session review). Triggers at the very start of any piece of work. (This repo's own workflow variant stays in its `CLAUDE.md`.)
+- **`coding-standards` skill** — how project code should be written, including test-first-where-behaviour-is-known. Triggers before writing/modifying code.
 
-## Collaboration workflow (coding projects)
-
-How Claude should work through changes in a project repo. (This is the coding-project variant; the skill-development version lives in `agentic`'s own `CLAUDE.md`.)
-
-- **Show the approach before writing.** For any non-trivial change, present the plan — or the concrete diff for a judgment call — and get confirmation before editing. Review-then-write, not write-then-revise. Trivial one-line fixes are exempt.
-- **Ask clarifying questions.** When scope or requirements are ambiguous, prefer several small, scoped questions over one open-ended one; don't build on unstated assumptions. (The `grill-me` skill formalizes this for larger tasks.)
-- **One change at a time, commit per item.** Work through a multi-item task in an agreed order (flagging dependencies), committing each resolved item on its own — with a descriptive message — before starting the next; don't batch unrelated changes into one commit.
-- **Definition of done: a green suite.** In a repo with tests, confirm the relevant tests pass before starting a change, and that the full suite is green before marking work complete.
-- **Propose improvements to shared instructions.** When you spot a better practice mid-work, propose an update to the relevant convention, skill, or instructions file — propose, don't silently apply — rather than using it once and moving on.
-- **End-of-session review.** Near the end of a working session, check that everything discussed landed somewhere durable (a commit, a tracked doc/issue), that no doc still frames a resolved decision as open, and that the working tree is clean and pushed.
+*Why skills, not plain files:* in a project session only the project's own `CLAUDE.md` and registered skills/agents surface automatically; a guidance file mounted via `--add-dir` loads only if something reads it, so it's easy to silently ignore. Skills self-surface via their trigger descriptions. The `onboard-project` skill also names these skills in the project's `CLAUDE.md` pointer as a backstop.
