@@ -8,6 +8,7 @@ Two-part plan for a fresh session:
 
 1. **Bring in Copilot instructions from a previous project.** Review them and convert whatever is generic/repo-agnostic (not tied to that specific project) into settled conventions in this repo's `CONVENTIONS.md`.
 2. **Package everything for project consumption.** Once that's done, sweep everything in this repo that's meant for other projects to use but isn't already a skill (e.g. convention entries that are really guidance for how a project should behave, not just decisions about this repo) — turn each into whatever form actually fits: a skill, an agent, or a plain guidance file that project repos read. Form is flexible; the point is making it consumable, not just documented here.
+3. **De-duplicate and re-split CONVENTIONS as part of this.** As guidance moves into skills/guidance files, CONVENTIONS should reference them once rather than restating, and can be split by concern — repo-internal mechanics vs. guidance that gets mounted into projects. CONVENTIONS is already growing (12 sections, ~1,100 words, still under the sprawl caps but trending up); this is where that gets addressed. See the dedicated de-duplication task below.
 
 **Status**: queued, not started
 
@@ -23,9 +24,13 @@ Likely lands as a review step added to the `onboard-project` skill, once the "Im
 
 **Status**: queued, not started — related to the topic above
 
-### Topic: Thorough review of the repo so far + suggestions
+### Topic: De-duplicate CONVENTIONS against skills/guidance once written
 
-One-off checkpoint (distinct from the ongoing "introspection process" item below): do a thorough review of everything in this repo as it stands — conventions, skills, agents, structure, docs — and surface suggestions for the user to weigh (gaps, inconsistencies, sprawl, things worth promoting/consolidating/cutting). Report/propose only; don't act without sign-off.
+Once a rule has been coded into a skill or guidance file, CONVENTIONS should reference it once rather than restating it. Known instances to resolve when this runs:
+- The `.claude/settings.json` permissions block is duplicated in CONVENTIONS ("Sharing agents/skills into project repos") and the `onboard-project` skill — CONVENTIONS should point at the skill.
+- Clarifying-questions guidance overlaps CONVENTIONS ("Collaboration workflow (coding projects)") and the `grill-me` skill.
+
+Ties into the "package everything for project use" topic above (the CONVENTIONS split is part of that).
 
 **Status**: queued, not started
 
