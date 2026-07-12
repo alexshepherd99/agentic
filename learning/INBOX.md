@@ -14,6 +14,12 @@ Likely lands as a review step added to the `onboard-project` skill. The import/p
 
 **Status**: queued, not started
 
+### Topic: Final duplication sweep — learning files vs baked skills
+
+One last pass checking for leftover duplication between the `learning/` files (`CONVENTIONS.md`, `INBOX.md`, `README.md`) and the baked skills/READMEs (`how-we-work`, `coding-standards`, `onboard-project`, `init-project-docs`, `grill-me`, plus `shared/persistent-docs.md`). Where a skill now owns a rule, `CONVENTIONS.md` should reference it once, not restate it — remove any restatement that remains.
+
+**Status**: queued, not started
+
 ### Topic: Build a manually-run repo-review skill
 
 Turn the periodic repo review (done manually this session) into a reusable, manually-invoked skill, usable both in this repo and in project repos (mounted via the standard share). It should audit the repo for gaps, inconsistencies, drift / stale cross-references, duplication, and sprawl, and surface suggestions for the human to weigh — report/propose only, never act without sign-off (cf. `init-project-docs`).
