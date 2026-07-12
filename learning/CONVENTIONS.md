@@ -33,6 +33,10 @@ summarised mid-task. Write them so the load-bearing parts survive.
   with this repo mounted elsewhere, so a bare relative path is ambiguous.
   Name the repo in the reference — `agentic`'s `shared/persistent-docs.md`,
   not a bare `shared/persistent-docs.md`.
+- **Keep meta out of the instruction file.** Source links, influences, and
+  design rationale go in a skill-local `README.md`, not `SKILL.md` /
+  `agent.md`. The instruction file is loaded into context at runtime, so
+  anything not needed to *perform* the skill is pure noise there.
 - **Be consistent.** Reuse the same section structure, vocabulary, and
   cross-reference style across skills, so familiarity with one transfers to
   the next.
@@ -43,7 +47,7 @@ Build skills in-house rather than adopting external agentic frameworks. (Rationa
 
 - New skill development may include an optional web search for established approaches. (Rationale: learn from others' work without being obligated to adopt it — intelligence gathering stays optional.)
 - Claude Code notes interesting patterns it encounters during work into a running list. (Rationale: build an idea backlog on your own schedule, not because trends demand it.)
-- Every developed skill documents its source links/influences. (Rationale: trace where ideas came from, stay honest about influences.)
+- Every developed skill documents its source links/influences in its `README.md` (not `SKILL.md` — see the authoring convention above). (Rationale: trace where ideas came from, stay honest about influences.)
 - Skills are refreshed via manual prompt, not on an automatic cadence. (Rationale: reviews happen when you decide it's time, not on a surrendered schedule.)
 
 ## Sharing agents/skills into project repos

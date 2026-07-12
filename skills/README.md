@@ -21,3 +21,5 @@ Instructions for the skill go here.
 ```
 
 Keep frontmatter to `name` and `description` only. Tool-specific fields don't belong in the canonical file — the goal is that this content is readable and reusable by any coding agent, not just Claude Code.
+
+Source links, influences, and design notes for a skill go in a `README.md` alongside its `SKILL.md` — never in `SKILL.md` itself, which is loaded into context at runtime.
