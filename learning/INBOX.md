@@ -8,7 +8,7 @@ Two-part plan for a fresh session:
 
 1. **Bring in Copilot instructions from a previous project.** Review them and convert whatever is generic/repo-agnostic (not tied to that specific project) into settled conventions in this repo's `CONVENTIONS.md`.
 2. **Package everything for project consumption.** Once that's done, sweep everything in this repo that's meant for other projects to use but isn't already a skill (e.g. convention entries that are really guidance for how a project should behave, not just decisions about this repo) — turn each into whatever form actually fits: a skill, an agent, or a plain guidance file that project repos read. Form is flexible; the point is making it consumable, not just documented here.
-3. **De-duplicate and re-split CONVENTIONS as part of this.** As guidance moves into skills/guidance files, CONVENTIONS should reference them once rather than restating, and can be split by concern — repo-internal mechanics vs. guidance that gets mounted into projects. CONVENTIONS is already growing (12 sections, ~1,100 words, still under the sprawl caps but trending up); this is where that gets addressed. See the dedicated de-duplication task below.
+3. **De-duplicate and re-split CONVENTIONS as part of this.** As guidance moves into skills/guidance files, CONVENTIONS should reference them once rather than restating, and can be split by concern — repo-internal mechanics vs. guidance that gets mounted into projects. CONVENTIONS is already growing (7 sections, ~1,100 words, still under the sprawl caps but trending up); this is where that gets addressed. See the dedicated de-duplication task below.
 
 **Status**: queued, not started
 
