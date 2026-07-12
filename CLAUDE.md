@@ -27,6 +27,10 @@ Frontmatter is deliberately limited to `name` and `description` — no tool-spec
 
 `.claude/agents` and `.claude/skills` are symlinks to the top-level `agents/` and `skills/` folders. They exist purely so Claude Code can discover this content today via `/add-dir <path-to-this-repo>` — the top-level folders remain the single source of truth; don't edit through the symlinks or duplicate content into them.
 
+## Shared instruction (`shared/`)
+
+Runtime instruction needed by more than one skill, extracted here so it isn't duplicated (e.g. `shared/persistent-docs.md`, the project persistent-document structure). Created only when the need actually arises; one file per concern. Distinct from `learning/CONVENTIONS.md`, which records settled decisions and rationale and is *not* loaded at skill runtime.
+
 ## Knowledge base structure (`learning/`)
 
 - `INBOX.md` — raw, messy capture of ideas, links, and half-formed thoughts. A completed item can be deleted from the list once it's fully done **and** its outputs are persisted somewhere durable (a commit, a `CONVENTIONS.md` entry, a skill, or a memory) — the INBOX tracks open work, not history.
