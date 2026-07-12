@@ -80,3 +80,12 @@ Scaffolding a new effort folder, and reviewing existing docs in a repo for migra
 Default to test-first — write a failing test, then implement — when the expected behavior is already clear: pure logic, bug fixes (regression test before the fix), APIs with a defined contract. Skip test-first for exploratory/prototype work, UI layout, or anything where the shape of the solution is still being discovered — write tests after, once the design settles, or skip entirely for throwaway exploration.
 
 Applies to project repos with actual code — this repo itself has no code/build/test tooling (per `CLAUDE.md`).
+
+## Collaboration workflow (coding projects)
+
+How Claude should work through changes in a project repo. (This is the coding-project variant; the skill-development version lives in `agentic`'s own `CLAUDE.md`.)
+
+- **Show the approach before writing.** For any non-trivial change, present the plan — or the concrete diff for a judgment call — and get confirmation before editing. Review-then-write, not write-then-revise. Trivial one-line fixes are exempt.
+- **Ask clarifying questions.** When scope or requirements are ambiguous, prefer several small, scoped questions over one open-ended one; don't build on unstated assumptions. (The `grill-me` skill formalizes this for larger tasks.)
+- **One change at a time, commit per item.** Work through a multi-item task in an agreed order (flagging dependencies), committing each resolved item on its own before starting the next — don't batch unrelated changes into one commit.
+- **End-of-session review.** Near the end of a working session, check that everything discussed landed somewhere durable (a commit, a tracked doc/issue), that no doc still frames a resolved decision as open, and that the working tree is clean and pushed.

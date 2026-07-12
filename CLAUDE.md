@@ -43,3 +43,7 @@ Treat `learning/` as a staging area, not a source of truth — finished material
   - Any single document exceeds ~1,500 words
   - Documents seem to overlap in coverage
   - Answering a simple question requires searching across multiple docs
+- **Draft before writing.** For judgment-call or multi-paragraph content (a convention, a skill/agent file), show the full draft in chat and get explicit confirmation before Edit/Write — review-then-write, not write-then-revise. Trivial one-line fixes are exempt.
+- **Ask clarifying questions.** When anything is ambiguous, prefer several small, scoped questions over one big open-ended one — don't finalize on assumptions.
+- **One item at a time, commit per item.** Work multi-item lists in an order you pick (flagging dependencies), committing and pushing each resolved item before the next — don't batch several into one commit.
+- **End-of-session review.** Near the end of a session with nontrivial back-and-forth, proactively check that everything discussed was captured somewhere durable (commit, INBOX/CONVENTIONS entry, memory), that no file still frames a since-resolved decision as open, that the tree is clean/pushed, and that sprawl (see above) is in check.
