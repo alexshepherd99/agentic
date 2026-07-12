@@ -10,6 +10,8 @@ A comprehensive, one-time review of *everything* in this repo — not just dupli
 
 Best done *after* the other Immediate items land, since it reviews their outputs too. Kept separate from the "manually-run repo-review skill" topic below: this is a one-off pass over *this* repo. As it runs, propose additions/refinements to fold into that skill-building topic later (what a reusable review should check).
 
+One thing to eye specifically: `CONVENTIONS.md`'s "Project instruction files hold only project-specific deltas" and "Project-facing guidance lives in skills, not this file" sit adjacent — decide whether they read as two distinct decisions or want tightening/merging. Left separate deliberately (one is agentic-internal organization, the other is the project-side end-state), but this pass should reconsider fresh.
+
 **Status**: queued, not started
 
 ### Topic: Build a manually-run repo-review skill
