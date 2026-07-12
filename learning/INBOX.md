@@ -2,16 +2,6 @@
 
 ## Immediate — needed to start using skills on future projects
 
-### Topic: Import Copilot instructions, then package everything for project use
-
-Two-part plan for a fresh session:
-
-1. ~~**Bring in Copilot instructions from a previous project.** Review them and convert whatever is generic/repo-agnostic (not tied to that specific project) into settled conventions in this repo's `CONVENTIONS.md`.~~ **Done** — generic content imported to a new `CODING-STANDARDS.md` staging file (later promoted into the `coding-standards` skill in part 2); Collaboration-workflow section of `CONVENTIONS.md` augmented (green-suite DoD, propose-improvements, descriptive commit messages). Project-specific F1/PuLP/tooling content discarded; source file deleted.
-2. ~~**Package everything for project consumption.**~~ **Done** — the two project-facing guidance bodies (collaboration workflow, coding standards) are packaged as skills (`how-we-work`, `coding-standards`) rather than plain files, so they self-surface via skill-triggering instead of being silently ignored. `how-we-work` triggers at the very start of any work; `coding-standards` before writing/modifying code.
-3. ~~**De-duplicate and re-split CONVENTIONS as part of this.**~~ **Done** — TDD + Collaboration-workflow sections replaced by one section pointing at the skills (+ why-skills-not-files rationale); `settings.json` block de-duplicated to `onboard-project`; frontmatter-spec restatement de-duplicated to the `agents/`/`skills/` READMEs. CONVENTIONS down to 6 sections.
-
-**Status**: done — all three parts complete.
-
 ### Topic: Project instructions should only hold project specifics
 
 **Principle**: a project repo's own agent instructions (`CLAUDE.md`, `.github/copilot-instructions.md`, etc.) should contain only project-specific content. Anything generic/repo-agnostic belongs in this `agentic` repo instead (as a convention or skill), not duplicated per-project.
@@ -20,19 +10,9 @@ Two-part plan for a fresh session:
 - Flag generic content that should be migrated out to `agentic` (convention/skill), rather than left duplicated in the project's own instructions.
 - Flag inconsistencies between what the project's instructions say and what's already settled in `agentic`'s `CONVENTIONS.md`/skills.
 
-Likely lands as a review step added to the `onboard-project` skill, once the "Import Copilot instructions" work above has happened and there's real content to test the review against.
+Likely lands as a review step added to the `onboard-project` skill. The import/packaging work this depended on is now done (the `how-we-work` and `coding-standards` skills exist, and CONVENTIONS points at them), so there's real content to test the review against.
 
-**Status**: queued, not started — related to the topic above
-
-### Topic: De-duplicate CONVENTIONS against skills/guidance once written
-
-Once a rule has been coded into a skill or guidance file, CONVENTIONS should reference it once rather than restating it. Known instances to resolve when this runs:
-- The `.claude/settings.json` permissions block is duplicated in CONVENTIONS ("Sharing agents/skills into project repos") and the `onboard-project` skill — CONVENTIONS should point at the skill.
-- Clarifying-questions guidance overlaps CONVENTIONS ("Collaboration workflow (coding projects)") and the `grill-me` skill.
-
-Ties into the "package everything for project use" topic above (the CONVENTIONS split is part of that).
-
-**Status**: done — both known instances resolved. The `settings.json` block now points to `onboard-project`; the clarifying-questions guidance moved into the `how-we-work` skill, which references `grill-me` rather than restating it.
+**Status**: queued, not started
 
 ### Topic: Build a manually-run repo-review skill
 
