@@ -29,6 +29,10 @@ summarised mid-task. Write them so the load-bearing parts survive.
   with one file per concern so a skill can pull in just the relevant piece.
   If two skills need the same rule, extract it to `shared/` and have both
   reference it rather than duplicating.
+- **Qualify cross-references by repo.** A skill may run inside a project repo
+  with this repo mounted elsewhere, so a bare relative path is ambiguous.
+  Name the repo in the reference — `agentic`'s `shared/persistent-docs.md`,
+  not a bare `shared/persistent-docs.md`.
 - **Be consistent.** Reuse the same section structure, vocabulary, and
   cross-reference style across skills, so familiarity with one transfers to
   the next.
