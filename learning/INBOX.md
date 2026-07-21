@@ -22,3 +22,4 @@ One concrete instance of the "introspection process for gradually improving the 
 - Introspection process for gradually improving the repo over time to be easier for agents to follow/modify/use
 - Graphify (or similar) for encoding a project for agent readability — worth it, and at what threshold
 - Encouraging the agent to refine its own instructions — post-project retrospective trigger
+- Review the skills built in this repo against what already exists — Claude Code's built-in skills/commands, Anthropic's published skills, and skills shared across the broader internet — to spot overlap, gaps, and ideas worth borrowing. Approach TBD (how to discover and compare against external skill sets isn't figured out yet).
