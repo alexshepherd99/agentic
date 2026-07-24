@@ -33,7 +33,7 @@ Project repos consume this repo's `agents/`/`skills/` read-only, via `--add-dir`
 
 **Split authority:** a project session may read conventions/skills and propose changes, but must not write to this repo. Actual edits/commits only happen from a session whose working directory is this repo itself — run two sessions in parallel and hand text across manually.
 
-**Verification caveat:** deny rules on `--add-dir`/`additionalDirectories` paths may not reliably hold in all Claude Code versions. Verify once per machine by asking a project session to edit a dummy file in the mounted repo. If the deny rule doesn't hold, the two-session discipline above is the real safeguard — the deny rule is a backstop, not a guarantee.
+**Deny rules are a backstop, not the discipline.** Split authority stands on intent — a project session shouldn't be *trying* to edit this repo — so it holds regardless of enforcement. But the deny rule does reliably hold when written correctly: it must be an `Edit(...)` rule (file-permission checks ignore `Write(...)` rules entirely) rooted at `~/`, e.g. `Edit(~/**/agentic/**)` — relative and unanchored globs silently match nothing. Verify once per machine by asking a project session to edit a dummy file in the mounted repo; a failed probe means the rule is malformed, not that deny rules are unreliable. Exact rule and failure modes live in the `onboard-project` skill.
 
 ## Persistent documents in project repos
 
