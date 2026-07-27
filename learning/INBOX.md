@@ -1,5 +1,21 @@
 # Agentic engineering topics to explore
 
+## Proposed instruction edits — drafted, awaiting sign-off
+
+Concrete edits to existing instruction files, each drafted with its evidence and ready to review. Unlike the topics below these need a decision rather than exploration — delete an item once its edit has landed or been rejected. All three came from `f1_fantasy`'s `fastf1_v1` effort (2026-07-27) via the split-authority handoff; line references are to that repo's `docs/fastf1_v1/log.md` at commit `95c6bc0`.
+
+### A. `skills/coding-standards/SKILL.md` — when red-first is impossible, verify by mutation
+
+**Gap:** the Testing section covers *watch it fail for the reason you expect* and *an unexpected pass is a defect in the test*. It has no answer for red-first being structurally **impossible** — a test that cannot fail before the implementation exists because what it asserts is vacuously true beforehand.
+
+**Drafted text** — insert after the "unexpected pass is a defect" bullet:
+
+- **When red-first is impossible, verify by mutation.** Some tests cannot fail before the implementation exists — an assertion that nothing was cached passes vacuously when no caching code exists at all, and a new function's first red is an `ImportError` that demonstrates nothing about behaviour. **Non-negotiable:** a test that could not be observed failing for the right reason must instead be confirmed by deliberately breaking the finished implementation — drop the guard, shift the boundary, reinline the duplicate — and watching it go red; name the mutation and quote the failure when reporting. The same applies to a pure refactor, which adds no behaviour to test: if mutating the code you just consolidated leaves the suite green, the refactor is unprotected and that coverage gap is itself the finding.
+
+**Evidence** — four independent instances: `log.md:317` (an "empty schedule is not cached" assertion would have passed vacuously pre-implementation, so it was verified by dropping the `not schedule.empty` guard instead); `log.md:364` (first red was signature-level `TypeError`/`ImportError`, so all three assertions were confirmed by mutation); `log.md:284` (two metrics tests first went red on a `KeyError` about `METRIC_WEIGHTS` itself, so the dict assertions were moved after the behavioural ones); and the rolling-window helper dedup, where mutating the consolidated helper left every output test green, revealing the refactor was unprotected. Currently captured only in `f1_fantasy`'s per-project memory, so no other project benefits — the main argument for promoting it.
+
+**Overlap to resolve before applying:** the drafted `ImportError` example restates a clause already in `SKILL.md:38`. More importantly `SKILL.md:39` frames *any* unexpected pass as a defect in the test and already prescribes a mutation ("back it out, confirm the test fails, then restore"), so appending this bullet as-is would leave the two contradicting each other — 39 wants narrowing to "passes because it exercises a different path" so this bullet can own "passes because the assertion is vacuously true beforehand".
+
 ## Immediate — needed to start using skills on future projects
 
 ### Topic: Build a manually-run repo-review skill
