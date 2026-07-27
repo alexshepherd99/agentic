@@ -28,6 +28,23 @@ Concrete edits to existing instruction files, each drafted with its evidence and
 
 **Overlap:** none. `persistent-docs.md` is purely structural today, and both `CONVENTIONS.md`'s "Persistent documents in project repos" section and the `init-project-docs` skill defer the mechanics to it, so this lands in one place and needs no follow-on edits. Style matches the existing bullets. Alex chose to route it through here rather than apply it directly, so it still wants a sign-off pass.
 
+### C. `shared/collaboration-workflow.md` — don't let a measurement claim more than it can carry
+
+**Gap:** nothing in this repo covers evidence strength. The `how-we-work` skill covers *say what failed and how*; neither file covers *say what the numbers cannot tell you*.
+
+**Drafted text** — add as a seventh bullet:
+
+- **Don't let a measurement claim more than it can carry.** When a change is justified by numbers, state what the comparison can and cannot distinguish before stating what it shows — a delta smaller than its own run-to-run spread is not evidence, and a handful of races, runs or trials usually cannot separate the options being weighed. **Non-negotiable:** a change that measured neutral is written up as neutral; "no measurable cost" is not "an improvement", and the correctness or simplicity argument for it has to stand on its own.
+
+**Evidence** — two strong instances: `log.md:168`, on choosing an indicator weight ("At nine races, one season and a single bookmaker snapshot, that cannot distinguish 1x from 2x from 3x. 2x is a judgement call."), and `log.md:260,272`, after a table showing every delta inside its own race-to-race spread ("none is distinguishable from noise at ten races… So this is a simplification at no measurable cost, not an accuracy improvement, **and it should not be written up as one.**").
+
+**Overlap:** none — a grep for `supersed|mutat|noise|measur|spread` across the repo turns up nothing on this. Worth deciding whether the home is `collaboration-workflow.md` (how work is reported, applies to both this repo and project repos) or `coding-standards`; the drafted bullet assumes the former.
+
+### Considered and deliberately not proposed
+
+- **Check third-party assumptions against reality before writing code** — the FastF1 `EventSchedule` pickle round-trip check (`log.md:309-313`) and the selective-session-load equivalence check (`log.md:113`) both de-risked a change before any code was written. Real, but reads as ordinary care rather than a rule that would change an agent's behaviour.
+- **An entrypoint no test exercises will drift silently** — `log.md:371-384`, on deleting `scripts/get_fastf1_data.py` after it drifted twice without a red test. Already captured concretely in `f1_fantasy`'s `BACKLOG.md` ("No test exercises any script's `__main__` block"), which exists to decide the standard; generalising it now would pre-empt that decision.
+
 ## Immediate — needed to start using skills on future projects
 
 ### Topic: Build a manually-run repo-review skill
