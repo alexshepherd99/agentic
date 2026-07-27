@@ -35,8 +35,10 @@ How code in a project repo should be written. Read before writing or changing so
 
 ## Testing
 
-- **Test-first where behaviour is known upfront.** Write a failing test, then implement — for pure logic, bug fixes (regression test before the fix), and APIs with a defined contract. For exploratory/prototype/UI work where the solution's shape is still emerging, write tests after the design settles, or skip for throwaway exploration.
-- Avoid mocking existing first-party functions where a real call is practical — mock at genuine boundaries, not internal code you own.
+- **Test-first where behaviour is known upfront** — pure logic, bug fixes, and APIs with a defined contract. **Non-negotiable:** run the new test and watch it fail for the reason you expect before writing the implementation. A test never observed red proves only that it passes, not that it can fail; and red from an `ImportError`, `NameError`, or typo has demonstrated nothing about behaviour.
+- **An unexpected pass is a defect in the test, not a shortcut.** **Non-negotiable:** a new test that passes before the implementation exists must be diagnosed and rewritten, never accepted as "already handled". It is almost always exercising a different path from the one you mean to change — commonly because the fixture only approximates the real failure condition. Rewrite it until it fails for the intended reason; if the fix is already written, back it out, confirm the test fails, then restore.
+- **Skipping test-first is a decision to state, not a default to assume.** Legitimate for exploratory/prototype/UI work where the solution's shape is still emerging — say so and say why, then write tests once the design settles. "The change is obvious" is not a reason; it's the usual rationalisation, and small additive changes are where the discipline slips first.
+- Avoid mocking existing first-party functions where a real call is practical — mock at genuine boundaries, not internal code you own. If isolating a test seems to need a first-party function patched, prefer making the real boundary injectable (a path, client, or clock parameter) over patching the function.
 
 ## Python-specific
 
