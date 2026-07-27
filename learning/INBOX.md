@@ -16,6 +16,18 @@ Concrete edits to existing instruction files, each drafted with its evidence and
 
 **Overlap to resolve before applying:** the drafted `ImportError` example restates a clause already in `SKILL.md:38`. More importantly `SKILL.md:39` frames *any* unexpected pass as a defect in the test and already prescribes a mutation ("back it out, confirm the test fails, then restore"), so appending this bullet as-is would leave the two contradicting each other — 39 wants narrowing to "passes because it exercises a different path" so this bullet can own "passes because the assertion is vacuously true beforehand".
 
+### B. `shared/persistent-docs.md` — annotate superseded content in place
+
+**Gap:** the file defines the structure (`BACKLOG.md`, `docs/<effort-name>/`) but says nothing about how content ages, so a fresh session would reasonably just rewrite or delete a line that has stopped being true.
+
+**Drafted text** — add as a fourth bullet:
+
+- **Superseded content is annotated in place, not rewritten or deleted** — a requirement or plan step that stops being true keeps its original wording and gains a dated marker beside it (inline `[Superseded YYYY-MM-DD: …]` for a sentence, a blockquote for a whole step), so the effort's history stays readable and a reader can see what was believed when. This includes lists of files an effort touched: a file deleted during the effort stays listed, marked with its deletion date and a recovery SHA, rather than dropped. `log.md` is append-only by nature — correct it with a new entry, never by editing an old one.
+
+**Evidence** — the convention was applied five times before being stated: `requirements.md:5` (`[Superseded 2026-07-25: external_data has been removed from the repo — see log.md.]`), `plan.md:5` and `plan.md:9` (blockquote `> **Superseded YYYY-MM-DD:**` banners for whole steps), `log.md:97` (inline marker on an earlier claim), and `log.md:101`, which states the reasoning directly — the originals keep their wording "so the effort's history stays readable without implying the module still exists". Alex then stated it explicitly on 2026-07-27, on a review finding that `plan.md`'s "Relevant files" listed five files deleted during the effort: *"indicate in the documentation that these files were deleted during this effort, leaving the filenames in the plan"* — confirming that keeping the filenames was the point, not merely marking them.
+
+**Overlap:** none. `persistent-docs.md` is purely structural today, and both `CONVENTIONS.md`'s "Persistent documents in project repos" section and the `init-project-docs` skill defer the mechanics to it, so this lands in one place and needs no follow-on edits. Style matches the existing bullets. Alex chose to route it through here rather than apply it directly, so it still wants a sign-off pass.
+
 ## Immediate — needed to start using skills on future projects
 
 ### Topic: Build a manually-run repo-review skill
