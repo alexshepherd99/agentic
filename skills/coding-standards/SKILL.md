@@ -5,7 +5,7 @@ description: How project code should be written — simple design, small
   explicit error handling (raise over silent None/sentinels), test-first where
   behaviour is known, and language-specific style (Python: PEP 8, type hints,
   fully-qualified imports, logging). Read BEFORE writing or modifying any source
-  code, and when reviewing existing code.
+  or test code, and when reviewing existing code.
 ---
 
 # Coding standards (project code)
