@@ -4,18 +4,6 @@
 
 Concrete edits to existing instruction files, each drafted with its evidence and ready to review. Unlike the topics below these need a decision rather than exploration — delete an item once its edit has landed or been rejected. All three came from `f1_fantasy`'s `fastf1_v1` effort (2026-07-27) via the split-authority handoff; line references are to that repo's `docs/fastf1_v1/log.md` at commit `95c6bc0`.
 
-### B. `shared/persistent-docs.md` — annotate superseded content in place
-
-**Gap:** the file defines the structure (`BACKLOG.md`, `docs/<effort-name>/`) but says nothing about how content ages, so a fresh session would reasonably just rewrite or delete a line that has stopped being true.
-
-**Drafted text** — add as a fourth bullet:
-
-- **Superseded content is annotated in place, not rewritten or deleted** — a requirement or plan step that stops being true keeps its original wording and gains a dated marker beside it (inline `[Superseded YYYY-MM-DD: …]` for a sentence, a blockquote for a whole step), so the effort's history stays readable and a reader can see what was believed when. This includes lists of files an effort touched: a file deleted during the effort stays listed, marked with its deletion date and a recovery SHA, rather than dropped. `log.md` is append-only by nature — correct it with a new entry, never by editing an old one.
-
-**Evidence** — the convention was applied five times before being stated: `requirements.md:5` (`[Superseded 2026-07-25: external_data has been removed from the repo — see log.md.]`), `plan.md:5` and `plan.md:9` (blockquote `> **Superseded YYYY-MM-DD:**` banners for whole steps), `log.md:97` (inline marker on an earlier claim), and `log.md:101`, which states the reasoning directly — the originals keep their wording "so the effort's history stays readable without implying the module still exists". Alex then stated it explicitly on 2026-07-27, on a review finding that `plan.md`'s "Relevant files" listed five files deleted during the effort: *"indicate in the documentation that these files were deleted during this effort, leaving the filenames in the plan"* — confirming that keeping the filenames was the point, not merely marking them.
-
-**Overlap:** none. `persistent-docs.md` is purely structural today, and both `CONVENTIONS.md`'s "Persistent documents in project repos" section and the `init-project-docs` skill defer the mechanics to it, so this lands in one place and needs no follow-on edits. Style matches the existing bullets. Alex chose to route it through here rather than apply it directly, so it still wants a sign-off pass.
-
 ### C. `shared/collaboration-workflow.md` — don't let a measurement claim more than it can carry
 
 **Gap:** nothing in this repo covers evidence strength. The `how-we-work` skill covers *say what failed and how*; neither file covers *say what the numbers cannot tell you*.
