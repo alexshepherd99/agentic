@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## What this repo is
 
-There is no code, build, lint, or test tooling. This repo has two roles:
+There is no build or test tooling. The only code is `tools/`, standing checks over this repo's own content. Two roles:
 
 1. A personal scratchpad for learning agentic engineering (Claude Code, agentic workflows, repo structure, skills) — content lives under `learning/`.
 2. The home for reusable agents and skills, pulled into other project repos so they don't have to be duplicated per-project.
@@ -29,7 +29,7 @@ Frontmatter is deliberately limited to `name` and `description` — no tool-spec
 
 ## Shared instruction (`shared/`)
 
-Runtime instruction needed in more than one place — across skills, or by this file's own conventions — extracted here so it isn't duplicated (e.g. `shared/persistent-docs.md`, the project persistent-document structure; `shared/collaboration-workflow.md`, the collaboration discipline). Created only when the need actually arises; one file per concern. Distinct from `learning/CONVENTIONS.md`, which records settled decisions and rationale and is *not* loaded at skill runtime.
+Runtime instruction needed in more than one place — across skills, or by this file's own conventions — extracted here so it isn't duplicated. Created only when the need actually arises; one file per concern, named for it. Distinct from `learning/CONVENTIONS.md`, which records settled decisions and rationale and is *not* loaded at skill runtime.
 
 ## Knowledge base structure (`learning/`)
 
@@ -48,4 +48,4 @@ The repo-agnostic collaboration discipline lives in `shared/collaboration-workfl
   - Any single document exceeds ~1,500 words
   - Documents seem to overlap in coverage
   - Answering a simple question requires searching across multiple docs
-- **End-of-session review — also** check sprawl (above), and read "somewhere durable" as the INBOX, `CONVENTIONS.md`, a memory, or a commit.
+- **End-of-session review — also** check sprawl (above), and read "somewhere durable" as the INBOX, `CONVENTIONS.md`, a memory, or a commit. If instruction content changed, run `python3 tools/instruction_hygiene.py` and triage the flags per `shared/instruction-hygiene.md`.
