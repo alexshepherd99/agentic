@@ -45,7 +45,7 @@ Scaffolding a new effort folder, and reviewing existing docs in a repo for migra
 
 Guidance for how an agent should *work in a project repo* — the collaboration workflow and the code-writing standards — is packaged as skills, not stated here, so it's surfaced by skill-triggering and not duplicated per project.
 
-- **`how-we-work` skill** — the collaboration workflow (clarifying questions, propose-before-editing, commit-per-item, green-suite DoD, end-of-session review). Triggers at the very start of any piece of work. (This repo's own workflow variant stays in its `CLAUDE.md`.)
+- **`how-we-work` skill** — the collaboration workflow: the shared core in `shared/collaboration-workflow.md`, plus project-repo specifics. Triggers at the very start of any piece of work. (This repo's own workflow variant stays in its `CLAUDE.md`.)
 - **`coding-standards` skill** — how project code should be written, including test-first-where-behaviour-is-known. Triggers before writing/modifying code.
 
 *Why skills, not plain files:* in a project session only the project's own `CLAUDE.md` and registered skills/agents surface automatically; a guidance file mounted via `--add-dir` loads only if something reads it, so it's easy to silently ignore. Skills self-surface via their trigger descriptions. The `onboard-project` skill also names these skills in the project's `CLAUDE.md` pointer as a backstop.

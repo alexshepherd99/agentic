@@ -40,7 +40,7 @@ Treat `learning/` as a staging area, not a source of truth — finished material
 
 ## Working conventions
 
-The repo-agnostic collaboration discipline lives in `shared/collaboration-workflow.md` — read it (clarifying questions, propose-before-writing, commit-per-item, propose-improvements-to-shared-instructions, end-of-session review). This repo adds:
+The repo-agnostic collaboration discipline lives in `shared/collaboration-workflow.md` — read it. This repo adds:
 
 - **Ask before adding to the knowledge base.** When something in a chat looks like it should persist (a decision, a convention, a completed idea), ask before adding it — don't add automatically, and don't assume something is settled just because it was discussed at length.
 - **Watch for sprawl.** Periodically (roughly every 10–15 chats, or whenever proposing an addition), check the knowledge base and flag it for review/consolidation if:
@@ -48,4 +48,4 @@ The repo-agnostic collaboration discipline lives in `shared/collaboration-workfl
   - Any single document exceeds ~1,500 words
   - Documents seem to overlap in coverage
   - Answering a simple question requires searching across multiple docs
-- **End-of-session review — also** confirm the knowledge base is captured and consistent: everything discussed lives in the INBOX/CONVENTIONS/a memory/a commit, no doc frames a since-resolved decision as open, and sprawl (above) is in check.
+- **End-of-session review — also** check sprawl (above), and read "somewhere durable" as the INBOX, `CONVENTIONS.md`, a memory, or a commit.
