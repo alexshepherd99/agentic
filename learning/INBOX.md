@@ -12,7 +12,8 @@ Remaining:
 
 - **Triage the standing flags** — 7 blocks over 65 words and 35 sentences over 25, in `collaboration-workflow`, `persistent-docs`, `coding-standards` and `onboard-project`. Each is a split, an override, or a threshold change. Held back deliberately so building the check didn't get entangled with rewriting the content it measures.
 - **Make the check runnable from a project repo** — it resolves thresholds relative to the repo root, so a project session can't run it against its own `CLAUDE.md`. Until then the end-of-session step sits only in `agentic`'s `CLAUDE.md`, not the shared workflow.
-- **Decide whether `CONVENTIONS.md` should record the decision** — the mechanics deliberately live in `shared/` and the rationale in `tools/README.md`, so a settled-decision entry may be redundant.
+
+Decided 2026-07-29: `CONVENTIONS.md` gets no entry for this. The thresholds live in `shared/instruction-hygiene.md` and the rationale in `tools/README.md`; a settled-decision entry would only duplicate them.
 
 ### Topic: Give the split-authority handoff a defined shape
 
