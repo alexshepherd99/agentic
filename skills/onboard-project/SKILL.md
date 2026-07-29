@@ -5,7 +5,7 @@ description: Set up a project repo to consume this repo's (agentic's) shared age
 
 # Onboard Project
 
-Wires a project repo up to consume `agentic`'s `agents/`/`skills/`/conventions read-only, per the mechanics in `agentic`'s `learning/CONVENTIONS.md` ("Sharing agents/skills into project repos").
+Wires a project repo up to consume `agentic`'s `agents/`/`skills/`/conventions read-only. This skill is the source of truth for the mechanics.
 
 Run this from a session in the project repo, with `agentic` reachable (e.g. launched via `claude --add-dir ../agentic`, or already configured).
 
@@ -52,7 +52,7 @@ Run this from a session in the project repo, with `agentic` reachable (e.g. laun
    ```
    Keep it a pointer, not a copy — don't duplicate `agentic`'s conventions content into the project. **Non-negotiable:** name the always-apply skills (`how-we-work`, `coding-standards`) explicitly — a plain mounted guidance file is easy to silently ignore, so the pointer is the backstop that surfaces them.
 
-4. **Verify the deny rule actually holds.** Try to write a dummy file inside the mounted `agentic` path (then clean it up), and confirm it's blocked. `settings.json` hot-reloads mid-session, so a corrected rule can be re-probed without restarting. **Non-negotiable:** never accept a failed probe as expected behaviour — a correctly written deny rule does hold, so diagnose it against the two known failure modes below, and only if it still doesn't block, say so explicitly to the user and fall back to the split-authority two-session discipline in `agentic`'s `learning/CONVENTIONS.md`.
+4. **Verify the deny rule actually holds.** Try to write a dummy file inside the mounted `agentic` path (then clean it up), and confirm it's blocked. `settings.json` hot-reloads mid-session, so a corrected rule can be re-probed without restarting. **Non-negotiable:** never accept a failed probe as expected behaviour — a correctly written deny rule does hold, so diagnose it against the two known failure modes below, and only if it still doesn't block, say so explicitly to the user and fall back to the split-authority discipline: draft changes from the project session, apply them from a session whose working directory is `agentic` itself.
    - **The rule is a `Write(...)` rule.** File-permission checks match only `Edit(path)` rules; `Write(...)` matches nothing. Rewrite as `Edit(...)`.
    - **The path isn't anchored.** For paths outside the project root, only `~/`-rooted globs anchor: `Edit(../agentic/**)` and `Edit(**/agentic/**)` both fail to block, `Edit(~/**/agentic/**)` blocks. (Relative paths *inside* the project do work — the anchoring problem is specific to escaping the project root.)
 
