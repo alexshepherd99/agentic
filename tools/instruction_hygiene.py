@@ -43,6 +43,11 @@ SHOWN_PER_FILE = 3
 OVERRIDE_RE = re.compile(r"<!--\s*hygiene-ok:\s*([a-z_]+)\s*(?:—|--)?\s*(.*?)-->", re.S)
 LIST_ITEM_RE = re.compile(r"^\s*([-*]|\d+\.)\s")
 
+# Markup is not prose. A bold lead-in label ("**Rule.** Detail ...") must not fuse
+# with the sentence after it, and a list marker is neither a word nor a sentence.
+EMPHASIS_RE = re.compile(r"\*\*")
+SENTENCE_SPLIT_RE = re.compile(r"(?<=[.!?])\s+(?=[\"A-Z(])")
+
 
 @dataclasses.dataclass(frozen=True)
 class Flag:
@@ -124,9 +129,9 @@ def sentences(block: str) -> list[str]:
     """Sentences within a block, treating each nested list line as its own."""
     found: list[str] = []
     for line in block.split("\n"):
-        text = strip_code(line).strip()
+        text = EMPHASIS_RE.sub("", LIST_ITEM_RE.sub("", strip_code(line))).strip()
         if text:
-            found.extend(s for s in re.split(r"(?<=[.!?])\s+(?=[A-Z(\*])", text) if s)
+            found.extend(s for s in SENTENCE_SPLIT_RE.split(text) if s)
     return found
 
 

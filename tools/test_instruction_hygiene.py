@@ -125,6 +125,38 @@ class BlocksTest(unittest.TestCase):
         self.assertEqual(found, ["a paragraph"])
 
 
+class SentencesTest(unittest.TestCase):
+    """Markup must not be measured as prose. Every case here is a fixed defect."""
+
+    def test_bold_lead_in_label_is_its_own_sentence(self) -> None:
+        found = instruction_hygiene.sentences("- **Rule.** Detail here.")
+        self.assertEqual(found, ["Rule.", "Detail here."])
+
+    def test_list_marker_is_not_a_word(self) -> None:
+        found = instruction_hygiene.sentences("- Collapsing for small efforts")
+        self.assertEqual(found, ["Collapsing for small efforts"])
+
+    def test_numbered_marker_is_not_a_sentence(self) -> None:
+        found = instruction_hygiene.sentences("4. **Verify it holds.** Try it.")
+        self.assertEqual(found, ["Verify it holds.", "Try it."])
+
+    def test_splits_before_a_quoted_sentence_start(self) -> None:
+        found = instruction_hygiene.sentences('It settles. "The change" is obvious.')
+        self.assertEqual(found, ["It settles.", '"The change" is obvious.'])
+
+    def test_still_splits_before_a_bold_mid_block_label(self) -> None:
+        found = instruction_hygiene.sentences("Ruled out above. **Non-negotiable:** do it.")
+        self.assertEqual(found, ["Ruled out above.", "Non-negotiable: do it."])
+
+    def test_period_inside_a_code_span_is_not_a_boundary(self) -> None:
+        found = instruction_hygiene.sentences("Read `learning/CONVENTIONS.md` first.")
+        self.assertEqual(found, ["Read X first."])
+
+    def test_each_line_of_a_block_is_segmented_independently(self) -> None:
+        found = instruction_hygiene.sentences("- first rule\n  a continuation")
+        self.assertEqual(found, ["first rule", "a continuation"])
+
+
 class OverridesTest(unittest.TestCase):
     def test_parses_metric_from_em_dash_form(self) -> None:
         text = "<!-- hygiene-ok: block_max_words — carries a boundary. 2026-07-30 -->"
