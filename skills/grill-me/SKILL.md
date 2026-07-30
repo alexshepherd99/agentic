@@ -3,6 +3,8 @@ name: grill-me
 description: Interrogate an ambiguous or underspecified request before acting on it, then pressure-test the resulting plan before implementing. Trigger automatically when a request has unstated assumptions, missing scope/requirements, or multiple reasonable interpretations. Skip for requests that are already fully specified, small edits, or straightforward bug fixes — grilling those just adds friction. Also trigger whenever the user explicitly says "grill me," asks to stress-test a plan, or asks what they're missing.
 ---
 
+<!-- hygiene-ok: description_max_words — a third of the length is the skip clause, the negative trigger that keeps this skill off small edits and plain bug fixes; cutting it makes the skill over-fire. 2026-07-30 -->
+
 # Grill Me
 
 Interrogate a request or plan before acting on it, rather than proceeding on assumptions.
