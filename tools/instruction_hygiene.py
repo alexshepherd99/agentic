@@ -43,6 +43,11 @@ SHOWN_PER_FILE = 3
 OVERRIDE_RE = re.compile(r"<!--\s*hygiene-ok:\s*([a-z_]+)\s*(?:—|--)?\s*(.*?)-->", re.S)
 LIST_ITEM_RE = re.compile(r"^\s*([-*]|\d+\.)\s")
 
+# A marker is metadata, not instruction. Measured as prose, writing one to excuse a
+# flag raises a different flag, which makes the override mechanism self-defeating.
+# Override detection reads the raw file, so stripping here does not hide markers.
+COMMENT_RE = re.compile(r"<!--.*?-->", re.S)
+
 # Markup is not prose. A bold lead-in label ("**Rule.** Detail ...") must not fuse
 # with the sentence after it, and a list marker is neither a word nor a sentence.
 EMPHASIS_RE = re.compile(r"\*\*")
@@ -94,8 +99,9 @@ def split_frontmatter(text: str) -> tuple[str, str]:
 
 
 def strip_code(text: str) -> str:
-    """Drop fenced blocks and reduce inline spans to a single token."""
+    """Drop fenced blocks and HTML comments; reduce inline spans to a single token."""
     text = re.sub(r"^\s*```.*?^\s*```", "", text, flags=re.S | re.M)
+    text = COMMENT_RE.sub("", text)
     return re.sub(r"`[^`]*`", "X", text)
 
 

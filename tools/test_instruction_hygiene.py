@@ -60,6 +60,11 @@ class StripCodeTest(unittest.TestCase):
         stripped = instruction_hygiene.strip_code("run `python3 tools/x.py` now")
         self.assertEqual(stripped, "run X now")
 
+    def test_html_comment_contributes_no_words(self) -> None:
+        """An override marker is metadata; measuring it makes overriding self-defeating."""
+        marker = "<!-- hygiene-ok: sentence_max_words — a long stated reason here. 2026-07-30 -->"
+        self.assertEqual(instruction_hygiene.strip_code(marker).split(), [])
+
 
 class SplitFrontmatterTest(unittest.TestCase):
     def test_splits_when_present(self) -> None:
