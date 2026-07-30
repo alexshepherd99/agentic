@@ -16,16 +16,6 @@ Remaining:
 - **Decide whether a block should count its list marker** — `sentence_max_words` now ignores `- `, `block_max_words` still counts it, so the same text is measured two ways. Changing it shifts every list block by one word, which means revisiting the derivation (cluster 59–64, jump to 81) rather than just the code.
 - **Make the check runnable from a project repo** — it resolves thresholds relative to the repo root, so a project session can't run it against its own `CLAUDE.md`. Until then the end-of-session step sits only in `agentic`'s `CLAUDE.md`, not the shared workflow.
 
-### Topic: Give the split-authority handoff a defined shape
-
-`CONVENTIONS.md`'s split-authority note says only "hand text across manually", which undersells what actually works: the project session writes a structured proposals file (per proposal — the gap, evidence as `file:line` pointers, drop-in text, suggested placement) and the `agentic` session verifies and places it. Validated by the `fastf1_v1` handoff on 2026-07-27 (three proposals).
-
-The load-bearing half is the receiving end: a project session cannot read the target files, so it structurally cannot tell whether its drafted text is already covered — the `agentic` session must always run that check before applying. Both handoffs bear this out. It caught a proposal that duplicated a clause and contradicted a rule in the very file it targeted, and applying it on 2026-07-28 required reshaping that proposal into two edits (narrowing the rule it contradicted) rather than the single append it was written as — a change no project session could have known to make.
-
-Open question: whether this is enough procedure to deserve a skill, or just a few sentences added to `CONVENTIONS.md`'s split-authority section.
-
-**Status**: queued, not started. Sequenced before the repo-review skill below, whose "adjacent mode" — checking an incoming proposal against its target — is exactly this check; deciding the handoff's shape first settles whether that skill absorbs it or defers to it.
-
 ### Topic: Build a manually-run repo-review skill
 
 Turn the periodic repo review (done manually as a one-off in 2026-07) into a reusable, manually-invoked skill, usable both in this repo and in project repos (mounted via the standard share). It should audit the repo for gaps, inconsistencies, drift / stale cross-references, duplication, and sprawl, and surface suggestions for the human to weigh — report/propose only, never act without sign-off (cf. `init-project-docs`).
@@ -36,7 +26,7 @@ Validated by the one-off full-repo pass (2026-07): stale cross-references (a doc
 
 One concrete instance of the "introspection process for gradually improving the repo" item under Longer-term below.
 
-Adjacent mode to scope in or out: checking an *incoming* proposal against what its target file already says, rather than auditing the repo as-is. The `fastf1_v1` handoff needed exactly that — three drafted bullets, one of which duplicated a clause and contradicted a rule in the very file it targeted. Settled by the split-authority item above, which owns that check; scope it in here only if that item lands as prose rather than a skill.
+Scoped out (2026-07-30): checking an *incoming* proposal against what its target file already says belongs to the `propose-shared-change` skill, which makes it the receiving end's non-negotiable. This skill audits the repo as it stands; proposals in flight are the other skill's job.
 
 Consumes the metrics item above: those thresholds are this skill's concrete seed checks, and the open-ended judgment pass is what this skill adds on top.
 
