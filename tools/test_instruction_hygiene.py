@@ -8,6 +8,8 @@ Scope is the pure parsing and threshold logic. ``check_references`` and
 ``check_duplication`` need fixture repo trees and are not covered.
 """
 
+import contextlib
+import io
 import pathlib
 import tempfile
 import textwrap
@@ -328,6 +330,46 @@ class CountInstructionsTest(WriteFileMixin, unittest.TestCase):
 class SummariseTest(unittest.TestCase):
     def test_collapses_whitespace_and_truncates(self) -> None:
         self.assertEqual(instruction_hygiene.summarise("a\n  b   c", width=3), "a b")
+
+
+class ReportTest(unittest.TestCase):
+    """The default output is an outcome; detail is opt-in via ``--all``."""
+
+    limits = {"instruction_count_soft": 150, "max_overrides": 6}
+
+    def render(self, flags: list, detail: bool) -> str:
+        buffer = io.StringIO()
+        with contextlib.redirect_stdout(buffer):
+            instruction_hygiene.report(flags, 12, 0, self.limits, detail=detail)
+        return buffer.getvalue()
+
+    def test_clean_run_is_one_line(self) -> None:
+        self.assertEqual(self.render([], detail=False).strip(), "instruction hygiene: clean")
+
+    def test_summary_counts_by_metric_without_naming_files(self) -> None:
+        flags = [
+            instruction_hygiene.Flag("a.md", "sentence_max_words", 50, 42, "some long sentence"),
+            instruction_hygiene.Flag("b.md", "sentence_max_words", 44, 42, "another one"),
+            instruction_hygiene.Flag("c.md", "duplication", 3, 1, "shared gram"),
+        ]
+        summary = self.render(flags, detail=False)
+        self.assertIn("3 flags", summary)
+        self.assertIn("sentence_max_words 2", summary)
+        self.assertIn("duplication 1", summary)
+        self.assertNotIn("some long sentence", summary)
+        self.assertNotIn("a.md", summary)
+
+    def test_detail_mode_names_the_file_and_the_text(self) -> None:
+        flags = [instruction_hygiene.Flag("a.md", "sentence_max_words", 50, 42, "some long sentence")]
+        detail = self.render(flags, detail=True)
+        self.assertIn("a.md", detail)
+        self.assertIn("some long sentence", detail)
+        self.assertIn("50>42", detail)
+
+    def test_advisories_are_detail_only(self) -> None:
+        """A clean summary must not carry the trend counters that invite metric talk."""
+        self.assertNotIn("instruction_count", self.render([], detail=False))
+        self.assertIn("instruction_count", self.render([], detail=True))
 
 
 if __name__ == "__main__":

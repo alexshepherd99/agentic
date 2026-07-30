@@ -3,11 +3,18 @@
 Thresholds are read from ``shared/instruction-hygiene.md`` so they exist in
 exactly one place. Run from the repo root::
 
-    python3 tools/instruction_hygiene.py
+    python3 tools/instruction_hygiene.py          # one-line outcome
+    python3 tools/instruction_hygiene.py --all    # every flag, plus trend counters
+
+The default is deliberately terse. An end-of-session check wants to know
+whether anything stands, not to re-read the metrics; detail is for triaging a
+flag once one appears.
 
 Exits 0 always: a flag is a prompt to look, never a gate.
 """
 
+import argparse
+import collections
 import dataclasses
 import logging
 import pathlib
@@ -260,8 +267,27 @@ def count_instructions(paths: list[pathlib.Path]) -> int:
     return total
 
 
-def report(flags: list[Flag], instructions: int, override_count: int, limits: dict[str, int]) -> None:
-    """Print flags grouped by metric, then the corpus-wide advisories."""
+def outcome(flags: list[Flag]) -> str:
+    """The one line a session needs: what stands, without reopening the detail."""
+    if not flags:
+        return "instruction hygiene: clean"
+    counts = collections.Counter(flag.metric for flag in flags)
+    breakdown = ", ".join(f"{metric} {count}" for metric, count in sorted(counts.items()))
+    noun = "flag" if len(flags) == 1 else "flags"
+    return f"instruction hygiene: {len(flags)} {noun} — {breakdown} (run with --all for detail)"
+
+
+def report(
+    flags: list[Flag],
+    instructions: int,
+    override_count: int,
+    limits: dict[str, int],
+    detail: bool = False,
+) -> None:
+    """Print the outcome. Per-flag listings and trend counters are opt-in."""
+    if not detail:
+        print(outcome(flags))
+        return
     if not flags:
         print("No flags.")
     for metric in sorted({flag.metric for flag in flags}):
@@ -278,21 +304,31 @@ def report(flags: list[Flag], instructions: int, override_count: int, limits: di
     print(f"overrides          {override_count} (max {limits['max_overrides']})")
 
 
-def main() -> int:
+def main(argv: list[str] | None = None) -> int:
     """Measure every in-scope file and print the report."""
+    parser = argparse.ArgumentParser(description="Report instruction-hygiene flags for this repo.")
+    parser.add_argument(
+        "--all",
+        action="store_true",
+        dest="detail",
+        help="list every flag and the advisory trend counters",
+    )
+    args = parser.parse_args(argv)
+
     logging.basicConfig(level=logging.INFO, format="%(message)s")
     root = pathlib.Path.cwd()
     limits = load_thresholds(root / THRESHOLDS_DOC)
     paths = discover(root)
     if not paths:
         raise FileNotFoundError(f"no instruction files found under {root}")
-    LOGGER.info("Checked %d files against %s", len(paths), THRESHOLDS_DOC)
+    if args.detail:
+        LOGGER.info("Checked %d files against %s", len(paths), THRESHOLDS_DOC)
 
     flags = [flag for path in paths for flag in check_file(path, root, limits)]
     flags += check_references(paths, root)
     flags += check_duplication(paths, root)
     override_count = sum(len(overrides(path.read_text())) for path in paths)
-    report(flags, count_instructions(paths), override_count, limits)
+    report(flags, count_instructions(paths), override_count, limits, detail=args.detail)
     return 0
 
 
