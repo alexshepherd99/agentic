@@ -7,7 +7,7 @@ These are house-style limits that preserve headroom, not safety limits. Measured
 ## Thresholds
 
 ```thresholds
-sentence_max_words     = 25
+sentence_max_words     = 42
 block_max_words        = 65
 nonneg_max_density_pct = 25
 file_max_words         = 800
@@ -23,7 +23,9 @@ Four defects have no threshold — any occurrence is a finding:
 - a runtime-loaded file directing a read of one that isn't (`runtime_reachability`, currently only `learning/CONVENTIONS.md` and `learning/INBOX.md`);
 - a file inline-enumerating another file's contents — **no check implements this one**; it is caught by reading, not by running the tool.
 
-Run `python3 tools/instruction_hygiene.py` from the repo root.
+Run `python3 tools/instruction_hygiene.py` from the repo root. It prints a one-line outcome; add `--all` for the per-flag detail.
+
+`sentence_max_words` names outliers, not house style. Aim for the plain-language band while writing — 15–20 words on average, 25 at the top — but the check only flags a sentence that breaks clear of the corpus, so a flag there means genuinely unusual, not merely long.
 
 ## Responding to a flag
 

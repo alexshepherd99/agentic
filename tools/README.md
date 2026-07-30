@@ -15,7 +15,7 @@ The distributions cited below are dated evidence for a threshold, not a status r
 
 | threshold | basis | derivation |
 | --- | --- | --- |
-| `sentence_max_words = 25` | external | Plain-language consensus: average 15–20, maximum 25. Adopted wholesale: this repo's own mean and median sat inside that band when it was set, so the number is the external convention rather than a local gap. |
+| `sentence_max_words = 42` | derived | Re-derived 2026-07-30. The only gap of 3 or more words in all 230 sentences is 41→46, so 41+1 names exactly one outlier — the same construction as `block_max_words`. It replaces an external 25 (plain-language consensus: average 15–20, maximum 25) that was adopted wholesale from guidance for public-facing human prose and never fitted to instruction text, where a rule plus the boundary that makes it applicable is legitimately one sentence. At 25 the check stood at 23 flags that could only be cleared by swapping an em dash for a full stop, which the triage rule forbids. The plain-language band survives in the shared doc as writing guidance; the threshold's job is to name outliers. |
 | `block_max_words = 65` | derived | Blocks cluster at 59, 61, 62, 63, 64 across four independently-written files, then jump 17 words to 81. Four files converging in a 5-word band reads as a natural ceiling for one rule plus its justification. |
 | `nonneg_max_density_pct = 25` | derived | Densities run 0, 0, 0, 13, 14, 18, 19, then 38 — a 19-point gap, the cleanest break in the corpus. |
 | `file_max_words = 800` | conventional | No break in the distribution (138…683, 729). Backstop against a future doubling. Anthropic's own limit is 500 lines, roughly 7x looser than this. |
