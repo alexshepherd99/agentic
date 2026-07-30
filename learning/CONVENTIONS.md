@@ -31,7 +31,9 @@ Build skills in-house rather than adopting external agentic frameworks. (Rationa
 
 Project repos consume this repo's `agents/`/`skills/` read-only, via `--add-dir` and `additionalDirectories`, never by copying. The exact `settings.json` permissions block and the onboarding steps live in the `onboard-project` skill — the source of truth for the mechanics; don't restate them here.
 
-**Split authority:** a project session may read conventions/skills and propose changes, but must not write to this repo. Actual edits/commits only happen from a session whose working directory is this repo itself — run two sessions in parallel and hand text across manually.
+**Split authority:** a project session may read conventions/skills and propose changes, but must not write to this repo. Actual edits/commits only happen from a session whose working directory is this repo itself — run the two sessions in parallel.
+
+The handoff between them has a defined shape (2026-07-30): a structured proposals file from the project side, and a mandatory check of each proposal against its target file's existing content on this side. The `propose-shared-change` skill is the source of truth for the procedure — don't restate it here.
 
 **Deny rules are a backstop, not the discipline.** Split authority stands on intent — a project session shouldn't be *trying* to edit this repo — so it holds regardless of enforcement. But the deny rule does reliably hold when written correctly: it must be an `Edit(...)` rule (file-permission checks ignore `Write(...)` rules entirely) rooted at `~/`, e.g. `Edit(~/**/agentic/**)` — relative and unanchored globs silently match nothing. Verify once per machine by asking a project session to edit a dummy file in the mounted repo; a failed probe means the rule is malformed, not that deny rules are unreliable. Exact rule and failure modes live in the `onboard-project` skill.
 
