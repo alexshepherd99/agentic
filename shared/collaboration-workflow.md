@@ -10,6 +10,7 @@ The repo-agnostic working discipline for any piece of work, from first mention t
   - The line is authorship, not mechanism: `Bash` remains right for running things (tests, git, greps, builds) and for file changes a *tool* authors — a formatter rewriting files, generated artifacts, `git rm`, redirecting a command's real output into a file.
 - **One change at a time, commit per item.** Work a multi-item task in an agreed order (flagging dependencies), committing each resolved item on its own with a descriptive message before starting the next. Don't batch unrelated changes into one commit.
 - **Propose improvements to shared instructions.** When you spot a better practice mid-work, propose an update to the relevant convention, skill, or instructions file — propose, don't silently apply.
+  - If the target sits in a read-only mounted repo, the draft has to cross sessions to land: use `agentic`'s `propose-shared-change` skill rather than inventing a route.
 - **Don't let a measurement claim more than it can carry.** When a change is justified by numbers, state what the comparison can and cannot distinguish before stating what it shows. **Non-negotiable:** a change that measured neutral is written up as neutral; "no measurable cost" is not "an improvement", and the correctness or simplicity argument for it has to stand on its own.
   - A delta smaller than its own run-to-run spread is not evidence.
   - A handful of races, runs or trials usually cannot separate the options being weighed.
