@@ -49,8 +49,9 @@ Run this from a session in the project repo, with `agentic` reachable (e.g. laun
    - **`coding-standards`** — how code here should be written; consult it
      before writing, modifying, or reviewing code.
 
-   Propose changes to `agentic` by drafting text in this session — actual
-   edits happen from a session whose working directory is `agentic` itself.
+   Propose changes to `agentic` with the **`propose-shared-change`**
+   skill — it defines how a draft crosses from this session to one
+   that can write to `agentic`.
    ```
    Keep it a pointer, not a copy — don't duplicate `agentic`'s conventions content into the project. **Non-negotiable:** name the always-apply skills (`how-we-work`, `coding-standards`) explicitly — a plain mounted guidance file is easy to silently ignore, so the pointer is the backstop that surfaces them.
 
@@ -60,11 +61,11 @@ Run this from a session in the project repo, with `agentic` reachable (e.g. laun
    - **The rule is a `Write(...)` rule.** File-permission checks match only `Edit(path)` rules; `Write(...)` matches nothing. Rewrite as `Edit(...)`.
    - **The path isn't anchored.** For paths outside the project root, only `~/`-rooted globs anchor: `Edit(../agentic/**)` and `Edit(**/agentic/**)` both fail to block, `Edit(~/**/agentic/**)` blocks. (Relative paths *inside* the project do work — the anchoring problem is specific to escaping the project root.)
 
-   Only if it still doesn't block, say so explicitly to the user and fall back to the split-authority discipline. Draft changes from the project session; apply them from a session whose working directory is `agentic` itself.
+   Only if it still doesn't block, say so explicitly to the user and fall back to the discipline itself, which stands on intent regardless of enforcement — the `propose-shared-change` skill holds it.
 
 5. **Reconcile the project's existing agent instructions.** Review any instruction files already in the repo (`CLAUDE.md`, `.github/copilot-instructions.md`, Cursor rules, etc.) against the principle that a project's instructions should hold *only* project-specific content — its differences from and overrides of `agentic`'s shared conventions/skills. Sort each existing rule into:
    - **Already covered by `agentic`** — redundant with the mounted shared content; propose deleting it.
-   - **Generic but not yet in `agentic`** — repo-agnostic and worth sharing; propose migrating it out to `agentic` (convention or skill) and removing it here. The `agentic` edit is propose-only from a project session — it lands via the split-authority two-session workflow, not by writing to `agentic` from here.
+   - **Generic but not yet in `agentic`** — repo-agnostic and worth sharing; propose migrating it out to `agentic` (convention or skill) and removing it here. The `agentic` edit is propose-only from a project session — it lands via the `propose-shared-change` skill's handoff, not by writing to `agentic` from here.
    - **Project-specific difference/override** — keep it. This is the only category that should remain.
    - **Conflicts with `agentic`** — where the project's instructions contradict `agentic`'s `CONVENTIONS.md`/skills, flag it and ask which wins; don't silently reconcile.
 
