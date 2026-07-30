@@ -4,19 +4,9 @@
 
 ### Topic: Define size and structure metrics for instruction content
 
-**Status**: metrics settled and the check built, 2026-07-29. `shared/instruction-hygiene.md` holds the thresholds and the triage rules; `tools/instruction_hygiene.py` computes them, parsing the thresholds out of that file so the numbers exist once; `tools/README.md` records how each was derived and the external sources. Runs as a step in the end-of-session review. Flags, never blocks. Overrides are in-file `hygiene-ok` comments and are counted as their own metric.
+**Status**: settled and running, 2026-07-29 to 2026-07-30. `shared/instruction-hygiene.md` holds the thresholds and triage rules, `tools/instruction_hygiene.py` computes them with a stdlib `unittest` suite beside it, and `tools/README.md` records every derivation and source. Runs as an end-of-session step in `agentic` only, prints a one-line outcome, and flags but never blocks. How it got here is in the commits; what follows is what is still open.
 
-Resolved along the way: size alone was indeed the wrong measure (this repo sits ~7x inside Anthropic's SKILL.md guidance and ~10% of `claudelint`'s `CLAUDE.md` cap), so these are house-style headroom limits rather than protection from a nearby cliff. Four files were found enumerating `collaboration-workflow.md`'s bullets, not two, already divergent; `onboard-project` was directing a runtime read of `CONVENTIONS.md`; two references were dangling.
-
-Corrected 2026-07-30: the sentence measurement was fusing a bold lead-in label into the sentence after it (24 sentences), counting a `- ` marker as a word, and splitting a numbered marker off as a phantom sentence. Fixed, and the script now has a stdlib `unittest` suite — the "no tests" known gap it carried is closed. The corrected corpus reads mean 15.8, median 13, not the 21.7 / 18 first recorded.
-
-Triaged 2026-07-30. Every oversized block was split at the seams its prose already had, and every list-written-as-prose became a list: `block_max_words` 7 → 0, `sentence_max_words` 28 → 23, `description_max_words` 2 → 0 via two overrides. Compression was refused throughout — per the triage rule that cutting words to reach a number loses the rule and keeps the score — so the 23 remaining flags are a decision, not an omission. The pass also exposed and fixed a defect: HTML comments were measured as prose, so writing a `hygiene-ok` marker raised a flag of its own.
-
-The standing `duplication` flag is the citation of `shared/persistent-docs.md` shared by `grill-me` and `init-project-docs`. Verified benign 2026-07-30 — the consistency convention working correctly. Left standing rather than overridden, because a `duplication` override is file-wide and would blind both files to real duplication later.
-
-Settled 2026-07-30, same day: `sentence_max_words` moved 25 → 42 and the check's default output became a one-line outcome. 25 was `external`, adopted wholesale from plain-language guidance for public-facing human prose and never fitted to instruction text; its 23 standing flags could only be cleared by the compression the triage rule forbids, and a threshold whose only remedy is forbidden is the wrong threshold. Re-derived from the corpus: across all 230 sentences there is exactly one gap of 3+ words, 41 → 46, so 41+1 names one outlier — the construction that put `block_max_words` at 65. The plain-language band moved into the shared doc as writing guidance. The single named outlier was split; the check now reads `instruction hygiene: 1 flag — duplication 1`.
-
-`CLAUDE.md`'s end-of-session step was rewritten to match: report the one-line outcome, treat a recorded verdict as settled, reserve `--all` for a genuinely new flag, and don't narrate thresholds. The aim is that a normal session ends with one line and nothing to discuss.
+Two decisions worth not re-deriving. `CONVENTIONS.md` gets no entry for this — the thresholds and their rationale already live in the two files above. And the one standing `duplication` flag, the citation of `shared/persistent-docs.md` shared by `grill-me` and `init-project-docs`, stays exactly as it is: verified benign (the consistency convention working correctly), not overridden because a `duplication` override is file-wide and would blind both files to real duplication later, and not silenced by raising the n-gram size from 8 to 11 — the corpus's longest shared run is 10 tokens, so with one data point there is no distribution to derive from and 11 would simply be fitted to it. Confirmed 2026-07-30; don't re-propose either.
 
 Remaining:
 
@@ -25,8 +15,6 @@ Remaining:
 - **Nothing implements the enumeration check** — the shared doc listed four zero-tolerance defects, but only `duplication`, `dangling_reference` and `runtime_reachability` exist. The four enumerating files found on 2026-07-29 were found by hand. The doc now states the gap; decide whether to build the check or drop the claim.
 - **Decide whether a block should count its list marker** — `sentence_max_words` now ignores `- `, `block_max_words` still counts it, so the same text is measured two ways. Changing it shifts every list block by one word, which means revisiting the derivation (cluster 59–64, jump to 81) rather than just the code.
 - **Make the check runnable from a project repo** — it resolves thresholds relative to the repo root, so a project session can't run it against its own `CLAUDE.md`. Until then the end-of-session step sits only in `agentic`'s `CLAUDE.md`, not the shared workflow.
-
-Decided 2026-07-29: `CONVENTIONS.md` gets no entry for this. The thresholds live in `shared/instruction-hygiene.md` and the rationale in `tools/README.md`; a settled-decision entry would only duplicate them.
 
 ### Topic: Give the split-authority handoff a defined shape
 
