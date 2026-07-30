@@ -48,4 +48,7 @@ The repo-agnostic collaboration discipline lives in `shared/collaboration-workfl
   - Any single document exceeds ~1,500 words
   - Documents seem to overlap in coverage
   - Answering a simple question requires searching across multiple docs
-- **End-of-session review — also** check sprawl (above), and read "somewhere durable" as the INBOX, `CONVENTIONS.md`, a memory, or a commit. If instruction content changed, run `python3 tools/instruction_hygiene.py` and triage the flags per `shared/instruction-hygiene.md`.
+- **End-of-session review — also** check sprawl (above), and read "somewhere durable" as the INBOX, `CONVENTIONS.md`, a memory, or a commit. If instruction content changed, run `python3 tools/instruction_hygiene.py` and report its one-line outcome.
+  - A flag whose verdict the INBOX already records is reported as known, not re-opened.
+  - Only a new flag earns `--all`, and then a triage per `shared/instruction-hygiene.md`.
+  - The outcome is the subject, not the metrics. Don't narrate thresholds, counts or derivations unless a new flag turns on one.
