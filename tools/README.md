@@ -9,15 +9,13 @@ Two bases, and the difference matters when a threshold is challenged:
 - **Derived** — the threshold sits in a real gap in this repo's own distribution, so it names an outlier rather than a preference. Re-derive it if the corpus changes shape.
 - **Conventional** — a round number chosen for headroom. Weaker. Say so rather than defending it as evidence.
 
-Baseline re-measured 2026-07-30 across 9 files, 110 blocks, 210 sentences.
-
-The sentence figures were inflated at first reading, because the splitter fused a bold lead-in label into the sentence following it and counted a list marker as a word. Anything quoting a sentence length from before 2026-07-30 reads high.
+The distributions cited below are dated evidence for a threshold, not a status report — run the check for where the corpus sits now. Any sentence figure recorded before 2026-07-30 reads high: until then the splitter fused a bold lead-in label into the sentence following it and counted a list marker as a word, so a re-derivation of `sentence_max_words` should not reuse those numbers.
 
 ## Per threshold
 
 | threshold | basis | derivation |
 | --- | --- | --- |
-| `sentence_max_words = 25` | external | Plain-language consensus: average 15–20, maximum 25. This repo measured mean 15.8, median 13 — inside the band, with a long tail of 28 sentences over. |
+| `sentence_max_words = 25` | external | Plain-language consensus: average 15–20, maximum 25. Adopted wholesale: this repo's own mean and median sat inside that band when it was set, so the number is the external convention rather than a local gap. |
 | `block_max_words = 65` | derived | Blocks cluster at 59, 61, 62, 63, 64 across four independently-written files, then jump 17 words to 81. Four files converging in a 5-word band reads as a natural ceiling for one rule plus its justification. |
 | `nonneg_max_density_pct = 25` | derived | Densities run 0, 0, 0, 13, 14, 18, 19, then 38 — a 19-point gap, the cleanest break in the corpus. |
 | `file_max_words = 800` | conventional | No break in the distribution (138…683, 729). Backstop against a future doubling. Anthropic's own limit is 500 lines, roughly 7x looser than this. |
