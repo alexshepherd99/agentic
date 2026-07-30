@@ -8,9 +8,12 @@
 
 Resolved along the way: size alone was indeed the wrong measure (this repo sits ~7x inside Anthropic's SKILL.md guidance and ~10% of `claudelint`'s `CLAUDE.md` cap), so these are house-style headroom limits rather than protection from a nearby cliff. Four files were found enumerating `collaboration-workflow.md`'s bullets, not two, already divergent; `onboard-project` was directing a runtime read of `CONVENTIONS.md`; two references were dangling.
 
+Corrected 2026-07-30: the sentence measurement was fusing a bold lead-in label into the sentence after it (24 sentences), counting a `- ` marker as a word, and splitting a numbered marker off as a phantom sentence. Fixed, and the script now has a stdlib `unittest` suite — the "no tests" known gap it carried is closed. The corrected corpus reads mean 15.8, median 13, not the 21.7 / 18 first recorded.
+
 Remaining:
 
-- **Triage the standing flags** — 7 blocks over 65 words and 35 sentences over 25, in `collaboration-workflow`, `persistent-docs`, `coding-standards` and `onboard-project`. Each is a split, an override, or a threshold change. Held back deliberately so building the check didn't get entangled with rewriting the content it measures.
+- **Triage the standing flags** — 7 blocks over 65 words and 28 sentences over 25, in `collaboration-workflow` (2+6), `coding-standards` (2+6), `onboard-project` (2+6), `persistent-docs` (1+2), `CLAUDE.md` (4), `init-project-docs` (2), `instruction-hygiene` (1) and `how-we-work` (1). Each is a split, an override, or a threshold change — and the distribution offers no derived case for moving the sentence threshold: the tail runs continuously to 41 words, then gaps to 46. Deferred to a fresh session on purpose, so the triage isn't shaped by the session that built the measurement.
+- **Decide whether a block should count its list marker** — `sentence_max_words` now ignores `- `, `block_max_words` still counts it, so the same text is measured two ways. Changing it shifts every list block by one word, which means revisiting the derivation (cluster 59–64, jump to 81) rather than just the code.
 - **Make the check runnable from a project repo** — it resolves thresholds relative to the repo root, so a project session can't run it against its own `CLAUDE.md`. Until then the end-of-session step sits only in `agentic`'s `CLAUDE.md`, not the shared workflow.
 
 Decided 2026-07-29: `CONVENTIONS.md` gets no entry for this. The thresholds live in `shared/instruction-hygiene.md` and the rationale in `tools/README.md`; a settled-decision entry would only duplicate them.
