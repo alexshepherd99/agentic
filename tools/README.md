@@ -39,6 +39,8 @@ The IFScale caveat: it is an unreviewed arXiv preprint, and its "instructions" a
 - [HumanLayer — Writing a good CLAUDE.md](https://www.humanlayer.dev/blog/writing-a-good-claude-md) — community consensus on `CLAUDE.md` length and the ~50-instruction system-prompt baseline.
 - [Readability Guidelines — Sentence length](http://readabilityguidelines.wikidot.com/sentence-length), [Federal Plain Language Guidelines](https://wid.org/wp-content/uploads/2022/03/FederalPLGuidelines.pdf), [Australian Style Manual — Sentence length](https://www.stylemanual.gov.au/style-manual-resources/government-writing-handbook/editors-tips/sentence-length) — the 15–20 average, 25 maximum convergence.
 
-## Known gap
+## Tests
 
-`instruction_hygiene.py` has no tests. This repo has no test tooling, and adding a framework was outside what was agreed when the script was introduced — stated here rather than left as a silent omission, per `skills/coding-standards`. The script is verified only by inspecting its output against hand-run measurements from the same session.
+`python3 -m unittest discover -s tools` — stdlib `unittest`, no dependencies. The suite covers the parsing and threshold logic: `strip_code`, `split_frontmatter`, `blocks`, `sentences`, `overrides`, `load_thresholds`, `check_file`, `count_instructions`, `summarise`.
+
+`check_references` and `check_duplication` are not covered — they need fixture repo trees, and both were hand-verified against this repo's own content when introduced. Tests that could not be written red-first were each confirmed by mutating the implementation and watching them fail, per `skills/coding-standards`.

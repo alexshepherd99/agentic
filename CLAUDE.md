@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## What this repo is
 
-There is no build or test tooling. The only code is `tools/`, standing checks over this repo's own content. Two roles:
+The only code is `tools/`, standing checks over this repo's own content, tested by a stdlib `unittest` suite beside it — `python3 -m unittest discover -s tools`. No build tooling, no dependencies. Two roles:
 
 1. A personal scratchpad for learning agentic engineering (Claude Code, agentic workflows, repo structure, skills) — content lives under `learning/`.
 2. The home for reusable agents and skills, pulled into other project repos so they don't have to be duplicated per-project.
