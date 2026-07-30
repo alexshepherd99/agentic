@@ -13,7 +13,9 @@ Run this from a session in the project repo, with `agentic` reachable (e.g. laun
 
 1. **Capture the path in both forms it's needed in.** Find where `agentic` sits relative to the project repo (commonly `../agentic`, but confirm — don't assume). Two consumers, two forms, not interchangeable:
    - **Relative** (e.g. `../agentic`) — for `additionalDirectories` (step 2) and the `CLAUDE.md` pointer prose (step 3), where it reads as "where the mount is".
-   - **Home-rooted glob** — literally `~/**/agentic/**`, for the deny rule (step 2). Deny rules only anchor against `~/`-rooted paths; a relative or unanchored path silently matches nothing. Keep the `**` wildcard rather than substituting the real checkout path — it stays committable (no username, no assumed layout) and still resolves to "an `agentic` repo somewhere under `$HOME`". If `agentic` lives outside `$HOME`, this won't match — root the glob at wherever it does live, and lean on step 4 to confirm.
+   - **Home-rooted glob** — literally `~/**/agentic/**`, for the deny rule (step 2). Deny rules only anchor against `~/`-rooted paths; a relative or unanchored path silently matches nothing.
+     - Keep the `**` wildcard rather than substituting the real checkout path — it stays committable (no username, no assumed layout) and still resolves to "an `agentic` repo somewhere under `$HOME`".
+     - If `agentic` lives outside `$HOME`, this won't match — root the glob at wherever it does live, and lean on step 4 to confirm.
 
 2. **Write/update `.claude/settings.json`** in the project repo:
    ```json
@@ -52,9 +54,13 @@ Run this from a session in the project repo, with `agentic` reachable (e.g. laun
    ```
    Keep it a pointer, not a copy — don't duplicate `agentic`'s conventions content into the project. **Non-negotiable:** name the always-apply skills (`how-we-work`, `coding-standards`) explicitly — a plain mounted guidance file is easy to silently ignore, so the pointer is the backstop that surfaces them.
 
-4. **Verify the deny rule actually holds.** Try to write a dummy file inside the mounted `agentic` path (then clean it up), and confirm it's blocked. `settings.json` hot-reloads mid-session, so a corrected rule can be re-probed without restarting. **Non-negotiable:** never accept a failed probe as expected behaviour — a correctly written deny rule does hold, so diagnose it against the two known failure modes below, and only if it still doesn't block, say so explicitly to the user and fall back to the split-authority discipline: draft changes from the project session, apply them from a session whose working directory is `agentic` itself.
+4. **Verify the deny rule actually holds.** Try to write a dummy file inside the mounted `agentic` path (then clean it up), and confirm it's blocked. `settings.json` hot-reloads mid-session, so a corrected rule can be re-probed without restarting.
+
+   **Non-negotiable:** never accept a failed probe as expected behaviour. A correctly written deny rule does hold, so diagnose it against the two known failure modes below.
    - **The rule is a `Write(...)` rule.** File-permission checks match only `Edit(path)` rules; `Write(...)` matches nothing. Rewrite as `Edit(...)`.
    - **The path isn't anchored.** For paths outside the project root, only `~/`-rooted globs anchor: `Edit(../agentic/**)` and `Edit(**/agentic/**)` both fail to block, `Edit(~/**/agentic/**)` blocks. (Relative paths *inside* the project do work — the anchoring problem is specific to escaping the project root.)
+
+   Only if it still doesn't block, say so explicitly to the user and fall back to the split-authority discipline. Draft changes from the project session; apply them from a session whose working directory is `agentic` itself.
 
 5. **Reconcile the project's existing agent instructions.** Review any instruction files already in the repo (`CLAUDE.md`, `.github/copilot-instructions.md`, Cursor rules, etc.) against the principle that a project's instructions should hold *only* project-specific content — its differences from and overrides of `agentic`'s shared conventions/skills. Sort each existing rule into:
    - **Already covered by `agentic`** — redundant with the mounted shared content; propose deleting it.
