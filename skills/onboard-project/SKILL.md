@@ -55,9 +55,9 @@ Run this from a session in the project repo, with `agentic` reachable (e.g. laun
    ```
    Keep it a pointer, not a copy — don't duplicate `agentic`'s conventions content into the project. **Non-negotiable:** name the always-apply skills (`how-we-work`, `coding-standards`) explicitly — a plain mounted guidance file is easy to silently ignore, so the pointer is the backstop that surfaces them.
 
-4. **Verify the deny rule actually holds.** Try to write a dummy file inside the mounted `agentic` path (then clean it up), and confirm it's blocked. `settings.json` hot-reloads mid-session, so a corrected rule can be re-probed without restarting.
+4. **Verify the deny rule actually holds.** Try to write a dummy file inside the mounted `agentic` path, then clean it up and confirm the mounted repo is clean again — an unblocked probe leaves a real file there. `settings.json` hot-reloads mid-session, so a probe can be repeated without restarting; but the reload is not instant, and a probe fired immediately after step 2 writes `settings.json` can beat it.
 
-   **Non-negotiable:** never accept a failed probe as expected behaviour. A correctly written deny rule does hold, so diagnose it against the two known failure modes below.
+   **Non-negotiable:** re-probe once before diagnosing anything, and never accept a *second* failed probe as expected behaviour. The reload race is the likeliest reason a first probe isn't blocked — likelier than a malformed rule — and diagnosing a rule that is already correct leads nowhere. A correctly written deny rule does hold once loaded, so diagnose a second failure against the two known failure modes below.
    - **The rule is a `Write(...)` rule.** File-permission checks match only `Edit(path)` rules; `Write(...)` matches nothing. Rewrite as `Edit(...)`.
    - **The path isn't anchored.** For paths outside the project root, only `~/`-rooted globs anchor: `Edit(../agentic/**)` and `Edit(**/agentic/**)` both fail to block, `Edit(~/**/agentic/**)` blocks. (Relative paths *inside* the project do work — the anchoring problem is specific to escaping the project root.)
 
