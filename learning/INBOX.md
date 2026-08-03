@@ -34,6 +34,12 @@ Consumes the metrics item above: those thresholds are this skill's concrete seed
 
 ## Longer-term — investigate later
 
+- Mocking should be confined to API boundaries — file, OS, time, randomness — never internal code. Would need a repo test review to check/enforce.
+- Caveman-talk skill: a terser response style to save tokens.
+- Tools that minimize tool output (e.g. test runs, git status) to just what is needed, rather than dumping everything.
+- Refine tests so that only the useful tests get written.
+- Skills discipline: add counter-cases to a skill to catch bad behaviour, not just positive instructions.
+- For any given skill: what am I asking it that the agent doesn't already know? If nothing, is the skill adding value, or could it be better expressed as a series of counter-cases for the agent to avoid?
 - Managing context + gated, documented steps with fresh context per step; consistency/coherence checks across docs, code, comments, tests after major chunks
 - Multi-language repo — Python first, others possibly later
 - Claude Code managing git — explore different levels of autonomy (commit-directly-to-main settled for the `agentic` repo specifically — broader question of auto-push, conflict handling, etc. still open)
