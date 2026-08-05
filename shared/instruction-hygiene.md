@@ -4,6 +4,8 @@ Standing checks on instruction content: `skills/*/SKILL.md`, `agents/*/agent.md`
 
 These are house-style limits that preserve headroom, not safety limits. Measured against published guidance, this content sits far inside where models actually degrade. A flag means "look at this", never "this is broken", and **a flag never blocks a change**. Derivations and sources are in `agentic`'s `tools/README.md` — not needed to apply the rules.
 
+The scope is hygiene flags alone: a **Non-negotiable:** in the instruction content itself is a rule to follow, not a metric to weigh.
+
 ## Thresholds
 
 ```thresholds
