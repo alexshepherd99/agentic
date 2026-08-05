@@ -52,6 +52,14 @@ Guidance for how an agent should *work in a project repo* — the collaboration 
 
 *Why skills, not plain files:* in a project session only the project's own `CLAUDE.md` and registered skills/agents surface automatically; a guidance file mounted via `--add-dir` loads only if something reads it, so it's easy to silently ignore. Skills self-surface via their trigger descriptions. The `onboard-project` skill also names these skills in the project's `CLAUDE.md` pointer as a backstop.
 
+## Credential controls: server-side, not a local hook
+
+Decided 2026-08-05. GitHub secret scanning with push protection is the primary mechanical control against committing credentials, enabled on every repo. A local pre-commit hook was considered and rejected.
+
+Push protection is server-side, so it covers every route to the remote — any machine, the web UI, the REST API, an agent running `git push`. A `.git/hooks` script covers one clone on one machine, isn't tracked, and doesn't survive `git clone`, so it protects least where a fresh checkout makes a mistake most likely. It also needs no install, preserving the repo's no-dependency property.
+
+Its limits are why a written rule sits alongside it: it matches known credential patterns only, custom patterns need a paid tier, it fires at push rather than commit, and the person pushing can bypass it. The credentials non-negotiable in `shared/collaboration-workflow.md` carries intent and the rotation step no scanner performs; the `check-secret-scanning` skill verifies the control is actually on. Both are the sources of truth for their part — don't restate them here.
+
 ## Project instruction files hold only project-specific deltas
 
 *Distinct from the section above: that governs where `agentic` keeps its own guidance (skills vs this file); this governs what a consuming project's own instruction files should contain.*
