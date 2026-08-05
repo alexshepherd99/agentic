@@ -9,6 +9,11 @@ The repo-agnostic working discipline for any piece of work, from first mention t
   - Appending to a file is not an exception — read the tail and `Edit`, or `Write` the whole file; a repetitive rename is `Edit` with `replace_all`, not a rewrite loop.
   - The line is authorship, not mechanism: `Bash` remains right for running things (tests, git, greps, builds) and for file changes a *tool* authors — a formatter rewriting files, generated artifacts, `git rm`, redirecting a command's real output into a file.
 - **One change at a time, commit per item.** Work a multi-item task in an agreed order (flagging dependencies), committing each resolved item on its own with a descriptive message before starting the next. Don't batch unrelated changes into one commit.
+- **Never commit a credential.** **Non-negotiable:** no credential enters a commit, and one that reached a remote is rotated, not just reverted.
+  - Covers API keys, tokens, passwords, and private keys, in code or quoted into a doc, a log, or a commit message. Placeholders and `.env.example` are fine; real values never are.
+  - Every repo, not just public ones — visibility changes, and clones don't un-clone.
+  - Rotating means issue a replacement *and* revoke the old value at the provider; a new key does not disable the old one.
+  - Reverting or rewriting history is not a fix, and doing it first wastes the window that matters. Forks, existing clones, and cached views keep the value regardless.
 - **Propose improvements to shared instructions.** When you spot a better practice mid-work, propose an update to the relevant convention, skill, or instructions file — propose, don't silently apply.
   - If the target sits in a read-only mounted repo, the draft has to cross sessions to land: use `agentic`'s `propose-shared-change` skill rather than inventing a route.
 - **Don't let a measurement claim more than it can carry.** When a change is justified by numbers, state what the comparison can and cannot distinguish before stating what it shows. **Non-negotiable:** a change that measured neutral is written up as neutral; "no measurable cost" is not "an improvement", and the correctness or simplicity argument for it has to stand on its own.
