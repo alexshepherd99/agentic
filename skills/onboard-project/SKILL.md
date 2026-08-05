@@ -82,3 +82,5 @@ The pointer section is static prose, written once. If `agentic`'s structure chan
 ## Next step
 
 Recommend running the `init-project-docs` skill to scaffold the project's own persistent-document structure (`BACKLOG.md`, `docs/<effort-name>/`) — a separate concern, kept separate so neither skill grows too large.
+
+Also run `check-secret-scanning` to confirm the remote's credential controls are on.
