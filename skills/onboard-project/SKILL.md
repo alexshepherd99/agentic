@@ -30,7 +30,7 @@ Run this from a session in the project repo, with `agentic` reachable — launch
    ```
    No `Write(...)` companion rule: file-permission checks consult only `Edit(path)` rules, and an `Edit` rule already covers every file-editing tool (Write, Edit, NotebookEdit). A `Write(...)` deny rule is dead config, and Claude Code prints a startup warning saying so.
 
-   `additionalDirectories` is a separate mechanism from deny matching, and the relative form there hasn't been probe-tested the way the deny rule has — if the mount doesn't appear, try an absolute path.
+   `additionalDirectories` is a separate mechanism from deny matching; the relative form is confirmed working for tool access. What it does not give you is skills and agents — that is step 3's launcher.
 
    **Non-negotiable:** Merge into any existing config — never clobber unrelated settings.
 
