@@ -29,7 +29,7 @@ Build skills in-house rather than adopting external agentic frameworks. (Rationa
 
 ## Sharing agents/skills into project repos
 
-Project repos consume this repo's `agents/`/`skills/` read-only, via `--add-dir` and `additionalDirectories`, never by copying. The exact `settings.json` permissions block and the onboarding steps live in the `onboard-project` skill — the source of truth for the mechanics; don't restate them here.
+Project repos consume this repo's `agents/`/`skills/` read-only, never by copying, via two mechanisms that are not interchangeable: `--add-dir` loads the skills and agents into a session, and `additionalDirectories` persists tool access to the mount across sessions. The exact `settings.json` permissions block and the onboarding steps live in the `onboard-project` skill — the source of truth for the mechanics; don't restate them here.
 
 **Split authority:** a project session may read conventions/skills and propose changes, but must not write to this repo. Actual edits/commits only happen from a session whose working directory is this repo itself — run the two sessions in parallel.
 
