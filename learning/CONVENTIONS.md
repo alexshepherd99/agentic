@@ -70,4 +70,4 @@ A project repo's own agent instructions (`CLAUDE.md`, `.github/copilot-instructi
 - Generic content not yet in `agentic` is migrated out to `agentic` (via the split-authority workflow) and removed from the project.
 - Only genuine project-specific differences/overrides remain.
 
-Reconciling a project's existing instructions to this end state is a step in the `onboard-project` skill — the operational procedure lives there; this section records only the decision.
+Reconciling a project's existing instructions to this end state is the `reconcile-project-instructions` skill — the operational procedure lives there; this section records only the decision.
