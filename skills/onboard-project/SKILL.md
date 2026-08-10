@@ -7,15 +7,15 @@ description: Set up a project repo to consume this repo's (agentic's) shared age
 
 Wires a project repo up to consume `agentic`'s `agents/`/`skills/`/conventions read-only. This skill is the source of truth for the mechanics.
 
-Run this from a session in the project repo, with `agentic` reachable (e.g. launched via `claude --add-dir ../agentic`, or already configured).
+Run this from a session in the project repo, with `agentic` reachable — launched via `claude --add-dir ../agentic`.
 
 ## Steps
 
 1. **Capture the path in both forms it's needed in.** Find where `agentic` sits relative to the project repo (commonly `../agentic`, but confirm — don't assume). Two consumers, two forms, not interchangeable:
-   - **Relative** (e.g. `../agentic`) — for `additionalDirectories` (step 2) and the `CLAUDE.md` pointer prose (step 3), where it reads as "where the mount is".
+   - **Relative** (e.g. `../agentic`) — for `additionalDirectories` (step 2), the launcher (step 3) and the `CLAUDE.md` pointer prose (step 4), where it reads as "where the mount is".
    - **Home-rooted glob** — literally `~/**/agentic/**`, for the deny rule (step 2). Deny rules only anchor against `~/`-rooted paths; a relative or unanchored path silently matches nothing.
      - Keep the `**` wildcard rather than substituting the real checkout path — it stays committable (no username, no assumed layout) and still resolves to "an `agentic` repo somewhere under `$HOME`".
-     - If `agentic` lives outside `$HOME`, this won't match — root the glob at wherever it does live, and lean on step 4 to confirm.
+     - If `agentic` lives outside `$HOME`, this won't match — root the glob at wherever it does live, and lean on step 5 to confirm.
 
 2. **Write/update `.claude/settings.json`** in the project repo:
    ```json
@@ -34,7 +34,30 @@ Run this from a session in the project repo, with `agentic` reachable (e.g. laun
 
    **Non-negotiable:** Merge into any existing config — never clobber unrelated settings.
 
-3. **Add a short pointer section to the project's `CLAUDE.md`:**
+3. **Commit a launcher script.** `additionalDirectories` grants tool access to the mount but does not load `agentic`'s skills or agents — only `--add-dir` does, and a bare `claude` gives no sign they're missing.
+
+   Write `claude.sh` at the project root, `chmod +x` it, and commit it with the executable bit set:
+   ```bash
+   #!/usr/bin/env bash
+   # Launch Claude Code with the shared `agentic` repo mounted, so its
+   # skills and agents load. Relative paths only — nothing
+   # machine-specific is committed.
+   set -euo pipefail
+
+   cd "$(dirname "$0")"
+
+   agentic_dir="<relative-path-to-agentic>"
+
+   if [ ! -d "$agentic_dir" ]; then
+       echo "error: no agentic repo at $agentic_dir (expected beside this repo)" >&2
+       exit 1
+   fi
+
+   exec claude --add-dir "$agentic_dir" "$@"
+   ```
+   Use step 1's relative path verbatim. The `README.md` beside this file explains why the script is shaped this way.
+
+4. **Add a short pointer section to the project's `CLAUDE.md`:**
    ```markdown
    ## Shared agents/skills/conventions
 
@@ -55,7 +78,7 @@ Run this from a session in the project repo, with `agentic` reachable (e.g. laun
    ```
    Keep it a pointer, not a copy — don't duplicate `agentic`'s conventions content into the project. **Non-negotiable:** name the always-apply skills (`how-we-work`, `coding-standards`) explicitly — a plain mounted guidance file is easy to silently ignore, so the pointer is the backstop that surfaces them.
 
-4. **Verify the deny rule actually holds.** Try to write a dummy file inside the mounted `agentic` path, then clean it up and confirm the mounted repo is clean again — an unblocked probe leaves a real file there.
+5. **Verify the deny rule actually holds.** Try to write a dummy file inside the mounted `agentic` path, then clean it up and confirm the mounted repo is clean again — an unblocked probe leaves a real file there.
 
    `settings.json` hot-reloads mid-session, but not instantly: a probe fired right after step 2 writes it can beat the reload, and that race is a likelier reason for a first miss than a malformed rule.
 
@@ -65,7 +88,9 @@ Run this from a session in the project repo, with `agentic` reachable (e.g. laun
 
    Only if it still doesn't block, say so explicitly to the user and fall back to the discipline itself, which stands on intent regardless of enforcement — the `propose-shared-change` skill holds it.
 
-5. **Report back** what changed (settings.json diff, CLAUDE.md addition, verification result) rather than assuming silent success.
+6. **Verify the launcher.** Run `./claude.sh` and confirm `how-we-work` is in the session's available skills. A bare `claude` in the same repo will not show it — that difference is the check, and it is the whole reason the script is committed.
+
+7. **Report back** what changed (settings.json diff, launcher, CLAUDE.md addition, verification results) rather than assuming silent success.
 
 ## Staleness
 
