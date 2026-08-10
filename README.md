@@ -7,14 +7,15 @@ Two roles: a personal scratchpad for learning agentic engineering (under `learni
 To let a project repo use this repo's `agents/`/`skills/` and conventions (read-only, never copied):
 
 1. Position the project repo as a sibling directory to this one (so `../agentic` resolves), or adjust the relative path to match your layout.
-2. Launch a Claude Code session in the project repo with this repo mounted read-only:
+2. Launch a Claude Code session in the project repo with this repo mounted read-only — `--add-dir` is what loads this repo's skills and agents into the session, and only this first session needs it typed by hand:
    ```bash
    claude --add-dir ../agentic
    ```
 3. Ask Claude to onboard the repo (invokes the `onboard-project` skill), which will:
    - Add `additionalDirectories`/deny rules to the project's `.claude/settings.json` so the mount persists across sessions and stays read-only.
+   - Commit a `claude.sh` launcher at the project root — `settings.json` alone grants tool access to the mount but does not load the skills, so this is how sessions are started from then on.
    - Add a short pointer section to the project's `CLAUDE.md` referencing this repo's conventions/skills.
-   - Verify the deny rule actually blocks writes (it only matches if it's an `Edit(...)` rule rooted at `~/` — see `learning/CONVENTIONS.md`).
+   - Verify the deny rule actually blocks writes (it only matches if it's an `Edit(...)` rule rooted at `~/` — see `learning/CONVENTIONS.md`), and that the launcher really does load the skills.
 4. Usually, follow up by running the `init-project-docs` skill to scaffold the project's own persistent-document structure (`BACKLOG.md`, `docs/<effort-name>/`). This is a separate concern from onboarding the mount — see `learning/CONVENTIONS.md` under "Persistent documents in project repos".
 
 You can also do these steps by hand — the exact `settings.json` block lives in the `onboard-project` skill (`skills/onboard-project/SKILL.md`), and the split-authority workflow is in `learning/CONVENTIONS.md` under "Sharing agents/skills into project repos".
