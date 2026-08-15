@@ -55,6 +55,10 @@ Consumes the metrics item above: those thresholds are this skill's concrete seed
 
 ## Longer-term — investigate later
 
+- **Detecting a commit the session did not make** — parked 2026-08-15, was `check-commit-provenance` in the bbmon handoff. The exposure is real: `bbmon/scripts/update.sh` pulls `main` and runs it as root on the Pi, so a commit reaching `main` becomes root on a device, and branch protection is unavailable on a free-plan private repo. The container authenticates through one classic PAT with full `repo` scope, which can push to `main` *and* disable branch protection; 2FA does not constrain a token. Parked because no unexpected commit has ever appeared — the exposure is real but so far hypothetical.
+  - **Not a skill.** Its trigger would be "the start of every session in a git repo, and after any pull", which is not a trigger, it is *always*. A skill would fire unreliably, and an unrun tripwire looks identical to a clean one. A `SessionStart` hook is the mechanism if it is ever built — it would be this repo's first hook, `.claude/settings.local.json` currently holding permissions only. Same open mechanism question as the drift item at the top of this file.
+  - Design settled 2026-08-13, if it is built: the ledger lives under `~/.claude/projects/<project>/`, beside existing per-project state, and entries are appended by the session as it commits — no `post-commit` hook, so nothing to configure per machine.
+  - It is a tripwire, not a control. Anyone with write access to the machine can edit the ledger; signed commits with a verified key are the cryptographic answer where the threat justifies it.
 - Mocking should be confined to API boundaries — file, OS, time, randomness — never internal code. Would need a repo test review to check/enforce.
 - Caveman-talk skill: a terser response style to save tokens.
 - Tools that minimize tool output (e.g. test runs, git status) to just what is needed, rather than dumping everything.
