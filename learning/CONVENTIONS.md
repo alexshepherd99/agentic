@@ -20,12 +20,7 @@ Skill and agent instructions are read under context pressure and may be summaris
 
 ## Skill development: bespoke over framework
 
-Build skills in-house rather than adopting external agentic frameworks. (Rationale: stay in control of pace and direction; avoid trend-chasing that pulls focus from your own goals.)
-
-- New skill development may include an optional web search for established approaches. (Rationale: learn from others' work without being obligated to adopt it — intelligence gathering stays optional.)
-- Claude Code notes interesting patterns it encounters during work into a running list. (Rationale: build an idea backlog on your own schedule, not because trends demand it.)
-- Every developed skill documents its source links/influences in its `README.md` (not `SKILL.md` — see the authoring convention above). (Rationale: trace where ideas came from, stay honest about influences.)
-- Skills are refreshed via manual prompt, not on an automatic cadence. (Rationale: reviews happen when you decide it's time, not on a surrendered schedule.)
+Build skills in-house rather than adopting external agentic frameworks, to stay in control of pace and direction rather than chasing trends. New skill development may include an optional web search for established approaches — intelligence gathering, carrying no obligation to adopt anything. Interesting patterns noticed during work go to `learning/INBOX.md` rather than prompting immediate change, and skills are refreshed by manual prompt, never on an automatic cadence.
 
 ## Sharing agents/skills into project repos
 
@@ -35,7 +30,7 @@ Project repos consume this repo's `agents/`/`skills/` read-only, never by copyin
 
 The handoff between them has a defined shape (2026-07-30): a structured proposals file from the project side, and a mandatory check of each proposal against its target file's existing content on this side. The `propose-shared-change` skill is the source of truth for the procedure — don't restate it here.
 
-**Deny rules are a backstop, not the discipline.** Split authority stands on intent — a project session shouldn't be *trying* to edit this repo — so it holds regardless of enforcement. But the deny rule does reliably hold when written correctly: it must be an `Edit(...)` rule (file-permission checks ignore `Write(...)` rules entirely) rooted at `~/`, e.g. `Edit(~/**/agentic/**)` — relative and unanchored globs silently match nothing. Verify once per machine by asking a project session to edit a dummy file in the mounted repo; a probe that isn't blocked means either the rule is malformed or the settings reload hasn't landed yet — re-probe before concluding anything. Exact rule and failure modes live in the `onboard-project` skill.
+**Deny rules are a backstop, not the discipline.** Split authority stands on intent — a project session shouldn't be *trying* to edit this repo — so it holds regardless of enforcement. A correctly written rule does hold once loaded; the exact rule, why it must be an `Edit(...)` rule rooted at `~/`, and how to probe it all live in the `onboard-project` skill, which is the source of truth — don't restate them here.
 
 ## Persistent documents in project repos
 
