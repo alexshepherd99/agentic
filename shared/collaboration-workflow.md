@@ -14,6 +14,10 @@ The repo-agnostic working discipline for any piece of work, from first mention t
   - Every repo, not just public ones — visibility changes, and clones don't un-clone.
   - Rotating means issue a replacement *and* revoke the old value at the provider; a new key does not disable the old one.
   - Reverting or rewriting history is not a fix, and doing it first wastes the window that matters. Forks, existing clones, and cached views keep the value regardless.
+- **Never commit data that identifies a machine, network, person, or place.** **Non-negotiable:** addresses, host key fingerprints, hostnames, MAC addresses, machine-specific paths, ISP, location, employer and real names stay out of the repo, in every visibility setting.
+  - Judge the category, not the individual value. Debating each value is how the rule erodes.
+  - **A pattern scan passing is not evidence.** Greps find addresses and key material; they do not find "our ISP" written in prose.
+  - Unlike a credential, this cannot be rotated — `review-repo-security` and `correct-repo-exposure` carry the review and the remedy.
 - **Propose improvements to shared instructions.** When you spot a better practice mid-work, propose an update to the relevant convention, skill, or instructions file — propose, don't silently apply.
   - If the target sits in a read-only mounted repo, the draft has to cross sessions to land: use `agentic`'s `propose-shared-change` skill rather than inventing a route.
 - **Don't let a measurement claim more than it can carry.** When a change is justified by numbers, state what the comparison can and cannot distinguish before stating what it shows. **Non-negotiable:** a change that measured neutral is written up as neutral; "no measurable cost" is not "an improvement", and the correctness or simplicity argument for it has to stand on its own.
