@@ -5,6 +5,11 @@ Standard structure for a project repo's requirements, plans, and execution logs,
 - **`BACKLOG.md`** (repo root) — global list of not-yet-started work. Freeform; one file, one list.
 - **`docs/<effort-name>/`** — created when an item is picked up off the backlog and work starts. Holds that effort's `requirements.md`, `plan.md`, and `log.md`.
 - **Collapsing for small efforts** — a trivial effort can skip the separate files and use a single `log.md` with inline `## Requirements` / `## Plan` sections instead. Split them out once any one section gets unwieldy.
+- **Gates, where verification needs an environment you cannot reach on demand** — hardware, a device, a staging tier, anything intermittent or costly. Rather than blocking milestones on access or deferring everything to the end, collect the environment-dependent checks into numbered gates in `plan.md`, each a short checklist.
+  - Milestones reach **done (dev)** without the environment; a gate reaches **done (verified)**. Keep the two labels distinct, so nothing is claimed as working somewhere it has never run.
+  - Work continues past an uncleared gate. A gate blocks only the claim that its milestone is verified, never the next milestone.
+  - Gates are cleared in batches when access happens, which is also why milestone order is worth arranging around them.
+  - Expect a gate to find several defects at once. That is the mechanism working: they would otherwise have been found one visit at a time.
 - **Logs are curated prose, not a transcript.** Record the decision, the outcome, and the reasoning — not raw command output.
   - Quote output only where the exact text is the point (an error message, a surprising value), and then only the lines that carry it.
   - Reporting *in session* is different: quoting a real failure there is expected. This governs what lands in the file.
