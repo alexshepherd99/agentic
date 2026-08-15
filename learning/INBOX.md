@@ -21,6 +21,43 @@ Drafted text, held (was **A1** of the bbmon handoff, targeting `shared/collabora
 - The open question the simple version has to answer: a rule this class of analysis keeps finding broken may want a hook rather than instruction text. A hook fires deterministically; instruction text depends on the session staying disciplined, which is what a 612-turn session stops doing.
 - The analysis scripts (`session_stats.py`, `violations.py`, `session_detail.py`, `turns.py`, `find_heredoc.py`) sit in `~/.claude/handoff/`, outside version control. If the finding is worth re-measuring, promoting them into `tools/` is the follow-up; otherwise the numbers above are the record.
 
+## Held — drafted, awaiting a session of their own
+
+Both from the bbmon handoff of 2026-08-15 (its sections E1 and E2), held 2026-08-15. Both target the always-on tier and cannot be routed to a skill — their moment is "about to report", and no trigger fires there — and both were drafted in the final twenty minutes of a 22-hour drifted session, which is the condition the parked drift item at the top of this file exists to prevent. Holding is not declining; re-derive them in a session opened for the purpose.
+
+### Definition of done, second clause: it has been run
+
+Would target `skills/how-we-work/SKILL.md` (130 words, ample headroom), which defines done as a green suite reached from a red one. Nothing says code touching a real system must be executed against that system before it is called done.
+
+Evidence, from bbmon's `docs/phase-1/log.md`: M1 lost buffered data on every SIGTERM; M3's parser could not read multi-line JSON from the real binary; M2's gate G1 found four (ping dead under the sandbox, non-zero exit after success, restart-everything-every-deploy, sshd drop-in silently inert); `update.sh`'s first run found two plus a regression at audit. **Nine defects, 193 passing tests, zero overlap.** All nine shared one shape — *reported success while not working* — which a suite cannot see, because it asserts on returned values rather than effects in the world.
+
+```markdown
+- **Definition of done, second clause: it has been run.** A green suite is evidence the logic
+  is right, not that the thing works. Code that touches a real system — installers, service
+  units, deploy scripts, anything shelling out or writing outside the process — is not done
+  until it has been executed against that system.
+  - **Non-negotiable:** when reporting work complete, name what has *not* been executed. "Tests
+    pass" and "it runs" are different claims and must not be merged into one.
+  - Where the real system is expensive or intermittent to reach, batch the checks rather than
+    skipping them — see the gates convention in `shared/persistent-docs.md`.
+```
+
+The gates reference already resolves — that convention landed 2026-08-15.
+
+### Verify the proposition you are claiming, not a neighbouring one
+
+Would target `shared/collaboration-workflow.md`, after the measurement bullet. That bullet covers measurements; this covers verification claims generally, which is where the damage landed — the user acted on "I checked".
+
+Four instances. The assistant stated both doc-quoted SHAs would survive a history rewrite and that it had checked; it had verified they were *ancestors of the edit point*, a true fact and the wrong proposition, and both broke. An M1 test asserted only that an error was raised, so the exploit executed and *then* failed validation, satisfying the assertion on its way past. Two M3 tests passed through a different path from the one they named. And the analysis that produced this handoff first reported 44 violations of the visible-changes rule: a regex had matched, the claim was that a rule had been broken, and the corrected count was 4.
+
+```markdown
+- **Verify the proposition you are about to claim.** **Non-negotiable:** before reporting something as checked, state what would have to be true for the claim to be false, and confirm the check would have caught that. A check that cannot fail is not verification.
+  - The recurring failure is a check that tests something adjacent and true: confirming a commit is an ancestor is not confirming its hash survives a rewrite.
+  - Say which of "I reasoned it" and "I ran it" applies. They are different claims and the reader is entitled to know which they are getting.
+```
+
+The handoff warned this tips `collaboration-workflow.md` over `file_max_words`. It no longer does: the parking rule was not applied, so the file sits at 696 body words and this addition lands near 776, inside the 800 cap. The file-splitting question is therefore not forced — take it up only if findability calls for it.
+
 ## Immediate — needed to start using skills on future projects
 
 ### Topic: Define size and structure metrics for instruction content
