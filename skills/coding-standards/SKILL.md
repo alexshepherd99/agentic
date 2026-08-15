@@ -44,6 +44,7 @@ How code in a project repo should be written. Read before writing or changing so
   - **Non-negotiable:** such a test must instead be confirmed by deliberately breaking the finished implementation — drop the guard, shift the boundary, reinline the duplicate — and watching it go red; name the mutation and quote the failure when reporting.
   - The same applies to a pure refactor, which adds no behaviour to test: if mutating the code you just consolidated leaves the suite green, the refactor is unprotected and that coverage gap is itself the finding.
 - **Skipping test-first is a decision to state, not a default to assume.** Legitimate for exploratory/prototype/UI work where the solution's shape is still emerging — say so and say why, then write tests once the design settles. "The change is obvious" is not a reason; it's the usual rationalisation, and small additive changes are where the discipline slips first.
+- **A change inside a conditional requires exercising the branches you did not change.** Mutation testing checks the code you wrote; this covers the code you diverted around, which is where a fix most often lands its regression. The branch you did not touch is also the one you will not think to re-run.
 - Avoid mocking existing first-party functions where a real call is practical — mock at genuine boundaries, not internal code you own. If isolating a test seems to need a first-party function patched, prefer making the real boundary injectable (a path, client, or clock parameter) over patching the function.
 
 ## Python-specific
