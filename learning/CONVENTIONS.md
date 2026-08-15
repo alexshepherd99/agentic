@@ -60,6 +60,14 @@ Push protection is server-side, so it covers every route to the remote — any m
 
 Its limits are why a written rule sits alongside it: it matches known credential patterns only, custom patterns need a paid tier, it fires at push rather than commit, and the person pushing can bypass it. The credentials non-negotiable in `shared/collaboration-workflow.md` carries intent and the rotation step no scanner performs; the `check-secret-scanning` skill verifies the control is actually on. Both are the sources of truth for their part — don't restate them here.
 
+## Repository contents: no identifying data, and correction is half the job
+
+Decided 2026-08-13, from a whole-repository security review of bbmon. Two findings drove it.
+
+A pattern scan for addresses, key material and MAC addresses came back clean while the ISP, a city and measured line speeds sat in a project log in plain prose. Mechanical scanning finds the shapes it knows; it does not find what a stranger would learn by reading. The non-negotiable in `shared/collaboration-workflow.md` covers the rule.
+
+The remedy for exposure depends entirely on how far it travelled, and a credential differs from everything else: it can be rotated, and rotation is the only step that removes the attacker's capability. Nothing else can be. `review-repo-security` and `correct-repo-exposure` carry the two halves — don't restate them here.
+
 ## Project instruction files hold only project-specific deltas
 
 *Distinct from the section above: that governs where `agentic` keeps its own guidance (skills vs this file); this governs what a consuming project's own instruction files should contain.*
