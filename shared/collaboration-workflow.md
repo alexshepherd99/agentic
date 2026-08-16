@@ -16,7 +16,6 @@ The repo-agnostic working discipline for any piece of work, from first mention t
   - Covers API keys, tokens, passwords, and private keys, in code or quoted into a doc, a log, or a commit message. Placeholders and `.env.example` are fine; real values never are.
   - Every repo, not just public ones — visibility changes, and clones don't un-clone.
   - Rotating means issue a replacement *and* revoke the old value at the provider; a new key does not disable the old one.
-  - Reverting or rewriting history is not a fix, and doing it first wastes the window that matters. Forks, existing clones, and cached views keep the value regardless.
 - **Never commit data that identifies a machine, network, person, or place.** **Non-negotiable:** addresses, host key fingerprints, hostnames, MAC addresses, machine-specific paths, ISP, location, employer and real names stay out of the repo, in every visibility setting.
   - Judge the category, not the individual value. Debating each value is how the rule erodes.
   - **A pattern scan passing is not evidence.** Greps find addresses and key material; they do not find "our ISP" written in prose.
