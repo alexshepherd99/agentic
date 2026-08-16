@@ -41,6 +41,14 @@ The handoff warned this tips `collaboration-workflow.md` over `file_max_words`, 
 
 ## Immediate — needed to start using skills on future projects
 
+### Topic: Run a security review over this repo
+
+Never done. This repo has been public since 2026-07-10, so the "before first publishing" trigger was missed rather than deferred; the bbmon review of 2026-08-13 is the only one on record.
+
+Expect the findings in the prose *about* the rules, not in code: the security skills and `CONVENTIONS.md` quote real examples while explaining why values are sensitive, which `review-repo-security` names as the text reviewers skip, and the held items above quote a real project's defect log.
+
+**Status**: queued — its own session, per `review-repo-security`.
+
 ### Topic: Define size and structure metrics for instruction content
 
 **Status**: settled and running, 2026-07-29 to 2026-07-30. `shared/instruction-hygiene.md` holds the thresholds and triage rules, `tools/instruction_hygiene.py` computes them with a stdlib `unittest` suite beside it, and `tools/README.md` records every derivation and source. Runs as an end-of-session step in `agentic` only, prints a one-line outcome, and flags but never blocks. How it got here is in the commits; what follows is what is still open.
