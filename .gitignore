@@ -1,1 +1,7 @@
+# Python bytecode. The only code here is tools/, run in place — no build step,
+# no packaging, no virtualenv, so this is the whole Python surface.
 __pycache__/
+*.py[cod]
+
+# Claude Code per-machine session settings — holds absolute home paths.
+.claude/settings.local.json
