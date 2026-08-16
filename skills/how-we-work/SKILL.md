@@ -23,4 +23,9 @@ Start from the repo-agnostic core in `agentic`'s `shared/collaboration-workflow.
 
   When presenting the work, say what failed and how — the diff can't show it afterwards.
 
+- **Definition of done, second clause: it has been run.** A green suite is evidence the logic is right, not that the thing works.
+  - Code that touches a real system — installers, service units, deploy scripts, anything shelling out or writing outside the process — is not done until it has been executed against that system.
+  - **Non-negotiable:** when reporting work complete, name what has *not* been executed. "Tests pass" and "it runs" are different claims and must not be merged into one.
+  - Where the real system is expensive or intermittent to reach, batch the checks rather than skipping them — see the gates convention in `shared/persistent-docs.md`.
+
 (`agentic`'s own repo workflow is the sibling variant in its `CLAUDE.md`.)
