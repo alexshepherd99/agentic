@@ -71,10 +71,6 @@ Consumes the metrics item above: those thresholds are this skill's concrete seed
 
 ## Longer-term — investigate later
 
-- **Detecting a commit the session did not make** — parked 2026-08-15, was `check-commit-provenance` in the bbmon handoff. The exposure is real: `bbmon/scripts/update.sh` pulls `main` and runs it as root on the Pi, so a commit reaching `main` becomes root on a device, and branch protection is unavailable on a free-plan private repo. The container authenticates through one classic PAT with full `repo` scope, which can push to `main` *and* disable branch protection; 2FA does not constrain a token. Parked because no unexpected commit has ever appeared — the exposure is real but so far hypothetical.
-  - **A periodic skill, not an always-on tripwire** — decided 2026-08-16, superseding the earlier reasoning that its trigger is "every session and after every pull", which is *always*, and so wants a `SessionStart` hook. The simple version: check provenance during a security review, where a trigger already exists and `review-repo-security` already runs. That catches an unexpected commit later than a tripwire would, but not never — enough while the exposure stays hypothetical, and it needs no hook. Per the *prefer the simplest solution* non-negotiable in `shared/collaboration-workflow.md`.
-  - Design settled 2026-08-13, if it is built: the ledger lives under `~/.claude/projects/<project>/`, beside existing per-project state, and entries are appended by the session as it commits — no `post-commit` hook, so nothing to configure per machine.
-  - It is a tripwire, not a control. Anyone with write access to the machine can edit the ledger; signed commits with a verified key are the cryptographic answer where the threat justifies it.
 - Mocking should be confined to API boundaries — file, OS, time, randomness — never internal code. Would need a repo test review to check/enforce.
 - Caveman-talk skill: a terser response style to save tokens.
 - Tools that minimize tool output (e.g. test runs, git status) to just what is needed, rather than dumping everything.
@@ -100,6 +96,7 @@ Surfaced by `f1_fantasy`'s `fastf1_v1` handoff (2026-07-27) alongside the three 
 
 Surfaced by the bbmon handoff (2026-08-15) and deliberately not proposed. Kept so they don't get re-raised.
 
+- **A commit-provenance ledger under `~/.claude/projects/<project>/`**, designed 2026-08-13 and not built. Once `gc.reflogExpire` is `never` the reflog *is* that ledger — git appends it, with no hook and no per-commit habit — so it landed instead as a step in `review-repo-security` on 2026-08-16, with the expiry setting in `publish-repo-safely`'s baseline. Also rejected on the way: comparing the branch against `origin`, which any pull silently empties. Neither form survives a machine change — a reflog is clone-local, and signed commits are the record that travels.
 - **A "non-negotiables index" file**, considered as a decay control against rules being forgotten deep into a long session. Rejected: it is another always-on file that duplicates every rule it indexes, and the duplication check would flag it correctly.
 - **Splitting an instruction file purely to clear `file_max_words`.** Both halves load together, so it saves no context and only moves the score. Split when it improves findability instead. This decided the `coding-standards` question on 2026-08-15, where the split turned out to be unnecessary anyway — the hygiene tool strips fenced code before counting, and `wc -w` does not.
 - **Trimming instruction text to reduce context.** The always-on tier measured ~1,281 words on 2026-08-15. Word-shaving there is not where the leverage is; routing rules to the tier they belong in, and keeping sessions from sprawling, are.
