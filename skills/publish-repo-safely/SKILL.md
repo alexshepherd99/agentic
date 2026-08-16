@@ -9,36 +9,24 @@ description: Set a project repository's exposure baseline — visibility, branch
 
 Default configuration for a project repository, unless there is a reason to differ:
 
-- **Public.** It keeps branch protection available at no cost, lets deploy targets pull without
-  storing a credential, and removes a class of secret-management problem entirely. It only
-  works because nothing identifying is ever committed — the two decisions depend on each other.
+- **Public.** It keeps branch protection available at no cost, lets deploy targets pull without storing a credential, and removes a class of secret-management problem entirely. It only works because nothing identifying is ever committed — the two decisions depend on each other.
 - **Branch protection on**, at minimum blocking force-push and branch deletion.
-- **Specific named collaborators.** Grant by name; never leave access broader than the people
-  actually working on it.
+- **Specific named collaborators.** Grant by name; never leave access broader than the people actually working on it.
 
-Going private is legitimate, but it is a trade rather than an upgrade: on a free plan it
-removes branch protection and stops unauthenticated pulls, which usually means putting a
-credential on a deploy target that previously needed none. Say so when it is chosen.
+Going private is legitimate, but it is a trade rather than an upgrade: on a free plan it removes branch protection and stops unauthenticated pulls, which usually means putting a credential on a deploy target that previously needed none. Say so when it is chosen.
 
 ## Git access
 
-**Fine-grained tokens are the encouraged default** — scoped to named repositories, granted only
-the permissions actually used, and carrying an expiry. Classic tokens with broad `repo` scope
-can push anywhere the account can reach *and* alter repository settings, which includes
-switching off the branch protection meant to contain them.
+**Fine-grained tokens are the encouraged default** — scoped to named repositories, granted only the permissions actually used, and carrying an expiry. Classic tokens with broad `repo` scope can push anywhere the account can reach *and* alter repository settings, which includes switching off the branch protection meant to contain them.
 
-This is a recommendation, not a requirement. Where a broad or non-expiring token is in use, say
-so once, explain what it widens, and leave the choice with the user. Do not repeat it.
+This is a recommendation, not a requirement. Where a broad or non-expiring token is in use, say so once, explain what it widens, and leave the choice with the user. Do not repeat it.
 
-Where a machine only needs to read one repository, a read-only deploy key is tighter than any
-token: it is scoped to that repository by construction and cannot push.
+Where a machine only needs to read one repository, a read-only deploy key is tighter than any token: it is scoped to that repository by construction and cannot push.
 
 ## Before publishing for the first time
 
-Making a repository public publishes its **whole history**, not its current state. Review
-before the switch, not after — afterwards there is nothing left to decide.
+Making a repository public publishes its **whole history**, not its current state. Review before the switch, not after — afterwards there is nothing left to decide.
 
 1. Run `review-repo-security` over the whole history, as its own session.
-2. Where history holds identifying data, rewrite it first, following `correct-repo-exposure`.
-   A redaction in `HEAD` achieves nothing here: anyone who clones gets the original blobs.
+2. Where history holds identifying data, rewrite it first, following `correct-repo-exposure`. A redaction in `HEAD` achieves nothing here: anyone who clones gets the original blobs.
 3. Only then change visibility, and re-check what the change enabled or broke.
