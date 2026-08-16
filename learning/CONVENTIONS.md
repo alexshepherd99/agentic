@@ -6,10 +6,11 @@ Settled decisions — repo structure, naming, workflow patterns. This is what ev
 
 Decided: future-proof now rather than defer. Canonical agent/skill content is tool-agnostic — plain markdown, no tool-specific frontmatter — so any coding agent (Claude Code, Copilot, Cursor) can read or adapt it, not just Claude Code. Tool-specific integration (e.g. Claude Code discovering skills/agents via `--add-dir`) is a thin adapter layer (symlinks), not a change to the canonical format. The concrete frontmatter spec (`name`/`description` only) lives in `agents/README.md` and `skills/README.md` — don't restate it here.
 
-## Authoring skills and agents: concise, non-negotiables signposted
+## Authoring skills and agents: simplest thing that works, concise, non-negotiables signposted
 
 Skill and agent instructions are read under context pressure and may be summarised mid-task. Write them so the load-bearing parts survive.
 
+- **Prefer the simplest solution.** Several pieces of work here drifted into complexity that a smaller mechanism would have covered. It happens by accretion within a session, and a rule that lives only in this file isn't loaded when that happens — so the operative rule is a signposted non-negotiable in `shared/collaboration-workflow.md`, reaching this repo through its `CLAUDE.md` and project repos through the `how-we-work` skill. Don't restate it here.
 - **Be concise.** Every sentence competes with the task for attention. Cut throat-clearing, non-actionable rationale, and examples a capable agent doesn't need. Aim for the shortest text that removes ambiguity, not a complete essay.
 - **Signpost non-negotiables.** A rule that must not be dropped gets an explicit, greppable marker: a bold **Non-negotiable:** label on its own line, stated as a self-contained imperative that still makes sense with the surrounding prose stripped away. These are the lines that must survive compression — make them stand out.
 - **Minimise duplication — extract shared instruction, don't copy.** Two kinds of "shared" pull in different directions. Settled *decisions* (the human-facing rationale and history) live in this CONVENTIONS.md, which is not loaded at skill runtime — don't make a skill depend on reading it. Shared *instruction that skills need at runtime* goes in a dedicated `shared/` folder, created only when the need actually arises and kept lean, with one file per concern so a skill can pull in just the relevant piece. If two skills need the same rule, extract it to `shared/` and have both reference it rather than duplicating.

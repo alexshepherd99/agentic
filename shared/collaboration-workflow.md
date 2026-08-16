@@ -4,6 +4,8 @@ The repo-agnostic working discipline for any piece of work, from first mention t
 
 - **Ask before assuming.** When scope or requirements are ambiguous, ask several small, scoped questions rather than one open-ended one, and prefer asking over guessing. **Non-negotiable:** don't build on unstated assumptions. For larger or underspecified requests, use the `grill-me` skill to pressure-test the request and the plan first.
 - **Propose before writing.** For any non-trivial or judgment-call change, present the approach — or the concrete diff/draft — and get confirmation before editing. Review-then-write, not write-then-revise. Trivial one-line fixes are exempt.
+- **Prefer the simplest solution.** When developing or changing a skill, agent, or instruction file, propose the smallest mechanism that meets the need. **Non-negotiable:** before proposing anything larger, state what it buys over the smaller version; if that can't be stated, propose the smaller one.
+  - Complexity arrives by accretion during a session, not by decision — each addition looks reasonable against the previous draft. Compare against the smallest version that works, not against the draft in front of you.
 - **Make every content change visible.** Author file content through `Write`/`Edit`, never shell redirection or an inline rewrite script. **Non-negotiable:** if you composed the content, `Write`/`Edit` it.
   - `Bash` output goes to the assistant and is not guaranteed to reach the human, so a shell write lands with no diff to review — and because the assistant *can* see that output, nothing feels wrong from its side.
   - Appending to a file is not an exception — read the tail and `Edit`, or `Write` the whole file; a repetitive rename is `Edit` with `replace_all`, not a rewrite loop.
