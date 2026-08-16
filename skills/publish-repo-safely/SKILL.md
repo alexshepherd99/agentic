@@ -1,6 +1,6 @@
 ---
 name: publish-repo-safely
-description: Set a project repository's exposure baseline — visibility, branch protection, named collaborators, and how git access is authenticated — and run the checks required before a repository is made public for the first time. Trigger when creating or onboarding a repo, when changing its visibility, or before publishing it.
+description: Set a project repository's exposure baseline — visibility, branch protection, named collaborators, local clone settings, and how git access is authenticated — and run the checks required before a repository is made public for the first time. Trigger when creating or onboarding a repo, when changing its visibility, or before publishing it.
 ---
 
 # Publish a repository safely
@@ -22,6 +22,12 @@ Going private is legitimate, but it is a trade rather than an upgrade: on a free
 This is a recommendation, not a requirement. Where a broad or non-expiring token is in use, say so once, explain what it widens, and leave the choice with the user. Do not repeat it.
 
 Where a machine only needs to read one repository, a read-only deploy key is tighter than any token: it is scoped to that repository by construction and cannot push.
+
+## The local clone
+
+Set `gc.reflogExpire` and `gc.reflogExpireUnreachable` to `never` in each working clone. The reflog is the only local record of which commits this machine actually made, and `review-repo-security` audits commit provenance against it; on the defaults it expires at 90 days and that audit quietly decays.
+
+This is per clone, not per repository — a new machine starts on the defaults, and no git mechanism copies a reflog across. The cost is that objects held only by a reflog entry, such as amended or rebased-out commits, stop being collected; a history rewrite must expire them explicitly, which `correct-repo-exposure` already covers.
 
 ## Before publishing for the first time
 
