@@ -24,6 +24,7 @@ Run against any repo, at onboarding or any time after — already-onboarded repo
    - **Private** — these controls need paid GitHub Secret Protection. Report as unavailable, not as a gap the user failed to close.
 
 4. **Report and offer.** State what you found and offer to enable it. **Non-negotiable:** don't enable it yourself — it's an outward-facing change to the user's account, and it's theirs to make.
+   - Once an enable has happened, re-read the status from the API instead of trusting the write. A `PATCH` to a plan-gated field returns `200` and discards it silently, so the response is not evidence the setting took.
 
 ## What this does not cover
 
