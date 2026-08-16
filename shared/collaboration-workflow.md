@@ -1,5 +1,7 @@
 # Collaboration workflow
 
+<!-- hygiene-ok: file_max_words — the always-on file, where every rule that is neither project-specific nor trigger-reachable has to land. 800 is a conventional backstop against doubling, not a derived limit (tools/README.md). 2026-08-16 -->
+
 The repo-agnostic working discipline for any piece of work, from first mention to done.
 
 - **Ask before assuming.** When scope or requirements are ambiguous, ask several small, scoped questions rather than one open-ended one, and prefer asking over guessing. **Non-negotiable:** don't build on unstated assumptions. For larger or underspecified requests, use the `grill-me` skill to pressure-test the request and the plan first.
@@ -25,6 +27,9 @@ The repo-agnostic working discipline for any piece of work, from first mention t
 - **Don't let a measurement claim more than it can carry.** When a change is justified by numbers, state what the comparison can and cannot distinguish before stating what it shows. **Non-negotiable:** a change that measured neutral is written up as neutral; "no measurable cost" is not "an improvement", and the correctness or simplicity argument for it has to stand on its own.
   - A delta smaller than its own run-to-run spread is not evidence.
   - A handful of races, runs or trials usually cannot separate the options being weighed.
+- **Verify the proposition you are about to claim.** **Non-negotiable:** before reporting something as checked, state what would have to be true for the claim to be false, and confirm the check would have caught that. A check that cannot fail is not verification.
+  - The recurring failure is a check that tests something adjacent and true: confirming a commit is an ancestor is not confirming its hash survives a rewrite.
+  - Say which of "I reasoned it" and "I ran it" applies. The reader is entitled to know which one they are getting, and cannot tell from the report.
 - **End-of-session review.** Near the end of a session with nontrivial back-and-forth, check that:
   - everything discussed landed somewhere durable;
   - no doc still frames a since-resolved decision as open;
