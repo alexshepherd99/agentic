@@ -11,6 +11,7 @@ The repo-agnostic working discipline for any piece of work, from first mention t
   - Appending to a file is not an exception — read the tail and `Edit`, or `Write` the whole file; a repetitive rename is `Edit` with `replace_all`, not a rewrite loop.
   - The line is authorship, not mechanism: `Bash` remains right for running things (tests, git, greps, builds) and for file changes a *tool* authors — a formatter rewriting files, generated artifacts, `git rm`, redirecting a command's real output into a file.
 - **One change at a time, commit per item.** Work a multi-item task in an agreed order (flagging dependencies), committing each resolved item on its own with a descriptive message before starting the next. Don't batch unrelated changes into one commit.
+  - Unrelated work is a separate session: capture it durably and offer to close rather than carrying two topics. **Non-negotiable:** a security review, repo-wide audit, or instruction retrospective is a session of its own, never a tail on implementation work.
 - **Never commit a credential.** **Non-negotiable:** no credential enters a commit, and one that reached a remote is rotated, not just reverted.
   - Covers API keys, tokens, passwords, and private keys, in code or quoted into a doc, a log, or a commit message. Placeholders and `.env.example` are fine; real values never are.
   - Every repo, not just public ones — visibility changes, and clones don't un-clone.

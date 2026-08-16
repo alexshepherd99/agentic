@@ -1,29 +1,8 @@
 # Agentic engineering topics to explore
 
-## Top of queue — a simple way to detect drift and propose parking
-
-**Status**: parked 2026-08-15. The evidence is settled; the control is not. Nothing has been added to instruction content.
-
-**What I actually want** is something *simple* that notices the session has moved off the topic it opened on and offers to stop. The proposal that came out of the bbmon handoff has become a very complex suggestion for that idea — a ~95-word non-negotiable in the always-on tier, with sub-bullets distinguishing parking from declining and the second topic from the length of the first. Come back and find the small version first: instruction text, a `SessionStart`-style hook, or something else. Don't apply the drafted text below just because it exists. This is now an instance of a standing rule, not a one-off preference — the *prefer the simplest solution* non-negotiable in `shared/collaboration-workflow.md` (2026-08-16).
-
-Drafted text, held (was **A1** of the bbmon handoff, targeting `shared/collaboration-workflow.md` after the "One change at a time" bullet):
-
-```markdown
-- **Park a topic that isn't the one the session started on.** When work arrives that is unrelated to the opening request, name it, write it to `BACKLOG.md` (or `agentic`'s `learning/INBOX.md`), and offer to close rather than carry both. **Non-negotiable:** a security review, a repo-wide audit, or an instruction retrospective is a session of its own, never a tail on implementation work.
-  - Parking is not declining. The item keeps its evidence and gets a session with room to do it properly.
-  - This is about the second topic, not the length of the first — finishing what you started is not drift.
-```
-
-**The evidence: session size predicts rule-breaks, and drift is what makes sessions oversized.** Measured 2026-08-15 across 46 non-trivial sessions on this machine (2026-07-21 to 08-14). Counting only sessions after the *"make every content change visible"* non-negotiable landed (2026-07-27 20:57), the only sessions that ever broke it were the two largest ever run — `bbmon/9eb71c9f` (291 assistant turns, 1 violation) and `bbmon/fc8a7175` (612 turns, 3) — while ~40 smaller post-rule sessions were clean. The oversized one opened with "let's start on m2" and then spent 21 of its 22 hours on an unrelated whole-repo security review.
-
-- **Two false-positive traps will bite anyone re-running this.** The first pass reported 44 violations. ~30 predate the rule — the session with the most hits *ended* at 20:57 on 07-27, so it caused the rule rather than broke it — and ~10 are mutation testing, deliberately breaking finished code to watch a test go red, which `coding-standards` requires and which is exempt as a tool-authored change. The corrected count is 4.
-- Sample is four events. A supported hypothesis, not a law.
-- The open question the simple version has to answer: a rule this class of analysis keeps finding broken may want a hook rather than instruction text. A hook fires deterministically; instruction text depends on the session staying disciplined, which is what a 612-turn session stops doing.
-- The analysis scripts (`session_stats.py`, `violations.py`, `session_detail.py`, `turns.py`, `find_heredoc.py`) sit in `~/.claude/handoff/`, outside version control. If the finding is worth re-measuring, promoting them into `tools/` is the follow-up; otherwise the numbers above are the record.
-
 ## Held — drafted, awaiting a session of their own
 
-Both from the bbmon handoff of 2026-08-15 (its sections E1 and E2), held 2026-08-15. Both target the always-on tier and cannot be routed to a skill — their moment is "about to report", and no trigger fires there — and both were drafted in the final twenty minutes of a 22-hour drifted session, which is the condition the parked drift item at the top of this file exists to prevent. Holding is not declining; re-derive them in a session opened for the purpose.
+Both from the bbmon handoff of 2026-08-15 (its sections E1 and E2), held 2026-08-15. Both target the always-on tier and cannot be routed to a skill — their moment is "about to report", and no trigger fires there — and both were drafted in the final twenty minutes of a 22-hour drifted session, which is the condition the drift sub-bullet in `shared/collaboration-workflow.md` now exists to prevent. Holding is not declining; re-derive them in a session opened for the purpose.
 
 ### Definition of done, second clause: it has been run
 
