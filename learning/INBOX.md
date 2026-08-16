@@ -35,7 +35,7 @@ Four instances. The assistant stated both doc-quoted SHAs would survive a histor
   - Say which of "I reasoned it" and "I ran it" applies. They are different claims and the reader is entitled to know which they are getting.
 ```
 
-The handoff warned this tips `collaboration-workflow.md` over `file_max_words`. It no longer does: the parking rule was not applied, so the file sits at 696 body words and this addition lands near 776, inside the 800 cap. The file-splitting question is therefore not forced — take it up only if findability calls for it.
+The handoff warned this tips `collaboration-workflow.md` over `file_max_words`, and that warning stands: this block is ~85 words and the file has under 10 to spare. The note here previously said otherwise on a 696-word reading that was already stale when it was written — don't trust a word count copied into prose, run the tool. Whoever takes this up brings an offsetting trim, an override, or the file-splitting question with it; splitting purely to clear the cap is already rejected below.
 
 ## Immediate — needed to start using skills on future projects
 
