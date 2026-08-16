@@ -1,51 +1,12 @@
 # Agentic engineering topics to explore
 
-## Held — drafted, awaiting a session of their own
-
-Both from the bbmon handoff of 2026-08-15 (its sections E1 and E2), held 2026-08-15. Both target the always-on tier and cannot be routed to a skill — their moment is "about to report", and no trigger fires there — and both were drafted in the final twenty minutes of a 22-hour drifted session, which is the condition the drift sub-bullet in `shared/collaboration-workflow.md` now exists to prevent. Holding is not declining; re-derive them in a session opened for the purpose.
-
-### Definition of done, second clause: it has been run
-
-Would target `skills/how-we-work/SKILL.md` (130 words, ample headroom), which defines done as a green suite reached from a red one. Nothing says code touching a real system must be executed against that system before it is called done.
-
-Evidence, from bbmon's `docs/phase-1/log.md`: M1 lost buffered data on every SIGTERM; M3's parser could not read multi-line JSON from the real binary; M2's gate G1 found four (ping dead under the sandbox, non-zero exit after success, restart-everything-every-deploy, sshd drop-in silently inert); `update.sh`'s first run found two plus a regression at audit. **Nine defects, 193 passing tests, zero overlap.** All nine shared one shape — *reported success while not working* — which a suite cannot see, because it asserts on returned values rather than effects in the world.
-
-```markdown
-- **Definition of done, second clause: it has been run.** A green suite is evidence the logic
-  is right, not that the thing works. Code that touches a real system — installers, service
-  units, deploy scripts, anything shelling out or writing outside the process — is not done
-  until it has been executed against that system.
-  - **Non-negotiable:** when reporting work complete, name what has *not* been executed. "Tests
-    pass" and "it runs" are different claims and must not be merged into one.
-  - Where the real system is expensive or intermittent to reach, batch the checks rather than
-    skipping them — see the gates convention in `shared/persistent-docs.md`.
-```
-
-The gates reference already resolves — that convention landed 2026-08-15.
-
-### Verify the proposition you are claiming, not a neighbouring one
-
-Would target `shared/collaboration-workflow.md`, after the measurement bullet. That bullet covers measurements; this covers verification claims generally, which is where the damage landed — the user acted on "I checked".
-
-Five instances, and the fifth post-dates the handoff. The assistant stated both doc-quoted SHAs would survive a history rewrite and that it had checked; it had verified they were *ancestors of the edit point*, a true fact and the wrong proposition, and both broke. An M1 test asserted only that an error was raised, so the exploit executed and *then* failed validation, satisfying the assertion on its way past. Two M3 tests passed through a different path from the one they named. And the analysis that produced this handoff first reported 44 violations of the visible-changes rule: a regex had matched, the claim was that a rule had been broken, and the corrected count was 4.
-
-The fifth is from 2026-08-16, in a session opened on a different subject. The commit-provenance check first proposed for `review-repo-security` compared the branch against `origin`, which answers "is there a commit I have not seen yet" while the claim on offer was "is every commit one I made" — adjacent, true, and empty the moment a pull lands, so it would have passed silently in precisely the case it existed for. The user caught it by asking what happened if they pulled before running the check; the assistant did not. Two things this adds to the four above: the failure is not an artifact of that one session, and it survives being *named* — the entry describing it was on screen in the same file the whole time.
-
-```markdown
-- **Verify the proposition you are about to claim.** **Non-negotiable:** before reporting something as checked, state what would have to be true for the claim to be false, and confirm the check would have caught that. A check that cannot fail is not verification.
-  - The recurring failure is a check that tests something adjacent and true: confirming a commit is an ancestor is not confirming its hash survives a rewrite.
-  - Say which of "I reasoned it" and "I ran it" applies. They are different claims and the reader is entitled to know which they are getting.
-```
-
-The handoff warned this tips `collaboration-workflow.md` over `file_max_words`, and that warning stands: this block is ~85 words and the file has under 10 to spare. The note here previously said otherwise on a 696-word reading that was already stale when it was written — don't trust a word count copied into prose, run the tool. Whoever takes this up brings an offsetting trim, an override, or the file-splitting question with it; splitting purely to clear the cap is already rejected below.
-
 ## Immediate — needed to start using skills on future projects
 
 ### Topic: Run a security review over this repo
 
 Never done. This repo has been public since 2026-07-10, so the "before first publishing" trigger was missed rather than deferred; the bbmon review of 2026-08-13 is the only one on record.
 
-Expect the findings in the prose *about* the rules, not in code: the security skills and `CONVENTIONS.md` quote real examples while explaining why values are sensitive, which `review-repo-security` names as the text reviewers skip, and the held items above quote a real project's defect log.
+Expect the findings in the prose *about* the rules, not in code: the security skills and `CONVENTIONS.md` quote real examples while explaining why values are sensitive, which `review-repo-security` names as the text reviewers skip. Commit messages are in scope too — several quote a real project's defect log.
 
 **Status**: queued — its own session, per `review-repo-security`.
 
