@@ -1,6 +1,6 @@
 # Collaboration workflow
 
-The repo-agnostic working discipline for any piece of work, from first mention to done. Consumed by both `agentic`'s own `CLAUDE.md` and the `how-we-work` skill (project repos); each adds only its context-specific deltas and does not restate these points.
+The repo-agnostic working discipline for any piece of work, from first mention to done.
 
 - **Ask before assuming.** When scope or requirements are ambiguous, ask several small, scoped questions rather than one open-ended one, and prefer asking over guessing. **Non-negotiable:** don't build on unstated assumptions. For larger or underspecified requests, use the `grill-me` skill to pressure-test the request and the plan first.
 - **Propose before writing.** For any non-trivial or judgment-call change, present the approach — or the concrete diff/draft — and get confirmation before editing. Review-then-write, not write-then-revise. Trivial one-line fixes are exempt.
