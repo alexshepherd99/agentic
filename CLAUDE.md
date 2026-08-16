@@ -52,3 +52,4 @@ The repo-agnostic collaboration discipline lives in `shared/collaboration-workfl
   - A flag whose verdict the INBOX already records is reported as known, not re-opened.
   - Only a new flag earns `--all`, and then a triage per `shared/instruction-hygiene.md`.
   - The outcome is the subject, not the metrics. Don't narrate thresholds, counts or derivations unless a new flag turns on one.
+  - Suggest a `review-repo-security` session when this repo is due one — it has no milestones or gates to anchor that skill's cadence on, so this is the only boundary here that recurs. Suggest and stop; starting one in the noticing session is what the skill forbids.
