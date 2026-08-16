@@ -39,6 +39,12 @@ Suggest a review when a milestone or gate closes, before any visibility change, 
    - You usually **cannot verify it**. Reading it needs a token scope that day-to-day tokens lack, and a `null` answer means "not visible", not "not enabled". Ask the user; never record it as confirmed from a silent API.
    - Say what it does not cover: **tokens and SSH keys bypass 2FA by design.** An account with 2FA and a long-lived full-scope token is still one leaked string from a hostile push.
 
+9. **Check every commit is one this clone made.** A leaked token ends in a push to `main`, and this is what detects it. Take the SHAs the reflog records this clone *creating* — `git reflog --format='%H %gs'`, keeping `commit`, `commit (amend)`, `rebase` and `cherry-pick` entries — and subtract them from `git rev-list main`. What remains arrived from somewhere else.
+   - Triage the benign class rather than listing it, as with IP literals: commits made through the hosting web UI carry the host as committer. Read what is left.
+   - **Confirm the reflog reaches back further than the review cadence.** `publish-repo-safely` sets that per clone; on git's defaults the entries expire and old commits start reading as foreign.
+   - **The record is clone-local and cannot be transferred.** A new machine knows nothing before its own clone. Copy the old clone rather than re-cloning, or baseline at the migration SHA and classify only what follows it.
+   - It is a tripwire, not a control: anyone with write access to the machine can edit a reflog. Signed commits with a verified key are the cryptographic answer where the threat justifies it.
+
 If anything is already committed, stop reviewing and switch to `correct-repo-exposure`. The remedy depends on how far it travelled, and getting the order wrong wastes the window.
 
 ## Before a risky change
