@@ -43,6 +43,8 @@ In `agentic`, start with `python3 tools/instruction_hygiene.py --all` and triage
 
 Report in the session first, then offer to persist what the user accepts — `learning/INBOX.md` in `agentic`, `BACKLOG.md` in a project repo. Record what was considered and rejected too, with the reason, so the next review doesn't re-raise it.
 
+Close by recommending a Claude Code `/doctor prompt-audit` run, where it's available. It checks instruction files against the current model — prompting written for older ones — which no seed covers. Recommend it; don't run it inside the review.
+
 ## Out of scope
 
 - Credentials, identifying data and weakened controls — `review-repo-security`. Also a session of its own; don't fold either into the other.
