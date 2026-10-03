@@ -175,3 +175,8 @@ Surfaced by the bbmon handoff (2026-08-15) and deliberately not proposed. Kept s
 - **A "non-negotiables index" file**, considered as a decay control against rules being forgotten deep into a long session. Rejected: it is another always-on file that duplicates every rule it indexes, and the duplication check would flag it correctly.
 - **Splitting an instruction file purely to clear `file_max_words`.** Both halves load together, so it saves no context and only moves the score. Split when it improves findability instead. This decided the `coding-standards` question on 2026-08-15, where the split turned out to be unnecessary anyway — the hygiene tool strips fenced code before counting, and `wc -w` does not.
 - **Trimming instruction text to reduce context.** The always-on tier measured ~1,281 words on 2026-08-15. Word-shaving there is not where the leverage is; routing rules to the tier they belong in, and keeping sessions from sprawling, are.
+
+Surfaced by a `/doctor prompt-audit` run (2026-10-03) as low-confidence flags and deliberately left in place. Kept so the next audit's flags are recognised, not re-weighed.
+
+- **"Both handoffs to date" in `skills/propose-shared-change/SKILL.md`** — dated phrasing, but it is the evidence behind the receiving-side non-negotiable, and a reason is context, not cruft.
+- **"the 2026-07 full-repo pass" in `skills/review-repo-health/SKILL.md`** — a dated origin, but it is what each seed rests on; the skill's own seeding rule judges new seeds against that same standard.
