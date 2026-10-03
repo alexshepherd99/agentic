@@ -1,7 +1,7 @@
 ---
 name: coding-standards
 description: How project code should be written — simple design, small
-  single-responsibility functions, meaningful names, documented public interfaces,
+  single-responsibility functions, documented public interfaces,
   explicit error handling (raise over silent None/sentinels), test-first where
   behaviour is known, and language-specific style (Python: PEP 8, type hints,
   fully-qualified imports, logging). Read BEFORE writing or modifying any source
@@ -16,7 +16,6 @@ How code in a project repo should be written. Read before writing or changing so
 
 - Prefer simple code; reach for established design patterns only where they genuinely fit, not by default.
 - Keep functions small and focused on a single responsibility; use classes to group related data and behaviour.
-- Use meaningful, descriptive names for variables and functions.
 - Comment only where the logic isn't self-explanatory; let clear code carry the rest.
 - Prioritise maintainability and readability over premature optimization.
 - Preserve backward compatibility when modifying existing code, unless a breaking change is explicitly required.
