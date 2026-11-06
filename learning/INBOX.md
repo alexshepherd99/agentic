@@ -1,29 +1,5 @@
 # Agentic engineering topics to explore
 
-## Proposals from projects — drafted, awaiting a decision
-
-Proposals 2, 3 and 6 (`f1_fantasy`, 2026-11-06) landed in `shared/persistent-docs.md` on 2026-11-06, proposal 1 in `review-repo-security` and `coding-standards` the same day, and proposal 4 in `shared/collaboration-workflow.md`; the rest keep their original numbers. Five proposals handed over via `propose-shared-change` between 2026-08-17 and 2026-08-31, moved here on 2026-08-31 and the handoff files deleted. Each carries its drop-in text verbatim, so applying one needs nothing else. All five were re-checked against their targets on 2026-08-31 and none had been applied. Listed in the priority order Alex set; not a queue to work through in one session — one change, one commit, per `propose-shared-change`'s receiving rule, which also requires checking each proposal against what its target file already says before applying any of it.
-
-### 5. Mutation testing needs a restore that works on untracked files — `skills/coding-standards/SKILL.md`
-
-**The gap.** The Testing section makes mutation testing non-negotiable where red-first is impossible, and names as one of the two cases a brand-new function whose only pre-implementation red is an import failure. It says to break the implementation, watch it go red, and name the mutation when reporting — and says nothing about restoring the file between mutations. The obvious reflex, `git checkout <file>`, is silently wrong for exactly that case: new code is usually untracked when it's mutated, git can't restore a path it has never seen, so the mutation stays, the next one lands on top of it, and every result after the first measures a file broken in ways the report doesn't mention. The failure is quiet in a specific way: each round still prints "1 failed, 7 passed", which is what a correct round looks like.
-
-**Evidence.** bbmon, 2026-08-28: five mutations against a then-untracked `retention.py` with `git checkout` as the restore step. The restore failed every time, so B–E stacked on A; the results looked plausible and were reported before the stacking was noticed, then withdrawn and re-run with a file copy. On the honest second run, one mutation that had appeared to be caught was **not** caught, exposing a real defect in the test. So the cost wasn't just wasted effort — the broken harness produced a false "this test catches that mutation" result, which is the one claim mutation testing exists to establish. It bit again on 2026-08-30, when a session mutated a brand-new untracked `web/export.py` and `git checkout --` would have deleted it rather than restored it.
-
-**Drop-in text** — a third sub-bullet under "When red-first is impossible, verify by mutation", after the pure-refactor sub-bullet, since it applies to both cases above it:
-
-```markdown
-  - **Restore from a copy, never `git checkout`, and confirm the suite is green again between mutations.** The case this bullet exists for is usually new code, and `git checkout` cannot restore a file git does not yet track — the restore fails, the mutation stays, and the next one lands on top of it, so every result after the first is void while each round still prints the one-failure shape that a correct round has. Copy the file aside before the first mutation and restore from the copy; a green suite between mutations is what proves the baseline came back.
-```
-
-Smaller version, if instruction volume is the greater concern — append one clause to the existing "name the mutation and quote the failure when reporting" line instead:
-
-```markdown
-… name the mutation and quote the failure when reporting, restoring from a file copy rather than `git checkout`, which cannot undo a mutation to code git does not yet track.
-```
-
-The sub-bullet buys two things the clause doesn't: the "confirm green between mutations" check, which is the step that actually catches a failed restore, and the explanation of why the failure is invisible. If neither is worth the length, the clause alone still closes the trap.
-
 ## Immediate — needed to start using skills on future projects
 
 ### Topic: Define size and structure metrics for instruction content
