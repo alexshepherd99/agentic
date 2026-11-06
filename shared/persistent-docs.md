@@ -14,6 +14,10 @@ Standard structure for a project repo's requirements, plans, and execution logs,
   - Quote output only where the exact text is the point (an error message, a surprising value), and then only the lines that carry it.
   - Reporting *in session* is different: quoting a real failure there is expected. This governs what lands in the file.
   - `log.md` is append-only — correct it with a new entry, never by editing an old one.
+  - **A long effort rolls its log.** When a milestone or gate closes, move its entries and everything older into `log-archive.md`, leaving the current milestone's in `log.md`. Nothing is rewritten and nothing is deleted: the text is identical, in a file beside it, so a pointer that names an entry by its heading still resolves.
+    - The trigger is mechanical on purpose. Entries move because their milestone is finished, never because someone judged they would not be wanted again — that judgement is a prediction, and a wrong one buries the reasoning you turn out to need.
+    - The archive is not read on orientation. A session reads `requirements.md`, `plan.md` and the current `log.md`, and opens the archive only when investigating something specific. That is what the roll is for.
+    - Roll only once the log has grown past the point where it is read end to end. A short effort never needs to.
 - **Apply the identifying-data rule while writing, not at review.** Effort docs describe real runs on real machines, which makes them the likeliest route for an address, hostname, path, ISP or location to enter a repo — and the least likely text to be re-read later. Logs are the sharpest case, being written fastest and quoted from real output.
   - Before recording a measurement, ask what it reveals about the machine or its owner, and write the finding without it. "A real run produced plausible figures" carries the same evidence as the figures.
   - Machine-specific paths are the easy one to miss, because they arrive by accident: an absolute path pasted into a doc, a test fixture, or an error message carries a username and a directory layout.

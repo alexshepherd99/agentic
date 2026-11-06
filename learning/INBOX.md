@@ -2,7 +2,7 @@
 
 ## Proposals from projects — drafted, awaiting a decision
 
-Proposals 2 and 6 (`f1_fantasy`, 2026-11-06) landed in `shared/persistent-docs.md` on 2026-11-06; the rest keep their original numbers. Five proposals handed over via `propose-shared-change` between 2026-08-17 and 2026-08-31, moved here on 2026-08-31 and the handoff files deleted. Each carries its drop-in text verbatim, so applying one needs nothing else. All five were re-checked against their targets on 2026-08-31 and none had been applied. Listed in the priority order Alex set; not a queue to work through in one session — one change, one commit, per `propose-shared-change`'s receiving rule, which also requires checking each proposal against what its target file already says before applying any of it.
+Proposals 2, 3 and 6 (`f1_fantasy`, 2026-11-06) landed in `shared/persistent-docs.md` on 2026-11-06; the rest keep their original numbers. Five proposals handed over via `propose-shared-change` between 2026-08-17 and 2026-08-31, moved here on 2026-08-31 and the handoff files deleted. Each carries its drop-in text verbatim, so applying one needs nothing else. All five were re-checked against their targets on 2026-08-31 and none had been applied. Listed in the priority order Alex set; not a queue to work through in one session — one change, one commit, per `propose-shared-change`'s receiving rule, which also requires checking each proposal against what its target file already says before applying any of it.
 
 ### 1. The security review never reads the code — `skills/review-repo-security/SKILL.md`
 
@@ -46,33 +46,6 @@ top of this file: it is diff-scoped, so on a clean tree it reads nothing.
 ```
 
 **Also to decide.** Whether the frontmatter description should say the skill covers *exposure* rather than security in general — "exposed credentials, machine or personal identifying data, and weakened controls" is accurate, and is precisely what let that session read the skill as complete. Deliberately not settled by the proposal: whether the code review deserves a skill of its own. The sender didn't create one — the section above is enough to start a session and `coding-standards` already carries the review-time posture. Reconsider if a third project hits the same gap.
-
-### 3. A long-running effort's log needs a roll point — `shared/persistent-docs.md:13` and `:25`
-
-**The gap.** `:13` says logs are curated prose and explains what to put in them; `:25` says `log.md` is append-only. Between them they describe how one entry is written and forbid editing old ones, and say nothing about what happens when a single effort runs long enough that nobody reads the file any more. The justification for curating the prose is that the log carries reasoning worth keeping — if the file stops being opened, the curation buys nothing.
-
-**Evidence.** `bbmon/docs/phase-1/log.md` is 987 lines, ~17,000 words, 26 entries over 27 days — one effort, still in progress, with no natural end before the effort ends. The 2026-08-30 session's own orientation is the finding: asked "what's next", it read `BACKLOG.md` and `plan.md` in full and then `tail -120` of the log, never opening lines 1–867. A decision recorded only there is a decision no later session sees — and item 2 above is the worked example, sitting at line 44 of that file and going unproposed for 25 days. The repo had already worked around this by hand: `plan.md` carries "Decisions taken with this plan", "Open items" and the gate sections — the durable half of the log, lifted out and maintained separately, by habit rather than by instruction.
-
-**Drop-in text.** Replace the bullet at `:13` — unchanged except for a new final sub-bullet:
-
-```markdown
-- **Logs are curated prose, not a transcript.** Record the decision, the outcome, and the reasoning — not raw command output.
-  - Quote output only where the exact text is the point (an error message, a surprising value), and then only the lines that carry it.
-  - Reporting *in session* is different: quoting a real failure there is expected. This governs what lands in the file.
-  - **A decision is recorded in `plan.md` or `requirements.md`, not only in the log.** The log says what happened on a day; those two say what is true now. Anything a later session must not have to re-litigate goes into one of them when it is settled — the log narrates a decision, it does not store it.
-```
-
-Replace the sub-bullet at `:25` with these two:
-
-```markdown
-  - `log.md` is append-only — correct it with a new entry, never by editing an old one.
-  - **A long effort rolls its log.** When a milestone or gate closes, move its entries and everything older into `log-archive.md`, leaving the current milestone's in `log.md`. Nothing is rewritten and nothing is deleted: the text is identical, in a file beside it.
-    - The trigger is mechanical on purpose. Entries move because their milestone is finished, never because someone judged they would not be wanted again — that judgement is a prediction, and a wrong one buries the reasoning you turn out to need.
-    - The archive is not read on orientation. A session reads `requirements.md`, `plan.md` and the current `log.md`, and opens the archive only when investigating something specific. That is what the roll is for.
-    - Roll only once the log has grown past the point where it is read end to end. A short effort never needs to.
-```
-
-Net change is about six lines, deliberately reshaping the two bullets that already exist rather than adding a "log lifecycle" section — the concern raised alongside it is that the shared guidance is outgrowing what actually gets followed. Left unsettled on purpose: whether `log-archive.md` should itself be split when an effort has many milestones. No project has hit it.
 
 ### 4. Close the session when the work is finished, instead of proposing the next piece — `shared/collaboration-workflow.md`
 
