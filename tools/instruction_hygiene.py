@@ -30,6 +30,7 @@ PROJECT_LOCAL_DOCS = frozenset(
     {
         "BACKLOG.md",
         "log.md",
+        "log-archive.md",
         "plan.md",
         "requirements.md",
         "agent.md",
