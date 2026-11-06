@@ -1,6 +1,6 @@
 # Collaboration workflow
 
-<!-- hygiene-ok: file_max_words — the always-on file, where every rule that is neither project-specific nor trigger-reachable has to land. 800 is a conventional backstop against doubling, not a derived limit (tools/README.md). 2026-08-16 -->
+<!-- hygiene-ok: file_max_words — the always-on file, where every rule that is neither project-specific nor trigger-reachable has to land. 800 is a conventional backstop against doubling, not a derived limit (tools/README.md). 2026-11-06 -->
 
 The repo-agnostic working discipline for any piece of work, from first mention to done.
 
@@ -34,3 +34,7 @@ The repo-agnostic working discipline for any piece of work, from first mention t
   - everything discussed landed somewhere durable;
   - no doc still frames a since-resolved decision as open;
   - the working tree is clean and pushed.
+- **When the work is finished, recommend a fresh session rather than the next piece of work.** Say the piece is done, say what would come next, and leave it there. Don't offer to start it, and don't end on a question whose easy answer is "yes, carry on".
+  - "Finished" is the whole of what was asked, done by the repo's definition of done (`how-we-work` in a project repo) — not the first item of a multi-part request, and not a convenient pause.
+  - **Non-negotiable:** what comes next is still written down — `BACKLOG.md`, the effort's `log.md`, a memory. Ending the conversation is not ending the record.
+  - A long session drifts and loses context; the next piece starts better from the durable record than from a summary of a summary. The user asking for more in the same session settles it — this governs what you volunteer.

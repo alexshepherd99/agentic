@@ -2,24 +2,7 @@
 
 ## Proposals from projects — drafted, awaiting a decision
 
-Proposals 2, 3 and 6 (`f1_fantasy`, 2026-11-06) landed in `shared/persistent-docs.md` on 2026-11-06, and proposal 1 in `review-repo-security` and `coding-standards` the same day; the rest keep their original numbers. Five proposals handed over via `propose-shared-change` between 2026-08-17 and 2026-08-31, moved here on 2026-08-31 and the handoff files deleted. Each carries its drop-in text verbatim, so applying one needs nothing else. All five were re-checked against their targets on 2026-08-31 and none had been applied. Listed in the priority order Alex set; not a queue to work through in one session — one change, one commit, per `propose-shared-change`'s receiving rule, which also requires checking each proposal against what its target file already says before applying any of it.
-
-### 4. Close the session when the work is finished, instead of proposing the next piece — `shared/collaboration-workflow.md`
-
-**The gap.** `:16` covers *unrelated* work — "a separate session: capture it durably and offer to close" — and makes audits and retrospectives sessions of their own. Nothing covers the *related* next piece: the next milestone, the next backlog item, the obvious follow-up in the same effort, which is the far more common continuation. The end-of-session review at `:33` lists three checks and then stops, saying nothing about what to do once they pass, so the file reads as permission to carry on. The result is a session that keeps going because the assistant keeps offering, and the drift and context loss `:16` exists to prevent arrive by the route it doesn't cover.
-
-**Evidence** — behavioural, from a session transcript rather than a file. bbmon's M4 was finished, committed, pushed and summarised, and the summary ended "Next is the hardware: G2 and G3 clear on one visit"; nothing had asked for that. Alex, unprompted, in that session: "I like to avoid long sprawling sessions and prefer starting a fresh session when a piece of development is finished... at the moment, you tend to suggest more work, or the next development item, when a given chunk of work is done." The *durable* half is already covered — every entry in bbmon's log ends by naming what comes next, and `persistent-docs.md:5` puts not-yet-started work in `BACKLOG.md` — so only the conversational nudge needs stopping, and the drafted text draws that line explicitly.
-
-**Drop-in text** — its own top-level bullet immediately after **End-of-session review** (`:33-36`), the rule it hands off from:
-
-```markdown
-- **When the work is finished, recommend a fresh session rather than the next piece of work.** Say the piece is done, say what would come next, and leave it there. Don't offer to start it, and don't end on a question whose easy answer is "yes, carry on".
-  - "Finished" is the whole of what was asked, judged against the definition-of-done clauses in `how-we-work` — not the first item of a multi-part request, and not a convenient pause.
-  - **Non-negotiable:** what comes next is still written down — `BACKLOG.md`, the effort's `log.md`, a memory. Ending the conversation is not ending the record.
-  - A long session drifts and loses context; the next piece starts better from the durable record than from a summary of a summary. The user asking for more in the same session settles it — this governs what you volunteer.
-```
-
-**Two things to weigh.** `collaboration-workflow.md` is already over `file_max_words` on the `hygiene-ok` override at `:3`, and this adds ~120 words — a flag never blocks, but the override's rationale may want re-dating, or this may be the nudge to split the file. And the rule could misfire as licence to stop early, mid-task; the "Finished is the whole of what was asked" boundary is what holds that, and is the clause to keep if the text gets trimmed. The offered alternative was to fold it into **End-of-session review** as a fourth sub-bullet; the sender didn't draft it that way because the triggers differ — the review fires on "a session with nontrivial back-and-forth", while this has to fire whenever the work is done, including after a small piece with no back-and-forth at all.
+Proposals 2, 3 and 6 (`f1_fantasy`, 2026-11-06) landed in `shared/persistent-docs.md` on 2026-11-06, proposal 1 in `review-repo-security` and `coding-standards` the same day, and proposal 4 in `shared/collaboration-workflow.md`; the rest keep their original numbers. Five proposals handed over via `propose-shared-change` between 2026-08-17 and 2026-08-31, moved here on 2026-08-31 and the handoff files deleted. Each carries its drop-in text verbatim, so applying one needs nothing else. All five were re-checked against their targets on 2026-08-31 and none had been applied. Listed in the priority order Alex set; not a queue to work through in one session — one change, one commit, per `propose-shared-change`'s receiving rule, which also requires checking each proposal against what its target file already says before applying any of it.
 
 ### 5. Mutation testing needs a restore that works on untracked files — `skills/coding-standards/SKILL.md`
 
