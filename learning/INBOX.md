@@ -2,7 +2,7 @@
 
 ## Proposals from projects — drafted, awaiting a decision
 
-Proposals 1–5 are from bbmon, 6 from `f1_fantasy`. Five proposals handed over via `propose-shared-change` between 2026-08-17 and 2026-08-31, moved here on 2026-08-31 and the handoff files deleted. Each carries its drop-in text verbatim, so applying one needs nothing else. All five were re-checked against their targets on 2026-08-31 and none had been applied. Listed in the priority order Alex set; not a queue to work through in one session — one change, one commit, per `propose-shared-change`'s receiving rule, which also requires checking each proposal against what its target file already says before applying any of it.
+Proposals 2 and 6 (`f1_fantasy`, 2026-11-06) landed in `shared/persistent-docs.md` on 2026-11-06; the rest keep their original numbers. Five proposals handed over via `propose-shared-change` between 2026-08-17 and 2026-08-31, moved here on 2026-08-31 and the handoff files deleted. Each carries its drop-in text verbatim, so applying one needs nothing else. All five were re-checked against their targets on 2026-08-31 and none had been applied. Listed in the priority order Alex set; not a queue to work through in one session — one change, one commit, per `propose-shared-change`'s receiving rule, which also requires checking each proposal against what its target file already says before applying any of it.
 
 ### 1. The security review never reads the code — `skills/review-repo-security/SKILL.md`
 
@@ -46,20 +46,6 @@ top of this file: it is diff-scoped, so on a clean tree it reads nothing.
 ```
 
 **Also to decide.** Whether the frontmatter description should say the skill covers *exposure* rather than security in general — "exposed credentials, machine or personal identifying data, and weakened controls" is accurate, and is precisely what let that session read the skill as complete. Deliberately not settled by the proposal: whether the code review deserves a skill of its own. The sender didn't create one — the section above is enough to start a session and `coding-standards` already carries the review-time posture. Reconsider if a third project hits the same gap.
-
-### 2. The superseded-text convention is contested by the repo that used it — `shared/persistent-docs.md:22`
-
-**The gap.** `persistent-docs.md:22-24` requires superseded content to keep its original wording under a dated `[Superseded YYYY-MM-DD: …]` marker, "not rewritten or deleted". bbmon does the opposite, deliberately, and has since 2026-08-05: the annotated `requirements.md` was rejected on review because it left a reader holding two contradictory statements and working out which was current, and git history already provides the recovery the marker protects. bbmon now deletes the stale text and puts the reasoning in the append-only log. The shared file doesn't acknowledge that the choice exists, so every session on that project meets a convention its own repo contradicts.
-
-**Evidence.** `bbmon/docs/phase-1/log.md:44-46` — "Superseded text is deleted here, not annotated" — plus that repo's auto-memory, both recording it as a deliberate divergence "not yet proposed back". It never was: the shared convention stood unchallenged from 2026-08-05 to 2026-08-30 while the only repo applying it did the opposite. It reached `agentic` only because proposal 3 below edits the bullet immediately beneath it. Second instance of a proposal parked in per-project memory — see the retrospective-trigger bullet in *Longer-term* below.
-
-**Drop-in text** — as a sub-bullet under `:22`:
-
-```markdown
-  - Where a project finds the marker does more harm than good — two contradictory statements in front of a reader who has to work out which is current — rewriting cleanly is a legitimate project-level choice, recorded in that project's own `CLAUDE.md`, with git history providing the recovery this rule protects. `log.md` stays append-only either way.
-```
-
-**This is a conversation, not an edit.** Three outcomes are live: the convention changes, it gains the opt-out above, or it stands with bbmon as a documented exception and bbmon conforms. The sending session explicitly declined to pick, and route the decision through `propose-shared-change` so the target file's existing content gets checked either way. If bbmon is the one to change, its `CLAUDE.md` and its auto-memory both need correcting.
 
 ### 3. A long-running effort's log needs a roll point — `shared/persistent-docs.md:13` and `:25`
 
@@ -125,70 +111,6 @@ Smaller version, if instruction volume is the greater concern — append one cla
 
 The sub-bullet buys two things the clause doesn't: the "confirm green between mutations" check, which is the step that actually catches a failed restore, and the explanation of why the failure is invisible. If neither is worth the length, the clause alone still closes the trap.
 
-### 6. Plans and requirements become living documents — `shared/persistent-docs.md:22-25`
-
-One proposal handed over via `propose-shared-change` on 2026-11-06, moved here the same day and the handoff file deleted. Checked against its target on 2026-11-06: not applied, and the `:22-25` line references are current. The sending session records that Alex agreed every point of the drop-in text, one question at a time — a decision to apply, not a hypothesis.
-
-**Settle together with** three open items in `learning/INBOX.md`:
-
-- **bbmon proposal 2** (an opt-out from `:22` for projects where markers do harm). This
-  proposal makes bbmon's practice the convention rather than an exception, so proposal 2
-  would be answered by it, not applied. bbmon may still need small alignment: the one-line
-  collapsed steps and rejected options below are new.
-- **bbmon proposal 3** also replaces the `:25` sub-bullet. The two collide on that line and
-  need merging. Its first new sub-bullet ("a decision is recorded in `plan.md` or
-  `requirements.md`, not only in the log") is compatible with this proposal and arguably
-  belongs beside it.
-- **Alex's own item of 2026-09-28**, *Strip out the size-optimising behaviour*, part (1):
-  "When revised text replaces old text, just replace it". This proposal is that part, with
-  the conditions Alex set. Part (2), the archive for instruction files, is untouched.
-
-**The gap.** `:22-24` makes every superseded plan step or requirement keep its wording under a
-dated marker. On an effort that loops back to an earlier step, the plan fills with stacked
-corrections, and its main reader, an agent, has to work out which statement is current. Git
-already holds the old wording and the log already holds the reasoning, so the markers
-duplicate history rather than preserve it. The one piece of history an agent does need at the
-point of use, which options were rejected, is not something the marker rule guarantees either.
-
-**Evidence.** `f1_fantasy` at `cb6e506`, after one step-back on `fastf1_v2` (the strategy's
-signal design failed in back-testing and the effort returns to step 4):
-
-- `docs/fastf1_v2/plan.md:3-10`: five stacked status markers ahead of the plan itself, and
-  13 dated `[2026-…]` markers in the file in all.
-- `docs/fastf1_v2/plan.md:96`, `:119`, `:153`, `:168`: blockquotes on four steps, each saying
-  the text beneath it no longer holds, plus a new revision section at `:11` that the old steps
-  have to be read against.
-- `docs/fastf1_v2/requirements.md:5`, `:12`, `:71`, `:269`: the same for the reopened
-  question 1. `:71` is the case for keeping rejections: a fresh session that does not see
-  that the position table was built and failed is likely to propose it again.
-
-Alex's reason for the collapsed steps: the agent is the plan's primary reader, and one line
-per finished step lets it see what was done without getting bogged down.
-
-**Drop-in text** — replace `:22-25` with:
-
-```markdown
-- **Plans and requirements are living documents; the log is the history.** `plan.md` and `requirements.md` show what is true now and are edited in place when that changes, with no superseded markers. Git holds the old wording, and the log holds the reasoning.
-  - **A change beyond progress gets a log entry in the same commit**, saying what changed and why. Marking a step done is progress; adding, reordering, replacing or dropping one is not. This is what stops a living plan drifting silently.
-  - **A finished step collapses to one line** pointing to its log entry, so references to it still resolve and a reader sees what is built without reading how. A step replaced rather than finished gets a one-line "replaced by N". Step numbers are never reused.
-  - **A rejected or reversed option stays in `requirements.md` as one line** — what, when, why, and a log pointer — so a later session sees what not to propose again without reading the history.
-  - A file deleted during the effort leaves the plan's file lists; its deletion date and a recovery SHA go in the log.
-  - Converting an effort written under the old annotate-in-place rule starts by checking that every marker in it has a matching log entry, writing any that are missing, before the file is rebuilt. Finished efforts are left as they are.
-  - `log.md` is append-only — correct it with a new entry, never by editing an old one.
-```
-
-**Suggested placement.** In place of the bullet at `:22` and its sub-bullets `:23-25`, same
-position in the list. The last sub-bullet keeps `:25`'s rule with "by nature" dropped, and is
-the line bbmon proposal 3 also replaces.
-
-**Other places checked.** A grep of `agentic` for "supersed" and "annotat" found no other file
-relying on the rule besides `learning/INBOX.md`. `skills/init-project-docs/SKILL.md` refers to
-`persistent-docs.md` for the structure and does not restate the marker rule.
-
-**Follow-up in `f1_fantasy`, not for this session.** The `annotate-superseded-docs` memory has
-been rewritten to the new rule. `fastf1_v2`'s plan and requirements are converted in that
-effort's next session, log check first. `data_capture_v1` converts when next worked on.
-
 ## Immediate — needed to start using skills on future projects
 
 ### Topic: Define size and structure metrics for instruction content
@@ -219,12 +141,12 @@ Remaining:
 - Claude Code managing git — explore different levels of autonomy (commit-directly-to-main settled for the `agentic` repo specifically — broader question of auto-push, conflict handling, etc. still open)
 - Introspection process for gradually improving the repo over time to be easier for agents to follow/modify/use. One concrete instance landed 2026-08-16 as the `review-repo-health` skill — on-demand, dedicated session, report-only. What stays open is everything that isn't a review the human calls for: whether improvement should also arrive continuously, and from where.
 - Graphify (or similar) for encoding a project for agent readability — worth it, and at what threshold
-- Encouraging the agent to refine its own instructions — post-project retrospective trigger. Datapoint (`fastf1_v1`, 2026-07-27): three instruction proposals surfaced from a scheduled end-of-effort consistency review, not noticed in passing — and one of them had been sitting in that project's per-project memory the whole time, where no other project could benefit from it. Suggests the trigger wants to be an explicit step in an effort's plan, and that it should include sweeping per-project memories for anything general enough to promote.
+- Encouraging the agent to refine its own instructions — post-project retrospective trigger. Datapoint (`fastf1_v1`, 2026-07-27): three instruction proposals surfaced from a scheduled end-of-effort consistency review, not noticed in passing — and one of them had been sitting in that project's per-project memory the whole time, where no other project could benefit from it. Suggests the trigger wants to be an explicit step in an effort's plan, and that it should include sweeping per-project memories for anything general enough to promote. Second datapoint (bbmon, 2026-08-30): its deliberate break from the superseded-marker rule sat in that project's log and auto-memory for 25 days, recorded as "not yet proposed back", and surfaced only because another proposal edited the neighbouring line.
 - Review the skills built in this repo against what already exists — Claude Code's built-in skills/commands, Anthropic's published skills, and skills shared across the broader internet — to spot overlap, gaps, and ideas worth borrowing. Approach TBD (how to discover and compare against external skill sets isn't figured out yet).
 - **`git -C <repo> worktree add <relative-path>` resolves the path against the repo, not the cwd** — hit 2026-08-03 while running the hygiene tool against a base commit for comparison: the worktree landed at the repo root as an untracked `base/`, caught in `git status` before the push. The generic trap is that `-C` rebases *every* relative path in the command, so a path meant for the scratchpad silently lands in the repo — which is precisely what the scratchpad convention exists to prevent. Decide whether one incident is enough to encode (an "absolute paths with `git -C`" line in `coding-standards` or the collaboration workflow) or whether it stays here as a known gotcha.
 - Revisit `INBOX.md`'s own conventions. Its title ("topics to explore") doesn't cover drafted, ready-to-apply edits, and parking three of them here in 2026-07 pushed the file past `CLAUDE.md`'s ~1,500-word cap purely on entries designed to be deleted as soon as they landed (they did, on 2026-07-28, taking it back to ~850). Decide whether long drafted text belongs somewhere else entirely — say `proposals/`, one file per proposal — with the INBOX holding only a pointer. The related question of whether a word cap on a queue measures anything useful was settled 2026-07-29: queue and project-local docs are out of scope for the hygiene metrics, so this file has no cap.
 
-- **Strip out the size-optimising behaviour for logs and instruction files.** Two parts. (1) When revised text replaces old text, just replace it — no dated annotation or superseded marker unless specifically asked for one; overlaps bbmon proposals 2 and 3 above, so settle them together; proposal 6 from `f1_fantasy` drafts this part. (2) Streamline instruction files loaded every session (e.g. an effort's `plan.md`) by moving superfluous detail into an archive file that isn't read by default. Raised 2026-09-28.
+- **Strip out the size-optimising behaviour for instruction files.** Streamline instruction files loaded every session — `CLAUDE.md`, skills, shared docs — by moving superfluous detail into an archive file that isn't read by default. Raised 2026-09-28; the effort-doc half (replace revised text rather than annotating it, and collapse finished plan steps) landed in `shared/persistent-docs.md` on 2026-11-06.
 
 ## Considered and deliberately not proposed
 
