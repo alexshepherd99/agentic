@@ -2,50 +2,7 @@
 
 ## Proposals from projects — drafted, awaiting a decision
 
-Proposals 2, 3 and 6 (`f1_fantasy`, 2026-11-06) landed in `shared/persistent-docs.md` on 2026-11-06; the rest keep their original numbers. Five proposals handed over via `propose-shared-change` between 2026-08-17 and 2026-08-31, moved here on 2026-08-31 and the handoff files deleted. Each carries its drop-in text verbatim, so applying one needs nothing else. All five were re-checked against their targets on 2026-08-31 and none had been applied. Listed in the priority order Alex set; not a queue to work through in one session — one change, one commit, per `propose-shared-change`'s receiving rule, which also requires checking each proposal against what its target file already says before applying any of it.
-
-### 1. The security review never reads the code — `skills/review-repo-security/SKILL.md`
-
-**The gap.** The skill reads every blob as *text* — pattern scans and a semantic pass — and never reads any of it as *logic*. That scope is defensible; nothing in the file says so, so a completed review reports "clean" and the word carries a claim the review never tested. Sharpest where the review touches an effort doc's recorded controls: confirming that `plan.md` lists CSRF, a host allowlist and a sandboxed root unit is evidence about the *record*, and the report's voice doesn't distinguish that from evidence about the code.
-
-**Evidence** (bbmon, 2026-08-31). A full run completed all nine steps and reported clean; of the 15 controls in that project's plan it verified none in code — only that they were written down, and it called the unauthenticated admin page's compensating controls "documented decisions, not gaps". The user asked whether the code had been reviewed; it hadn't. The code review that followed found a passwordless route from the deploy account to root: `scripts/bootstrap.sh` chowns the install tree to the deploy account, a root systemd unit executes a Python interpreter out of that same tree, and a passwordless `systemctl restart` grant completes it — defeating a boundary the project's own access doc claims. Every file involved is unremarkable text; the finding exists only in the relationship between three of them. It also found CSV formula injection in the web export path. The built-in `/security-review` was tried and failed on `origin/HEAD` being unset; on a clean tree it would have read nothing, which is the diff-scoped limitation `SKILL.md:8` already states.
-
-**Drop-in text** — a new section between the `correct-repo-exposure` paragraph that closes `## Reviewing` and the existing `## Before a risky change`:
-
-```markdown
-## After the review — the code itself
-
-This skill reads the repository as *text*. None of it is read as *logic*, and a
-report that does not say so lets "clean" carry a claim the review never tested.
-
-**Non-negotiable: say which question you answered.** Controls recorded in an
-effort doc are evidence about the record. Confirming a plan lists a control is
-not confirming the code implements it, and the two are easy to write in the same
-voice.
-
-Then suggest a code review as its own session, on the cadence rule above: say
-what prompted it and let the user schedule it. **Not in this session** — the
-rule that keeps this review out of implementation work keeps a code review out
-of this one.
-
-Name what it would cover, because the difference is not obvious:
-
-- Input reaching a subprocess, the filesystem, or SQL. Argument injection as
-  well as shell injection — an argv list stops the second and not the first.
-- Privileged paths: what runs as root, and **who can write the code it runs**. A
-  root unit executing from a directory the deploy account owns is a passwordless
-  route to root, and it is invisible to any scan of file contents because it
-  lives in the relationship between files.
-- Output leaving in a format another program executes — CSV formulas, and
-  anything rendered as HTML rather than as text.
-- Whether the claimed controls are in the code at all: authentication, CSRF,
-  escaping, and bounds on anything caller-supplied.
-
-The built-in `security-review` does not cover this either, for the reason at the
-top of this file: it is diff-scoped, so on a clean tree it reads nothing.
-```
-
-**Also to decide.** Whether the frontmatter description should say the skill covers *exposure* rather than security in general — "exposed credentials, machine or personal identifying data, and weakened controls" is accurate, and is precisely what let that session read the skill as complete. Deliberately not settled by the proposal: whether the code review deserves a skill of its own. The sender didn't create one — the section above is enough to start a session and `coding-standards` already carries the review-time posture. Reconsider if a third project hits the same gap.
+Proposals 2, 3 and 6 (`f1_fantasy`, 2026-11-06) landed in `shared/persistent-docs.md` on 2026-11-06, and proposal 1 in `review-repo-security` and `coding-standards` the same day; the rest keep their original numbers. Five proposals handed over via `propose-shared-change` between 2026-08-17 and 2026-08-31, moved here on 2026-08-31 and the handoff files deleted. Each carries its drop-in text verbatim, so applying one needs nothing else. All five were re-checked against their targets on 2026-08-31 and none had been applied. Listed in the priority order Alex set; not a queue to work through in one session — one change, one commit, per `propose-shared-change`'s receiving rule, which also requires checking each proposal against what its target file already says before applying any of it.
 
 ### 4. Close the session when the work is finished, instead of proposing the next piece — `shared/collaboration-workflow.md`
 

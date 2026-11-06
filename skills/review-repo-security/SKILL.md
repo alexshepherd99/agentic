@@ -47,6 +47,16 @@ Suggest a review when a milestone or gate closes, before any visibility change, 
 
 If anything is already committed, stop reviewing and switch to `correct-repo-exposure`. The remedy depends on how far it travelled, and getting the order wrong wastes the window.
 
+## After the review — the code itself
+
+This skill reads the repository as *text*. None of it is read as *logic*, and a report that does not say so lets "clean" carry a claim the review never tested.
+
+**Non-negotiable: say which question you answered.** Controls recorded in an effort doc are evidence about the record. Confirming a plan lists a control is not confirming the code implements it, and the two are easy to write in the same voice.
+
+Then suggest a code review as its own session, the way **Cadence** suggests this one, and name what it would cover from `coding-standards`' **Security** section, because the difference is not obvious.
+
+**Not in this session** — the rule that keeps this review out of implementation work keeps a code review out of this one. The built-in `security-review` is no substitute, for the reason at the top of this file.
+
 ## Before a risky change
 
 Arm a revert first, verify from a fresh connection, then disarm. A change that can lock you out of a machine — or an account — deserves a timer that undoes it unattended.

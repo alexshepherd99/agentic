@@ -32,6 +32,15 @@ How code in a project repo should be written. Read before writing or changing so
 - Prefer raising exceptions over returning `None` or sentinel values for missing/invalid data, so failures are explicit rather than silent.
 - Log context before raising, so an error carries enough information to debug.
 
+## Security
+
+Check these when writing code that handles untrusted input or runs with privilege, and when reviewing code for security. None of them shows up in a scan of file contents; they live in the code's logic.
+
+- **Input reaching a subprocess, the filesystem, or SQL** — guard against argument injection as well as shell injection. An argv list stops the second and not the first.
+- **Privileged paths** — know what runs as root, and **who can write the code it runs**. A root unit executing from a directory the deploy account owns is a passwordless route to root. It lives in the relationship between files, not in any one of them.
+- **Output in a format another program executes** — CSV formulas, and anything rendered as HTML rather than as text — is escaped for that format.
+- **Claimed controls** — when a plan or doc says a control exists (authentication, CSRF, escaping, bounds on anything caller-supplied), confirm the code implements it.
+
 ## Testing
 
 - **Test-first where behaviour is known upfront** — pure logic, bug fixes, and APIs with a defined contract. **Non-negotiable:** run the new test and watch it fail for the reason you expect before writing the implementation. A test never observed red proves only that it passes, not that it can fail; and red from an `ImportError`, `NameError`, or typo has demonstrated nothing about behaviour.
