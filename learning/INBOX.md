@@ -1,6 +1,6 @@
 # Agentic engineering topics to explore
 
-## Immediate — needed to start using skills on future projects
+## Open — instruction hygiene follow-ups
 
 ### Topic: Define size and structure metrics for instruction content
 
@@ -16,12 +16,6 @@ Remaining:
 - **Nothing implements the enumeration check** — the shared doc listed four zero-tolerance defects, but only `duplication`, `dangling_reference` and `runtime_reachability` exist. The four enumerating files found on 2026-07-29 were found by hand. The doc now states the gap; decide whether to build the check or drop the claim.
 - **Decide whether a block should count its list marker** — `sentence_max_words` now ignores `- `, `block_max_words` still counts it, so the same text is measured two ways. Changing it shifts every list block by one word, which means revisiting the derivation (cluster 59–64, jump to 81) rather than just the code.
 - **Make the check runnable from a project repo** — it resolves thresholds relative to the repo root, so a project session can't run it against its own `CLAUDE.md`. Until then the end-of-session step sits only in `agentic`'s `CLAUDE.md`, not the shared workflow, and `review-repo-health` degrades to applying the thresholds by reading when it runs in a project repo.
-
-## Open findings from the 2026-11-06 repo health review
-
-A report-only pass with `review-repo-health`. Each item is a proposed fix that gets its own change; delete each one once it lands.
-
-- **Two INBOX entries are stale.** The "Immediate — needed to start using skills on future projects" heading is out of date: the skills are in use in two project repos, and its one item is settled. The "Strip out the size-optimising behaviour" entry's title seems to say the opposite of its body. It also doesn't say how it differs from the rejected "Trimming instruction text to reduce context".
 
 ## Longer-term — investigate later
 
@@ -41,7 +35,7 @@ A report-only pass with `review-repo-health`. Each item is a proposed fix that g
 - **`git -C <repo> worktree add <relative-path>` resolves the path against the repo, not the cwd** — hit 2026-08-03 while running the hygiene tool against a base commit for comparison: the worktree landed at the repo root as an untracked `base/`, caught in `git status` before the push. The generic trap is that `-C` rebases *every* relative path in the command, so a path meant for the scratchpad silently lands in the repo — which is precisely what the scratchpad convention exists to prevent. Decide whether one incident is enough to encode (an "absolute paths with `git -C`" line in `coding-standards` or the collaboration workflow) or whether it stays here as a known gotcha.
 - Revisit `INBOX.md`'s own conventions. Its title ("topics to explore") doesn't cover drafted, ready-to-apply edits, and parking three of them here in 2026-07 pushed the file past `CLAUDE.md`'s ~1,500-word cap purely on entries designed to be deleted as soon as they landed (they did, on 2026-07-28, taking it back to ~850). Decide whether long drafted text belongs somewhere else entirely — say `proposals/`, one file per proposal — with the INBOX holding only a pointer. The related question of whether a word cap on a queue measures anything useful was settled 2026-07-29: queue and project-local docs are out of scope for the hygiene metrics, so this file has no cap.
 
-- **Strip out the size-optimising behaviour for instruction files.** Streamline instruction files loaded every session — `CLAUDE.md`, skills, shared docs — by moving superfluous detail into an archive file that isn't read by default. Raised 2026-09-28; the effort-doc half (replace revised text rather than annotating it, and collapse finished plan steps) landed in `shared/persistent-docs.md` on 2026-11-06.
+- **Move detail out of instruction files loaded every session into an archive that isn't read by default** — `CLAUDE.md`, skills, shared docs. Raised 2026-09-28; the effort-doc half (replace revised text rather than annotating it, and collapse finished plan steps) landed in `shared/persistent-docs.md` on 2026-11-06. Not the rejected "Trimming instruction text to reduce context" below: that cuts words where they are, while this moves detail somewhere that isn't loaded, which is what that rejection says is worth doing.
 
 ## Considered and deliberately not proposed
 
