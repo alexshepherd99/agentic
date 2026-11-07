@@ -56,7 +56,3 @@ This skill reads the repository as *text*. None of it is read as *logic*, and a 
 Then suggest a code review as its own session, the way **Cadence** suggests this one, and name what it would cover from `coding-standards`' **Security** section, because the difference is not obvious.
 
 **Not in this session** — the rule that keeps this review out of implementation work keeps a code review out of this one. The built-in `security-review` is no substitute, for the reason at the top of this file.
-
-## Before a risky change
-
-Arm a revert first, verify from a fresh connection, then disarm. A change that can lock you out of a machine — or an account — deserves a timer that undoes it unattended.

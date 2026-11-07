@@ -27,5 +27,6 @@ Start from the repo-agnostic core in `agentic`'s `shared/collaboration-workflow.
   - Code that touches a real system — installers, service units, deploy scripts, anything shelling out or writing outside the process — is not done until it has been executed against that system.
   - **Non-negotiable:** when reporting work complete, name what has *not* been executed. "Tests pass" and "it runs" are different claims and must not be merged into one.
   - Where the real system is expensive or intermittent to reach, batch the checks rather than skipping them — see the gates convention in `agentic`'s `shared/persistent-docs.md`.
+  - Before a change that can lock you out of a machine or an account, arm a revert on a timer, verify from a fresh connection, then disarm.
 
 (`agentic`'s own repo workflow is the sibling variant in its `CLAUDE.md`.)
