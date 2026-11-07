@@ -45,7 +45,7 @@ The repo-agnostic collaboration discipline lives in `shared/collaboration-workfl
 - **Ask before adding to the knowledge base.** When something in a chat looks like it should persist (a decision, a convention, a completed idea), ask before adding it — don't add automatically, and don't assume something is settled just because it was discussed at length.
 - **Watch for sprawl.** Periodically (roughly every 10–15 chats, or whenever proposing an addition), check the knowledge base and flag it for review/consolidation if:
   - There are more than ~8–10 documents
-  - Any single document exceeds ~1,500 words
+  - Any single document other than `INBOX.md` exceeds ~1,500 words
   - Documents seem to overlap in coverage
   - Answering a simple question requires searching across multiple docs
 - **End-of-session review — also** check sprawl (above), and read "somewhere durable" as the INBOX, `CONVENTIONS.md`, a memory, or a commit. If instruction content changed, run `python3 tools/instruction_hygiene.py` and report its one-line outcome.
