@@ -1,7 +1,5 @@
 # Collaboration workflow
 
-<!-- hygiene-ok: file_max_words — the always-on file, where every rule that is neither project-specific nor trigger-reachable has to land. 800 is a conventional backstop against doubling, not a derived limit (tools/README.md). 2026-11-06 -->
-
 The repo-agnostic working discipline for any piece of work, from first mention to done.
 
 - **Ask before assuming.** When scope or requirements are ambiguous, ask several small, scoped questions rather than one open-ended one, and prefer asking over guessing. **Non-negotiable:** don't build on unstated assumptions. For larger or underspecified requests, use the `grill-me` skill to pressure-test the request and the plan first.

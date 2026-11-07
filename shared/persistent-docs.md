@@ -1,7 +1,5 @@
 # Persistent documents in project repos
 
-<!-- hygiene-ok: file_max_words — read on demand while effort docs are written, and every rule here applies at that same moment, so a split would load both halves together and save nothing. Grew past 800 on adopting living documents and the log roll. 2026-11-06 -->
-
 Standard structure for a project repo's requirements, plans, and execution logs, so agents and humans always know where to look.
 
 - **`BACKLOG.md`** (repo root) — global list of not-yet-started work. Freeform; one file, one list.

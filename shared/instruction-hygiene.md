@@ -12,7 +12,7 @@ The scope is hygiene flags alone: a **Non-negotiable:** in the instruction conte
 sentence_max_words     = 42
 block_max_words        = 65
 nonneg_max_density_pct = 25
-file_max_words         = 800
+file_max_words         = 1500
 description_max_words  = 60
 instruction_count_soft = 150
 max_overrides          = 6

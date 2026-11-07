@@ -21,7 +21,6 @@ Remaining:
 
 A report-only pass with `review-repo-health`. Each item is a proposed fix that gets its own change; delete each one once it lands.
 
-- **`file_max_words` now flags `coding-standards` and `review-repo-security`**, both of which grew in `22f107f`/`cf24a3f`. Overriding both would use up the last allowed overrides (`max_overrides`). The 800 limit also doesn't match its stated reason, a "backstop against a future doubling", when the largest file was 729 words at the time. Proposed: re-derive the threshold before spending overrides; if the new value is high enough, the two existing overrides go too. Moving "Before a risky change" out (above) is the only split that makes anything easier to find.
 - **Two INBOX entries are stale.** The "Immediate — needed to start using skills on future projects" heading is out of date: the skills are in use in two project repos, and its one item is settled. The "Strip out the size-optimising behaviour" entry's title seems to say the opposite of its body. It also doesn't say how it differs from the rejected "Trimming instruction text to reduce context".
 
 ## Longer-term — investigate later
