@@ -9,7 +9,7 @@ Scope is the whole repository and its whole history. A diff-scoped review — in
 
 **Non-negotiable: run this as a session of its own.** Open a session for the review and nothing else. A review appended to implementation work is what produced the largest and least-disciplined session on record. Finish the implementation, park the review, come back to it.
 
-Prevention belongs upstream of this skill: `shared/persistent-docs.md` covers keeping identifying data out of effort docs as they are written.
+Prevention belongs upstream of this skill: `agentic`'s `shared/persistent-docs.md` covers keeping identifying data out of effort docs as they are written.
 
 ## Cadence
 

@@ -12,7 +12,7 @@ Pick by how far it has travelled. **Non-negotiable:** state which case applies a
 - **Uncommitted** — edit the file. Nothing else needed.
 - **Committed, not pushed** — the whole window worth having. Rewrite rather than delete forward: reset the commit, scrub, recommit, then expire unreachable reflog entries and garbage-collect. Confirm the old object is gone rather than assuming it.
 - **Pushed** — assume it is public and stays public. Clones and caches do not un-clone.
-  - *Credential*: rotate **first**, per the credentials non-negotiable in `shared/collaboration-workflow.md`. That is the only step that removes the attacker's capability. History rewriting is cleanup and does not substitute for it.
+  - *Credential*: rotate **first**, per the credentials non-negotiable in `agentic`'s `shared/collaboration-workflow.md`. That is the only step that removes the attacker's capability. History rewriting is cleanup and does not substitute for it.
   - *Non-credential*: there is nothing to rotate. Decide deliberately whether to rewrite history, and record that disclosure already happened.
 - **Any case** — redacting `HEAD` leaves history intact. If you did not rewrite history, say the data is still there.
 
