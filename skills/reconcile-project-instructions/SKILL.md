@@ -5,7 +5,7 @@ description: Reduce a project repo's own agent instructions (CLAUDE.md, .github/
 
 # Reconcile Project Instructions
 
-Reviews the instruction files already in a project repo against the principle that a project's instructions should hold *only* project-specific content — its differences from and overrides of `agentic`'s shared conventions and skills. `learning/CONVENTIONS.md` records that decision; this skill is the procedure.
+Reviews the instruction files already in a project repo against the principle that a project's instructions should hold *only* project-specific content — its differences from and overrides of `agentic`'s shared conventions and skills.
 
 Run from a session in the project repo, with `agentic` reachable. The `onboard-project` skill wires up that mount and is the source of truth for those mechanics; this skill assumes it has already run.
 
@@ -15,7 +15,7 @@ Run from a session in the project repo, with `agentic` reachable. The `onboard-p
    - **Already covered by `agentic`** — redundant with the mounted shared content; propose deleting it.
    - **Generic but not yet in `agentic`** — repo-agnostic and worth sharing; propose migrating it out to `agentic` (convention or skill) and removing it here. The `agentic` edit is propose-only from a project session — it lands via the `propose-shared-change` skill's handoff, not by writing to `agentic` from here.
    - **Project-specific difference/override** — keep it. This is the only category that should remain.
-   - **Conflicts with `agentic`** — where the project's instructions contradict `agentic`'s `CONVENTIONS.md`/skills, flag it and ask which wins; don't silently reconcile.
+   - **Conflicts with `agentic`** — where the project's instructions contradict `agentic`'s skills or `shared/` instruction, flag it and ask which wins; don't silently reconcile.
 
 2. **Get sign-off, then apply.** The end state is a project instruction file containing only project-specific deltas. **Non-negotiable:** propose the full sort and get sign-off before editing the project's files or drafting `agentic` changes — never trim or migrate automatically.
 

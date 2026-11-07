@@ -63,8 +63,7 @@ Run this from a session in the project repo, with `agentic` reachable — launch
 
    This repo pulls in reusable agents, skills, and conventions from the
    `agentic` repo, mounted read-only at `<relative-path-to-agentic>`.
-   See its `learning/CONVENTIONS.md` for settled decisions and
-   `skills/`/`agents/` for what's available.
+   See its `skills/` and `agents/` for what's available.
 
    Start sessions with `./claude.sh` — it mounts `agentic` so the skills
    below actually load. If `how-we-work` is not in your available skills,
