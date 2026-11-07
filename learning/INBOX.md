@@ -17,6 +17,19 @@ Remaining:
 - **Decide whether a block should count its list marker** — `sentence_max_words` now ignores `- `, `block_max_words` still counts it, so the same text is measured two ways. Changing it shifts every list block by one word, which means revisiting the derivation (cluster 59–64, jump to 81) rather than just the code.
 - **Make the check runnable from a project repo** — it resolves thresholds relative to the repo root, so a project session can't run it against its own `CLAUDE.md`. Until then the end-of-session step sits only in `agentic`'s `CLAUDE.md`, not the shared workflow, and `review-repo-health` degrades to applying the thresholds by reading when it runs in a project repo.
 
+## Open findings from the 2026-11-06 repo health review
+
+A report-only pass with `review-repo-health`. Each item is a proposed fix that gets its own change; delete each one once it lands.
+
+- **`README.md`'s onboarding section copies out `onboard-project`'s steps and has drifted from the skill.** For the deny rule, it sends readers to `learning/CONVENTIONS.md`, which says that explanation lives in the skill. Its follow-up names `init-project-docs` but not `reconcile-project-instructions`, `check-secret-scanning` or `publish-repo-safely`. Proposed: keep only what a person does before the skill can run (put the repo beside `agentic`, start with `claude --add-dir ../agentic`), then point to the skill.
+- **The onboarding pointer sends projects to `learning/CONVENTIONS.md` "for settled decisions"** (step 4 template in `skills/onboard-project/SKILL.md`). That file is a staging area, isn't loaded at runtime, and is mostly pointers back to skills. `reconcile-project-instructions` step 1 relies on it the same way. Proposed: point at the skills only. Projects already onboarded keep the old text until onboarding is re-run.
+- **Three `shared/` paths don't name their repo**: `how-we-work` (gates convention), `correct-repo-exposure` (credentials non-negotiable) and `review-repo-security` (prevention upstream). They don't resolve from a project repo. The hygiene tool can't catch this because it resolves every path from `agentic`'s root. Proposed: prefix each with `agentic`'s.
+- **`review-repo-security`'s "Before a risky change" never loads when it applies.** It's advice for making a change, inside a review session that by its own rule makes none. Proposed: move it to `how-we-work`'s "it has been run" clause, or drop it.
+- **`file_max_words` now flags `coding-standards` and `review-repo-security`**, both of which grew in `22f107f`/`cf24a3f`. Overriding both would use up the last allowed overrides (`max_overrides`). The 800 limit also doesn't match its stated reason, a "backstop against a future doubling", when the largest file was 729 words at the time. Proposed: re-derive the threshold before spending overrides; if the new value is high enough, the two existing overrides go too. Moving "Before a risky change" out (above) is the only split that makes anything easier to find.
+- **`CLAUDE.md`'s sprawl check still caps every `learning/` doc at ~1,500 words.** The 2026-07-29 decision recorded below says this file has no cap, so the check trips at every end-of-session review. Proposed: exempt the INBOX in that bullet. `CONVENTIONS.md` is also just over the limit; I found no overlap in it worth consolidating.
+- **Two INBOX entries are stale.** The "Immediate — needed to start using skills on future projects" heading is out of date: the skills are in use in two project repos, and its one item is settled. The "Strip out the size-optimising behaviour" entry's title seems to say the opposite of its body. It also doesn't say how it differs from the rejected "Trimming instruction text to reduce context".
+- **`check_duplication` skips each file's last 8-word run.** `range(len(tokens) - size)` needs `+ 1`. Confirmed: two files ending in the same 8 words produce no flag. The effect is small; only an exactly-8-word repeat at the end of a file is missed. Separately, the Tests list in `tools/README.md` leaves out `report` and `outcome`, which `ReportTest` covers.
+
 ## Longer-term — investigate later
 
 - Mocking should be confined to API boundaries — file, OS, time, randomness — never internal code. Would need a repo test review to check/enforce.
@@ -55,3 +68,9 @@ Surfaced by a `/doctor prompt-audit` run (2026-10-03) as low-confidence flags an
 
 - **"Both handoffs to date" in `skills/propose-shared-change/SKILL.md`** — dated phrasing, but it is the evidence behind the receiving-side non-negotiable, and a reason is context, not cruft.
 - **"the 2026-07 full-repo pass" in `skills/review-repo-health/SKILL.md`** — a dated origin, but it is what each seed rests on; the skill's own seeding rule judges new seeds against that same standard.
+
+Surfaced by the 2026-11-06 repo health review and deliberately not raised as findings.
+
+- **The own-session rule appears in `collaboration-workflow` and in both review skills.** Each skill loads on its own trigger, and `review-repo-health` cites the shared rule rather than restating it. This is the same reasoning as the onboard/reconcile precondition above.
+- **`agents/` contains no agents.** Nothing claims it does; it's harmless scaffolding.
+- **A seed for guidance that can't reach the moment it applies.** The unqualified-path and "Before a risky change" findings share this pattern, but neither has a recorded case of costing anyone, which the skill requires before adding a seed. Revisit if it comes up again.
