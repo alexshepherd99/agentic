@@ -245,7 +245,7 @@ def check_duplication(paths: list[pathlib.Path], root: pathlib.Path, size: int =
     for path in paths:
         _, body = split_frontmatter(path.read_text())
         tokens = re.findall(r"[a-z]+", strip_code(body).lower())
-        for start in range(len(tokens) - size):
+        for start in range(len(tokens) - size + 1):
             seen.setdefault(" ".join(tokens[start : start + size]), set()).add(relative(path, root))
 
     # Overlapping n-grams describe one passage, so report per file-set, not per gram.

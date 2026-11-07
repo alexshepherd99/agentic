@@ -4,8 +4,8 @@ Run from the repo root::
 
     python3 -m unittest discover -s tools
 
-Scope is the pure parsing and threshold logic. ``check_references`` and
-``check_duplication`` need fixture repo trees and are not covered.
+Scope is the pure parsing and threshold logic, plus ``check_duplication``'s
+window. ``check_references`` needs a fixture repo tree and is not covered.
 """
 
 import contextlib
@@ -325,6 +325,22 @@ class CountInstructionsTest(WriteFileMixin, unittest.TestCase):
     def test_frontmatter_lines_are_not_instructions(self) -> None:
         path = self.write("SKILL.md", "---\nname: thing\n---\n- only rule\n")
         self.assertEqual(instruction_hygiene.count_instructions([path]), 1)
+
+
+class CheckDuplicationTest(WriteFileMixin, unittest.TestCase):
+    """The n-gram window must reach the last token of each file."""
+
+    def flags_for(self, first: str, second: str) -> list:
+        paths = [self.write("a.md", first), self.write("b.md", second)]
+        return instruction_hygiene.check_duplication(paths, self.directory)
+
+    def test_run_of_exactly_n_words_at_end_of_file_flags(self) -> None:
+        shared = "one two three four five six seven eight\n"
+        self.assertEqual(len(self.flags_for(shared, shared)), 1)
+
+    def test_run_one_word_short_of_n_is_quiet(self) -> None:
+        shared = "one two three four five six seven\n"
+        self.assertEqual(self.flags_for(shared, shared), [])
 
 
 class SummariseTest(unittest.TestCase):

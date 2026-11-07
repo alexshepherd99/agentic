@@ -41,6 +41,6 @@ The IFScale caveat: it is an unreviewed arXiv preprint, and its "instructions" a
 
 ## Tests
 
-`python3 -m unittest discover -s tools` — stdlib `unittest`, no dependencies. The suite covers the parsing and threshold logic: `strip_code`, `split_frontmatter`, `blocks`, `sentences`, `overrides`, `load_thresholds`, `check_file`, `count_instructions`, `summarise`.
+`python3 -m unittest discover -s tools` — stdlib `unittest`, no dependencies. The suite covers the parsing and threshold logic: `strip_code`, `split_frontmatter`, `blocks`, `sentences`, `overrides`, `load_thresholds`, `check_file`, `check_duplication`, `count_instructions`, `summarise`, `report`, `outcome`.
 
-`check_references` and `check_duplication` are not covered — they need fixture repo trees, and both were hand-verified against this repo's own content when introduced. Tests that could not be written red-first were each confirmed by mutating the implementation and watching them fail, per `skills/coding-standards`.
+`check_references` is not covered — it needs a fixture repo tree, and was hand-verified against this repo's own content when introduced. Tests that could not be written red-first were each confirmed by mutating the implementation and watching them fail, per `skills/coding-standards`.
