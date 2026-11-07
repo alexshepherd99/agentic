@@ -61,4 +61,5 @@ Surfaced by the 2026-11-06 repo health review and deliberately not raised as fin
 
 - **The own-session rule appears in `collaboration-workflow` and in both review skills.** Each skill loads on its own trigger, and `review-repo-health` cites the shared rule rather than restating it. This is the same reasoning as the onboard/reconcile precondition above.
 - **`agents/` contains no agents.** Nothing claims it does; it's harmless scaffolding.
+- **`CONVENTIONS.md` sits just over `CLAUDE.md`'s ~1,500-word sprawl cap.** The review found no overlap in it worth consolidating, so the end-of-session sprawl check reports it as known. Revisit if it grows materially.
 - **A seed for guidance that can't reach the moment it applies.** The unqualified-path and "Before a risky change" findings share this pattern, but neither has a recorded case of costing anyone, which the skill requires before adding a seed. Revisit if it comes up again.
